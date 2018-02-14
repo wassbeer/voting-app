@@ -1,0 +1,15 @@
+{
+  "name": "users",
+  "version": "1.0.0",
+  "description": "The \"users\" container is responsible for the controllers, database configuration and integration tests concerning users.",
+  "main": "gulpfile.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {}
+}
