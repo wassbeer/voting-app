@@ -18,19 +18,22 @@ Users API       |users|users| Node, Express
 |Social Media       |social-media| social-media | Node, Express
 
 ## Repository Structure 
+```
+.
+└── services
+    ├── apigateway
+    ├── authentication
+    ├── authorization
+    ├── polls
+    │   └── src
+    │       └── db
+    ├── social-media
+    ├── users
+    │   └── src
+    │       └── db
+    └── web
+   ```
 
-├── services
-│   ├── web
-│   ├── apigateway
-│   ├── polls
-│   │   └── src
-│   │       └── db
-│   ├── users
-│   │   └── src
-│   │       └── db
-│   ├── authentication
-│   ├── authorization
-│   └── social media
 
 ## API Specification
 
@@ -38,5 +41,3 @@ Please visit these endpoints for API specification:
 *  http://localhost:3000/polls/api-docs/
 *  http://localhost:3000/users/api-docs/
 *  http://localhost:3000/apigateway/api-docs/
-
-The specification is powered by Swagger.
