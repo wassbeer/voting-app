@@ -1,0 +1,12 @@
+{
+  "name": "polls",
+  "version": "1.0.0",
+  "description": "The \"polls\" container is responsible for the controllers, database configuration and integration tests concerning polls.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {}
+}
