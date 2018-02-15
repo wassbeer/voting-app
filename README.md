@@ -1,21 +1,18 @@
-# Voting Application
-
 ## Architecture
 
 The application is built in a microservice architecture. The application contains 7 microservices residing in 9 Docker containers. 
 
-
 |		Name      | Service   |Container   |  Tech     |
-|-------------|-----------|-------|-----------------|
-Web| web            |web            | Vue.js, Vuex|Polls DB       
-|API Gateway       |apigateway|apigateway| Node, Express
-|Polls API          |polls        |polls            | Node, Express
-|Polls DB       | polls |polls-db| MongoDB
-Users API       |users|users| Node, Express
-|Users DB      |users|users-db| MongoDB
-|Authentication       |authentication|authentication| Node,  Express, passport
-|Authorization       |authorization| authorization | Node, Express, ACL 
-|Social Media       |social-media| social-media | Node, Express
+|   -------------   |  -----------  |  -------|-----------------|
+| Web| web            |web            | Vue.js, Vuex, Jest |
+|API Gateway       |apigateway|apigateway| Node, Express |
+|Polls API          |polls        |polls            | Node, Express, Mocha, Chai |
+|Polls DB       | polls |polls-db| Node, MongoDB |
+|  Users API       |users|  users| Node, Express, Mocha, Chai |
+|Users DB      |users|users-db| Node, MongoDB |
+|Authentication       |authentication|authentication| Node,  Express, passport, JWT, Mocha, Chai |
+|Authorization       |authorization| authorization | Node, Express, ACL |
+|Social Media       |social-media| social-media | Node, Express |
 
 ## Repository Structure 
 ```
@@ -32,8 +29,7 @@ Users API       |users|users| Node, Express
     │   └── src
     │       └── db
     └── web
-   ```
-
+```
 
 ## API Specification
 
