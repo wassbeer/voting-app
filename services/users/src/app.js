@@ -2,19 +2,17 @@
 
     'use strict';
 
-console.log(__dirname + "./config/main-config.js")
-
     // dependencies
     const express = require('express'),
-        appConfig = require('../config/main-config.js'),
-        // routeConfig = require('./config/route-config.js'),
+        appConfig = require('./config/main-config.js'),
+        routeConfig = require('./config/route-config.js'),
 
         // express instance
         app = express();
 
     // *** config *** //
     appConfig.init(app, express);
-    // routeConfig.init(app);
+    routeConfig.init(app);
 
     module.exports = app;
 
