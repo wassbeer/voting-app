@@ -8,7 +8,7 @@ The application is built in a microservice architecture. The application contain
 |API Gateway       |apigateway|apigateway| Node, Express |
 |Polls API          |polls        |polls            | Node, Express, Mocha, Chai |
 |Polls DB       | polls |polls-db| Node, MongoDB |
-|  Users API       |users|  users| Node, Express, Mocha, Chai |
+|  Users API       |users|  users| node.js, express, chai, supertest |
 |Users DB      |users|users-db| Node, MongoDB |
 |Authentication       |authentication|authentication| Node,  Express, passport, JWT, Mocha, Chai |
 |Authorization       |authorization| authorization | Node, Express, ACL |
