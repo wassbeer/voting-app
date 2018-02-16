@@ -12,8 +12,9 @@ User = require('./models').User
 // | /users/update/:id |     PUT     |      UPDATE |     edit a user |
 // | /users/delete/:id |   DELETE    |      DELETE |   delete a user |
 
-function loginUser(){
-
+function loginUser(email, password){
+	// mongoose query authentication api
+	// mongoose read db
 }
 
 function registerUser(obj){
@@ -21,6 +22,22 @@ function registerUser(obj){
 	user.save((err) => {
 		err ? console.error(err):
 		console.log('User saved succesfully')
+	})
+}
+
+function updateUser(email, updateObj){
+	let conditions = { email: `${email}` }, 
+	update = { $inc: `${updateObj}`}
+User.update(conditions, update, (err) => {
+	err ? console.error(err) :
+	console.log('User data updated succesfully')
+});
+}
+
+function deleteUser(email){
+	User.remove({email: `${email}`}, (err) => {
+		err ? console.error(err):
+		console.log('User data deleted')
 	})
 }
 
