@@ -7,13 +7,13 @@
         bodyParser = require('body-parser'),
         appConfig = require('./config/main-config.js'),
         routeConfig = require('./config/route-config.js'),
-        connectMongoose = require('./db/connection.js'),
+        dbConnect = require('./db/connection.js'),
 
         // express instance
         app = express();
 
         // mongoose connection
-        connectMongoose;
+        dbConnect;
 
     // *** config *** //
     appConfig.init(app, express);

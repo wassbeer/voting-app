@@ -1,5 +1,6 @@
-const User = require('./models').User
-
+// const User = require('./models').User
+const db = require('./connection'),
+users = db.collection('users')
 // ## URI endpoints
 
 // | Endpoint          | HTTP Method | CRUD Method |          Result |
@@ -11,37 +12,35 @@ const User = require('./models').User
 // | /users/delete/:id |   DELETE    |      DELETE |   delete a user |
 
 function createUser(obj) {
-    let user = new User(obj)
-    // user.password --> authentication
-    // user.password === res.authentication.api
-    user.save((err) => {
-        err ? console.error(err) :
-            console.log('User saved succesfully')
-    })
+    users.insert(obj, (err) => {
+        err ? console.error(err):
+        console.log('user inserted');
+    });
 }
 
 function readUser(data) {
-    User.findOne({ id: data } || { email: data }, (err, user) => {
-        // err ? console.error(err) :
+    users.find({id: req.params.id}, (err, user) => {
+           err ? console.error(err) :
             return user;
-    })
+    });
 }
 
 function updateUser(userId, updateObj) {
     let conditions = { id: `${userId}` },
-        update = { $inc: `${updateObj}` }
-    User.update(conditions, update, (err) => {
+        update = { $set: `${updateObj}` }
+    users.updateOne(conditions, update, (err, result) => {
         err ? console.error(err) :
             console.log('User data updated succesfully')
+            console.log(result)
     });
 }
 
 function deleteUser(userId) {
-    User.remove({ id: `${userId}` }, (err) => {
-        err ? console.error(err) :
-            console.log('User data deleted')
+    users.deleteOne({ id: `${userId}` }, (err) => {
+err ? console.error(err) :
+console.log('user deleted')
     })
-}
+
 
 module.exports = {
     createUser,
