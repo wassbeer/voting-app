@@ -1,6 +1,10 @@
 // const User = require('./models').User
-const db = require('./connection'),
-users = db.collection('users')
+const db = require('./connection.js')
+// ,
+// users = db.collections('users')
+
+console.log(db)
+
 // ## URI endpoints
 
 // | Endpoint          | HTTP Method | CRUD Method |          Result |
@@ -20,7 +24,7 @@ function createUser(obj) {
 
 function readUser(data) {
     users.find({id: req.params.id}, (err, user) => {
-           err ? console.error(err) :
+           // err ? console.error(err) :
             return user;
     });
 }
@@ -39,7 +43,7 @@ function deleteUser(userId) {
     users.deleteOne({ id: `${userId}` }, (err) => {
 err ? console.error(err) :
 console.log('user deleted')
-    })
+    })}
 
 
 module.exports = {

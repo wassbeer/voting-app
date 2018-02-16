@@ -1,26 +1,11 @@
-const db = require('./connection');
-
-module.exports = db.createCollection({
-        name: String,
-        email: { type: String, required: true, unique: true },
-        password: { type: String, required: true },
-        created_at: Date,
-        updated_at: Date
-    });
-
-// // create a schema
-// let userSchema = ({
-//         name: String,
-//         email: { type: String, required: true, unique: true },
-//         password: { type: String, required: true },
-//         created_at: Date,
-//         updated_at: Date
-//     }),
-
-//     // creating a model from the schema
-//     Model = connection.model('User', userSchema);
-//     User = new Model;
-
-// // make this available to our users in our Node applications
-// module.exports = User;
-
+const connection = require('./connection.js'),
+    database = require('../../mongodbfile.js')[process.env.NODE_ENV];
+    
+module.exports = {
+    users: function createUsersCollection(client) {
+        let db = client.db(database)
+        db.createCollection("users", (err) => {
+            err ? console.error(err) :
+                console.log('users collection created')
+        });
+    }};

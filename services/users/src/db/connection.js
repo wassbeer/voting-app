@@ -1,6 +1,5 @@
 const environment = process.env.NODE_ENV || 'test',
-    config = require('../../mongodbfile.js')[environment],
-    createCollections = require('./collections');
-module.exports = require('mongoose').connect(config, (err, client) => {
-createCollections;
-});
+    createUsersCollection = require('./collections').users;
+module.exports = require('mongodb').connect(process.env.DATABASE_URL, (err, client) => {
+    createUsersCollection(client);
+})
