@@ -25,40 +25,6 @@ describe('routes : users', () => {
 // | /users/delete/:id |   DELETE    |      DELETE |   delete a user |
 
 
-    describe('POST /users/login', () => {
-        it('it should authenticate the user and upon success GET users/user/:id', (done) => {
-            request(server)
-                .post('/users/login')
-                .field('name', 'Bas')
-                .field('email', 'bkdelaat@gmail.com')
-                .field('password', '<passport-generated-password>')
-                .get('/users/user/Bas')
-                .expect('Content-Type', /html/)
-                .expect(200)
-                .end((err, res) => {
-                    err ? console.log(err) :
-                        done();
-                });
-        });
-        it('it should authenticate the user and upon fail GET users/login', (done) => {
-            request(server)
-                .post('/users/login')
-                .field('name', 'Christian')
-                .field('email', 'christianszyinsky@gmail.com')
-                .field('password', '<passport-generated-password>')
-                .get('/users/login')
-                .expect('Content-Type', /html/)
-                .expect(200)
-                .expect((res) => {
-                    // res.body should contain "please enter a valid password or e-mail"
-                })
-                .end((err, res) => {
-                    err ? console.log(err) :
-                        done();
-                })
-        })
-    });
-
     // | Endpoint          | HTTP Method | CRUD Method |          Result |
     // | ----------------- | :---------: | ----------: | --------------: |
     // | /users/create   |    POST     |      CREATE | create a user |
@@ -66,20 +32,24 @@ describe('routes : users', () => {
     describe('POST /users/create', () => {
         it('it should create a user and GET users/user/:id', (done) => {
             request(server)
-                .post('/user/create')
+                .post('/users/create')
                 .field('name', 'Bas')
                 .field('email', 'bkdelaat@gmail.com')
                 .field('password', '<passport-generated-password>')
-                .get('/users/user/Bas')
-                .expect('Content-Type', /html/)
-                .expect(200)
+                .expect((req) => {
+                    // console.log(req.body)
+                    console.log(req.header)
+                    // console.log(req)
+                })
+                .expect('Location', '/users.user/*')
+                .expect(queries.readUser('bkdelaat@gmail.com'))
                 .end((err, res) => {
                     err ? console.log(err) :
                         done();
                 });
         });
 
-        it('it should not create a user with an already createed e-mail', (done) => {
+        it('it should not create a user with an already created e-mail', (done) => {
             queries.createUser({ name: "bas", email: "bkdelaat@gmail.com", password: "12345" }, (err, user) => {
                 request(server)
                     .post('/user/create')

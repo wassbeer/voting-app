@@ -1,6 +1,7 @@
 const express = require('express'),
     router = express.Router(),
-    mongoose = require('../db/queries');
+    queries = require('../db/queries'),
+    mongoose = require('../db/connection')
 
     // ## URI endpoints
 
@@ -12,27 +13,18 @@ const express = require('express'),
     // | /users/update/:id |     PUT     |      UPDATE |     edit a user |
     // | /users/delete/:id |   DELETE    |      DELETE |   delete a user |
 
-/* router.post('/login', (req, res, next) => {
-    mongoose.verify(
-        req.body.email,
-        req.body.password
-    ).then(() => {
-        // 1. attach JWT
-        // 2. res.redirect to /users/user/:id
-    }); 
-}); */
 
 // | Endpoint          | HTTP Method | CRUD Method |          Result |
 // | ----------------- | :---------: | ----------: | --------------: |
 // | /users/create   |    POST     |      CREATE | create a user |
 
-router.post('/create', (req, res, next) => {
+router.post('/create', (req, res) => {
     let user = ({
         name: req.body.name,
         email: req.body.email,
         password: req.body.password
     });
-    mongoose.createUser(user)
+    queries.createUser(user)
         .then((user) => {
             res.status(200).json({
                 status: 'success',
@@ -51,7 +43,7 @@ router.post('/create', (req, res, next) => {
 // | ----------------- | :---------: | ----------: | --------------: |
 // | /users/ping       |     GET     |        READ |            pong |
 
-router.get('/ping', (req, res, next) => {
+router.get('/ping', (req, res) => {
     res.send('pong')
 })
 
@@ -59,24 +51,24 @@ router.get('/ping', (req, res, next) => {
 // | ----------------- | :---------: | ----------: | --------------: |
 // | /users/user/:id   |     GET     |        READ |   get user info |
 
-router.get('/read/:id', (req, res, next)=> {
-
+router.get('/read/:id', (req, res)=> {
+    return queries.readUser(req.params.id)
 })
 
 // | Endpoint          | HTTP Method | CRUD Method |          Result |
 // | ----------------- | :---------: | ----------: | --------------: |
 // | /users/update/:id |     PUT     |      UPDATE |     edit a user |
 
-router.put('/update/:id', (req, res, next)=> {
-
+router.put('/update/:id', (req, res)=> {
+    return queries.updateUser(req.params.id)
 })
 
 // | Endpoint          | HTTP Method | CRUD Method |          Result |
 // | ----------------- | :---------: | ----------: | --------------: |
 // | /users/delete/:id |   DELETE    |      DELETE |   delete a user |
 
-router.delete('/delete/:id', (req, res, next) => {
-
+router.delete('/delete/:id', (req, res) => {
+    return queries.deleteUser(req.params.id)
 })
 
 module.exports = router;

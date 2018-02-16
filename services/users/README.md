@@ -32,10 +32,7 @@ The "users" container is responsible for the routes, database configuration and 
 
 | Endpoint          | HTTP Method | CRUD Method |          Result |
 | ----------------- | :---------: | ----------: | --------------: |
-| /users/login      |    POST     |      CREATE | login as a user |
 | /users/register   |    POST     |      CREATE | register a user |
-| /users/login      |    GET      |      READ   | login as a user |
-| /users/register   |    GET      |      READ   | register a user |
 | /users/ping       |    GET      |        READ |            pong |
 | /users/user/:id   |    GET      |        READ |   get user info |
 | /users/update/:id |    PUT      |      UPDATE |     edit a user |
@@ -43,6 +40,6 @@ The "users" container is responsible for the routes, database configuration and 
 
 ## API's && Dependencies
 
-* npm mongoose
+* npm mongodb
 * npm jest
 * npm express

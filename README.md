@@ -9,7 +9,7 @@ The application is built in a microservice architecture. The application contain
 |Polls API          |polls        |polls            | Node, Express, Mocha, Chai |
 |Polls DB       | polls |polls-db| Node, MongoDB |
 |  Users API       |users|  users| node.js, express, chai, supertest |
-|Users DB      |users|users-db| Node, MongoDB |
+|Users DB      |users|users-db| Node, Mongodb |
 |Authentication       |authentication|authentication| Node,  Express, passport, JWT, Mocha, Chai |
 |Authorization       |authorization| authorization | Node, Express, ACL |
 |Social Media       |social-media| social-media | Node, Express |
