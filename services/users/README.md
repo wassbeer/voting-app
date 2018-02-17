@@ -30,13 +30,13 @@ The "users" container is responsible for the routes, database configuration and 
 
 ## URI endpoints
 
-| Endpoint          | HTTP Method | CRUD Method |          Result |
-| ----------------- | :---------: | ----------: | --------------: |
-| /users/register   |    POST     |      CREATE | register a user |
-| /users/ping       |    GET      |        READ |            pong |
-| /users/user/:id   |    GET      |        READ |   get user info |
-| /users/update/:id |    PUT      |      UPDATE |     edit a user |
-| /users/delete/:id |    DELETE   |      DELETE |   delete a user |
+| Endpoint              | HTTP Method | CRUD Method |          Result |
+| --------------------- | :---------: | ----------: | --------------: |
+| /api/users/register   |    POST     |      CREATE | register a user |
+| /api/users/ping       |    GET      |        READ |            pong |
+| /api/users/user/:id   |    GET      |        READ |   get user info |
+| /api/users/update/:id |    PUT      |      UPDATE |     edit a user |
+| /api/users/delete/:id |    DELETE   |      DELETE |   delete a user |
 
 ## API's && Dependencies
 

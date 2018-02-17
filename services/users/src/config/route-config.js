@@ -10,7 +10,7 @@
 
     // register routes
     // app.use('/', routes);
-    app.use('/users', userRoutes);
+    app.use('/api/users', userRoutes);
 
   };
 })(module.exports);

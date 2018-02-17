@@ -1,10 +1,3 @@
-// const User = require('./models').User
-const db = require('./connection.js')
-// ,
-// users = db.collections('users')
-
-console.log(db)
-
 // ## URI endpoints
 
 // | Endpoint          | HTTP Method | CRUD Method |          Result |
@@ -16,14 +9,14 @@ console.log(db)
 // | /users/delete/:id |   DELETE    |      DELETE |   delete a user |
 
 function createUser(obj) {
-    users.insert(obj, (err) => {
+    require('./connection').collection('users').insert(obj, (err) => {
         err ? console.error(err):
         console.log('user inserted');
     });
 }
 
 function readUser(data) {
-    users.find({id: req.params.id}, (err, user) => {
+    require('./connection').collection('users').find({id: req.params.id}, (err, user) => {
            // err ? console.error(err) :
             return user;
     });
@@ -32,7 +25,7 @@ function readUser(data) {
 function updateUser(userId, updateObj) {
     let conditions = { id: `${userId}` },
         update = { $set: `${updateObj}` }
-    users.updateOne(conditions, update, (err, result) => {
+    require('./connection').collection('users').update(conditions, update, (err, result) => {
         err ? console.error(err) :
             console.log('User data updated succesfully')
             console.log(result)
@@ -40,7 +33,7 @@ function updateUser(userId, updateObj) {
 }
 
 function deleteUser(userId) {
-    users.deleteOne({ id: `${userId}` }, (err) => {
+    require('./connection').collection('users').delete({ id: `${userId}` }, (err) => {
 err ? console.error(err) :
 console.log('user deleted')
     })}
