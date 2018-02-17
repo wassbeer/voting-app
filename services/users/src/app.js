@@ -1,27 +1,17 @@
-(function() {
+// dependencies
+const express = require('express'),
+    appConfig = require('./config/main-config.js'),
+    routeConfig = require('./config/route-config.js'),
+    mongodb = require('./db/connection.js'),
 
-    'use strict';
+    // express instance
+    app = express();
 
-    // dependencies
-    const express = require('express'),
-        bodyParser = require('body-parser'),
-        appConfig = require('./config/main-config.js'),
-        routeConfig = require('./config/route-config.js'),
-        dbConnect = require('./db/connection.js'),
+// mongodb connection
+mongodb.init();
 
-        // express instance
-        app = express();
+// config
+appConfig.init(app, express);
+routeConfig.init(app);
 
-        // mongoose connection
-        dbConnect;
-
-    // *** config *** //
-    appConfig.init(app, express);
-    routeConfig.init(app);
-
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({ extended: true }));
-
-    module.exports = app;
-
-}());
+module.exports = app;

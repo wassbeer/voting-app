@@ -1,15 +1,19 @@
 (function(appConfig) {
 
-  'use strict';
+    'use strict';
 
-  // main dependencies
-  const morgan = require('morgan');
+    // main dependencies
+    const morgan = require('morgan'),
+    bodyParser = require('body-parser');
 
-  appConfig.init = function(app, express) {
-    // app middleware 
-    if (process.env.NODE_ENV !== 'test') {
-      app.use(morgan('dev'));
-    }
-  };
+
+    appConfig.init = function(app, express) {
+        // app middleware 
+        if (process.env.NODE_ENV !== 'test') {
+            app.use(morgan('dev'));
+        }
+        app.use(bodyParser.json());
+        app.use(bodyParser.urlencoded({ extended: false }));
+    };
 
 })(module.exports);

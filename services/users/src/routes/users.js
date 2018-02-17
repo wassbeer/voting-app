@@ -3,15 +3,15 @@ const express = require('express'),
     queries = require('../db/queries'),
     mongoose = require('../db/connection')
 
-    // ## URI endpoints
+// ## URI endpoints
 
-    // | Endpoint          | HTTP Method | CRUD Method |          Result |
-    // | ----------------- | :---------: | ----------: | --------------: |
-    // | /users/create   |    POST     |      CREATE | create a user |
-    // | /users/ping       |     GET     |        READ |            pong |
-    // | /users/user/:id   |     GET     |        READ |   get user info |
-    // | /users/update/:id |     PUT     |      UPDATE |     edit a user |
-    // | /users/delete/:id |   DELETE    |      DELETE |   delete a user |
+// | Endpoint          | HTTP Method | CRUD Method |          Result |
+// | ----------------- | :---------: | ----------: | --------------: |
+// | /users/create   |    POST     |      CREATE | create a user |
+// | /users/ping       |     GET     |        READ |            pong |
+// | /users/user/:id   |     GET     |        READ |   get user info |
+// | /users/update/:id |     PUT     |      UPDATE |     edit a user |
+// | /users/delete/:id |   DELETE    |      DELETE |   delete a user |
 
 
 // | Endpoint          | HTTP Method | CRUD Method |          Result |
@@ -26,7 +26,7 @@ router.post('/create', (req, res) => {
     });
     queries.createUser(user)
         .then((user) => {
-            res.status(200).json({
+            res.status(201).json({
                 status: 'success',
                 data: user
             });
@@ -51,16 +51,40 @@ router.get('/ping', (req, res) => {
 // | ----------------- | :---------: | ----------: | --------------: |
 // | /users/user/:id   |     GET     |        READ |   get user info |
 
-router.get('/read/:id', (req, res)=> {
+router.get('/read/:id', (req, res) => {
     return queries.readUser(req.params.id)
+        .then((user) => {
+            res.status(200).json({
+                status: 'success',
+                data: user
+            })
+        })
+        .catch((err) => {
+            res.status(500).json({
+                status: 'error',
+                data: err
+            });
+        });
 })
 
 // | Endpoint          | HTTP Method | CRUD Method |          Result |
 // | ----------------- | :---------: | ----------: | --------------: |
 // | /users/update/:id |     PUT     |      UPDATE |     edit a user |
 
-router.put('/update/:id', (req, res)=> {
+router.put('/update/:id', (req, res) => {
     return queries.updateUser(req.params.id)
+        .then((user) => {
+            res.status(200).json({
+                status: 'success',
+                data: user
+            });
+        })
+        .catch((err) => {
+            res.status(500).json({
+                status: 'error',
+                data: err
+            });
+        });
 })
 
 // | Endpoint          | HTTP Method | CRUD Method |          Result |
@@ -69,6 +93,18 @@ router.put('/update/:id', (req, res)=> {
 
 router.delete('/delete/:id', (req, res) => {
     return queries.deleteUser(req.params.id)
+        .then((user) => {
+            res.status(200).json({
+                status: 'success',
+                data: user
+            });
+        })
+        .catch((err) => {
+            res.status(500).json({
+                status: 'error',
+                data: err
+            });
+        });
 })
 
 module.exports = router;
