@@ -52,18 +52,18 @@ router.get('/ping', (req, res) => {
 
 router.get('/read/:id', (req, res) => {
     queries.readUser(req.params.id)
-        // .then((user) => {
-        //     res.status(200).json({
-        //         status: 'success',
-        //         data: user
-        //     })
-        // })
-        // .catch((err) => {
-        //     res.status(500).json({
-        //         status: 'error',
-        //         data: err
-        //     });
-        // });
+        .then((user) => {
+            res.status(200).json({
+                status: 'success',
+                data: user
+            })
+        })
+        .catch((err) => {
+            res.status(500).json({
+                status: 'error',
+                data: err
+            });
+        });
 })
 
 // | Endpoint          | HTTP Method | CRUD Method |          Result |

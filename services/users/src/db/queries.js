@@ -12,24 +12,25 @@ const getDb = require('./connection').getDb,
 // | /users/delete/:id |   DELETE    |      DELETE |   delete a user |
 
 module.exports = {
-    createUser: function(obj) {
-        return getDb().collection('users').insertOne(obj)
+    createUser: async function(obj) {
+        await getDb().collection('users').insertOne(obj)
     },
 
-    readUser: function(data) {
+    readUser: async function(data) {
         let o_id = new ObjectId(data);
-        return getDb().collection('users').find({ _id: o_id }).toArray((err, docs) => {
-            console.log(docs)
-        })
+        await getDb().collection('users').find({ _id: o_id })
+        // .toArray((err, docs) => {
+        //     return docs
+        // })
     },
 
-    updateUser: function(userId, updateObj) {
+    updateUser: async function(userId, updateObj) {
         let conditions = { id: `${userId}` },
             update = { $set: `${updateObj}` }
-        return getDb().collection('users').updateOne(conditions, update);
+        await getDb().collection('users').updateOne(conditions, update);
     },
 
-    deleteUser: function(userId) {
-        return getDb().collection('users').deleteOne({ _id: `${userId}` });
+    deleteUser: async function(userId) {
+        await getDb().collection('users').deleteOne({ _id: `${userId}` });
     }
 };

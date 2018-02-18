@@ -52,7 +52,7 @@ describe('routes : users', () => {
                 .field('email', 'tm.wassenberg@gmail.com')
                 .field('password', 'baea0912')
                 .field('_id', '2')
-                .expect(queries.readUser({_id: '2'}).then((users => {
+                .expect(queries.readUser({ _id: '2' }).then((users => {
                     users !== null;
                     users.name === 'Thomas'
                     users.email === 'tm.wassenberg@gmail.com'
@@ -114,7 +114,7 @@ describe('routes : users', () => {
                 .get('/api/users/user/1')
                 .expect(200)
                 .expect((res) => {
-                    res.body.name === 'Bas'
+                    res.status === "success"
                 })
                 .end((err, res) => {
                     err ? console.log(err) :
@@ -149,9 +149,10 @@ describe('routes : users', () => {
         it('it should PUT users/user/bas', (done) => {
             queries.updateUser('1', { name: "bas", email: "bkdelaat@hotmail.com", password: "12345" }, (err, user) => {
                 request(server)
-                    .expect('Content-Type', /html/)
                     .expect(200)
-                    .expect('Location', '/api/users/user/' + user.id)
+                    .expect((res) => {
+                        res.status === "success"
+                    })
                     .end((err, res) => {
                         err ? console.log(err) :
                             done();
@@ -170,9 +171,10 @@ describe('routes : users', () => {
             queries.createUser({ name: "bas", email: "bkdelaat@gmail.com", password: "12345" }, (err, user) => {
                 queries.deleteUser({ email: "bkdelaat@hotmail.com" }, (err, user) => {
                     request(server)
-                        .expect('Content-Type', /html/)
                         .expect(200)
-                        .expect('Location', '/')
+                        .expect((res) => {
+                            res.status === "success"
+                        })
                         .end((err, res) => {
                             err ? console.log(err) :
                                 done();
