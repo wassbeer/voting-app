@@ -1,4 +1,6 @@
-const getDb = require('./connection').getDb
+const getDb = require('./connection').getDb,
+    ObjectId = require('mongodb').ObjectId;
+
 // ## URI endpoints
 
 // | Endpoint          | HTTP Method | CRUD Method |          Result |
@@ -11,11 +13,14 @@ const getDb = require('./connection').getDb
 
 module.exports = {
     createUser: function(obj) {
-        return getDb().collection('users').insertOne(obj)  
+        return getDb().collection('users').insertOne(obj)
     },
 
     readUser: function(data) {
-        return getDb().collection('users').findOne({ _id: data })
+        let o_id = new ObjectId(data);
+        return getDb().collection('users').find({ _id: o_id }).toArray((err, docs) => {
+            console.log(docs)
+        })
     },
 
     updateUser: function(userId, updateObj) {
