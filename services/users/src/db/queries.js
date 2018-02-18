@@ -19,9 +19,6 @@ module.exports = {
     readUser: async function(data) {
         let o_id = new ObjectId(data);
         await getDb().collection('users').find({ _id: o_id })
-        // .toArray((err, docs) => {
-        //     return docs
-        // })
     },
 
     updateUser: async function(userId, updateObj) {

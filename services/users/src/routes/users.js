@@ -42,8 +42,8 @@ router.get('/ping', (req, res) => {
 })
 
 router.get('/read/:id', (req, res) => {
-    queries.readUser(req.params.id)
         .then((user) => {
+            console.log(user)
             res.status(200).json({
                 status: 'success',
                 data: user
