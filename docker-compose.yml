@@ -1,0 +1,13 @@
+version: “3”
+
+services:
+  usersapi:
+    build:
+      context: ./services/users
+      dockerfile: Dockerfile
+    volumes:
+      — ./:/app
+    ports:
+     — “3000:3000”
+    links:
+     — mongo

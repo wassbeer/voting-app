@@ -41,5 +41,5 @@ The "users" container is responsible for the routes, database configuration and 
 ## API's && Dependencies
 
 * npm mongodb
-* npm jest
+* npm mocha, chai
 * npm express
