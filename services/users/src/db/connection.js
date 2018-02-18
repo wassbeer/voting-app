@@ -9,6 +9,7 @@ module.exports.init = function() {
         _db = database.db(envDatabase);
         if (!err) {
             console.log('mongodb connected');
+            createUsersCollection(_db)
         }
     });
 };

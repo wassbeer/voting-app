@@ -52,8 +52,11 @@ describe('routes : users', () => {
                 .field('email', 'tm.wassenberg@gmail.com')
                 .field('password', 'baea0912')
                 .field('_id', '2')
-                .expect(queries.readUser('2').then((users => {
+                .expect(queries.readUser({_id: '2'}).then((users => {
                     users !== null;
+                    users.name === 'Thomas'
+                    users.email === 'tm.wassenberg@gmail.com'
+                    users.password === 'baea0912'
                 })))
                 .end((err, res) => {
                     err ? console.log(err) :
