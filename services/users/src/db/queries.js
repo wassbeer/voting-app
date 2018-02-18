@@ -11,35 +11,20 @@ const getDb = require('./connection').getDb
 
 module.exports = {
     createUser: function(obj) {
-        let db = getDb();
-        db.collection('users').insert(obj, (err) => {
-            err ? console.error(err) :
-                console.log('user inserted');
-        });
+        return getDb().collection('users').insertOne(obj)  
     },
 
     readUser: function(data) {
-        db.collection('users').find({ id: req.params.id }, (err, user) => {
-            // err ? console.error(err) :
-            return user;
-        });
+        return getDb().collection('users').findOne({ _id: data })
     },
 
     updateUser: function(userId, updateObj) {
         let conditions = { id: `${userId}` },
             update = { $set: `${updateObj}` }
-        db.collection('users').update(conditions, update, (err, result) => {
-            err ? console.error(err) :
-                console.log('User data updated succesfully')
-            console.log(result)
-        });
+        return getDb().collection('users').updateOne(conditions, update);
     },
 
     deleteUser: function(userId) {
-        db.collection('users').delete({ id: `${userId}` }, (err) => {
-            err ? console.error(err) :
-                console.log('user deleted')
-        })
+        return getDb().collection('users').deleteOne({ _id: `${userId}` });
     }
-
 };

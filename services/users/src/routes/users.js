@@ -30,8 +30,7 @@ router.post('/create', (req, res) => {
                 status: 'success',
                 data: user
             });
-        })
-        .catch((err) => {
+        }).catch((err) => {
             res.status(500).json({
                 status: 'error',
                 data: err
@@ -52,7 +51,7 @@ router.get('/ping', (req, res) => {
 // | /users/user/:id   |     GET     |        READ |   get user info |
 
 router.get('/read/:id', (req, res) => {
-    return queries.readUser(req.params.id)
+    queries.readUser(req.params.id)
         .then((user) => {
             res.status(200).json({
                 status: 'success',
@@ -72,7 +71,12 @@ router.get('/read/:id', (req, res) => {
 // | /users/update/:id |     PUT     |      UPDATE |     edit a user |
 
 router.put('/update/:id', (req, res) => {
-    return queries.updateUser(req.params.id)
+    let updatedUser = ({
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password
+    });
+    queries.updateUser(req.params.id, updatedUser)
         .then((user) => {
             res.status(200).json({
                 status: 'success',
@@ -92,7 +96,7 @@ router.put('/update/:id', (req, res) => {
 // | /users/delete/:id |   DELETE    |      DELETE |   delete a user |
 
 router.delete('/delete/:id', (req, res) => {
-    return queries.deleteUser(req.params.id)
+    queries.deleteUser(req.params.id)
         .then((user) => {
             res.status(200).json({
                 status: 'success',

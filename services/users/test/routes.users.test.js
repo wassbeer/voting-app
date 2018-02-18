@@ -4,25 +4,40 @@ const request = require('supertest'),
     chai = require('chai'),
     should = chai.should(),
     server = require('../src/app'),
-    queries = require('../src/db/queries')
+    queries = require('../src/db/queries'),
+    getDb = require('../src/db/connection').getDb,
+    connectDatabase = require('../src/db/connection').init
 
-// describe('routes : users', () => {
-    beforeEach((done) => {
-        // 1. replace by mongodb syntax
-        User.remove({}, (err) => {
-            done();
-        });
-    });
+describe('routes : users', () => {
 
-// ## URI endpoints
+    // beforeEach((done) => {
+    //     console.log('before each test')
+    //     // drop collection
+    //     getDb().collection('users').drop().then(() => {
+    //         // create collection
+    //         getDb().createCollection('users').then(() => {
+    //             // insert a dummy user Bas
+    //             queries.createUser({
+    //                 name: 'Bas',
+    //                 email: 'bkdelaat@gmail.com',
+    //                 password: '3982jnf',
+    //                 _id: '1'
+    //             }).then(() => {
+    //                 done()
+    //             })
+    //         })
+    //     })
+    // });
 
-// | Endpoint          | HTTP Method | CRUD Method |          Result |
-// | ----------------- | :---------: | ----------: | --------------: |
-// | /api/users/create   |    POST     |      CREATE | create a user |
-// | /api/users/ping       |     GET     |        READ |            pong |
-// | /api/users/user/:id   |     GET     |        READ |   get user info |
-// | /api/users/update/:id |     PUT     |      UPDATE |     edit a user |
-// | /api/users/delete/:id |   DELETE    |      DELETE |   delete a user |
+    // ## URI endpoints
+
+    // | Endpoint          | HTTP Method | CRUD Method |          Result |
+    // | ----------------- | :---------: | ----------: | --------------: |
+    // | /api/users/create   |    POST     |      CREATE | create a user |
+    // | /api/users/ping       |     GET     |        READ |            pong |
+    // | /api/users/user/:id   |     GET     |        READ |   get user info |
+    // | /api/users/update/:id |     PUT     |      UPDATE |     edit a user |
+    // | /api/users/delete/:id |   DELETE    |      DELETE |   delete a user |
 
 
     // | Endpoint          | HTTP Method | CRUD Method |          Result |
@@ -30,19 +45,16 @@ const request = require('supertest'),
     // | /api/users/create   |    POST     |      CREATE | create a user |
 
     describe('POST /api/users/create', () => {
-        it('it should create a user and GET users/user/:id', (done) => {
+        it('it should create a user', (done) => {
             request(server)
                 .post('/api/users/create')
-                .field('name', 'Bas')
-                .field('email', 'bkdelaat@gmail.com')
-                .field('password', '<passport-generated-password>')
-                .expect((req) => {
-                    // console.log(req.body)
-                    console.log(req.header)
-                    // console.log(req)
-                })
-                .expect('Location', '/users.user/*')
-                .expect(queries.readUser('bkdelaat@gmail.com'))
+                .field('name', 'Thomas')
+                .field('email', 'tm.wassenberg@gmail.com')
+                .field('password', 'baea0912')
+                .field('_id', '2')
+                .expect(queries.readUser('2').then((users => {
+                    users !== null;
+                })))
                 .end((err, res) => {
                     err ? console.log(err) :
                         done();
@@ -57,8 +69,7 @@ const request = require('supertest'),
                     .field(user.email)
                     .field(user.password)
                     .expect('Content-Type', /html/)
-                    .expect(200)
-                    .expect('Location', '/api/users/create')
+                    .expect(500)
                     .end((err, res) => {
                         err ? console.log(err) :
                             done();
@@ -71,8 +82,7 @@ const request = require('supertest'),
                 .post('/api/users/create')
                 .field('name', 'Bas')
                 .field('password', '<passport-generated-password>')
-                .expect(200)
-                .expect('Location', '/api/users/create')
+                .expect(500)
                 .end((err, res) => {
                     err ? console.log(err) :
                         done();
@@ -83,8 +93,7 @@ const request = require('supertest'),
                 .post('/api/users/create')
                 .field('name', 'Bas')
                 .field('email', 'bkdelaat@gmail.com')
-                .expect(200)
-                .expect('Location', '/api/users/create')
+                .expect(500)
                 .end((err, res) => {
                     err ? console.log(err) :
                         done();
@@ -97,17 +106,17 @@ const request = require('supertest'),
     // | /api/users/user/:id   |     GET     |        READ |   get user info |
 
     describe('GET /api/users/user/:id', () => {
-        it('it should GET a users/user/bas', (done) => {
-            queries.createUser({ name: "bas", email: "bkdelaat@gmail.com", password: "12345" }, (err, user) => {
-                request(server)
-                    .get('/api/users/user/' + user.id)
-                    .expect('Content-Type', /html/)
-                    .expect(200)
-                    .end((err, res) => {
-                        err ? console.log(err) :
-                            done();
-                    });
-            });
+        it('it should GET a user Bas', (done) => {
+            request(server)
+                .get('/api/users/user/1')
+                .expect(200)
+                .expect((res) => {
+                    res.body.name === 'Bas'
+                })
+                .end((err, res) => {
+                    err ? console.log(err) :
+                        done();
+                });
         });
     });
 
@@ -135,17 +144,15 @@ const request = require('supertest'),
 
     describe('PUT /api/users/update/:id', () => {
         it('it should PUT users/user/bas', (done) => {
-            queries.createUser({ name: "bas", email: "bkdelaat@gmail.com", password: "12345" }, (err, user) => {
-                queries.updateUser({ name: "bas", email: "bkdelaat@hotmail.com", password: "12345" }, (err, user) => {
-                    request(server)
-                        .expect('Content-Type', /html/)
-                        .expect(200)
-                        .expect('Location', '/api/users/user/' + user.id)
-                        .end((err, res) => {
-                            err ? console.log(err) :
-                                done();
-                        });
-                })
+            queries.updateUser('1', { name: "bas", email: "bkdelaat@hotmail.com", password: "12345" }, (err, user) => {
+                request(server)
+                    .expect('Content-Type', /html/)
+                    .expect(200)
+                    .expect('Location', '/api/users/user/' + user.id)
+                    .end((err, res) => {
+                        err ? console.log(err) :
+                            done();
+                    });
             })
         })
     })

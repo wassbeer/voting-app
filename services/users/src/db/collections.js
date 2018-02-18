@@ -1,11 +1,11 @@
-const connection = require('./connection.js'),
-    database = require('../../mongodbfile.js')[process.env.NODE_ENV];
-    
+const getDb = require('./connection.js').getDb;
+
 module.exports = {
-    users: function createUsersCollection(client) {
-        let db = client.db(database)
-        db.createCollection("users", (err) => {
+    users: function createUsersCollection() {
+        getDb().createCollection("users", (err) => {
             err ? console.error(err) :
                 console.log('users collection created')
+            getDb().collection('users').createIndex({ email: 1 }, { unique: true })
         });
-    }};
+    };
+};

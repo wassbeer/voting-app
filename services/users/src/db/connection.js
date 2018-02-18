@@ -9,12 +9,6 @@ module.exports.init = function() {
         _db = database.db(envDatabase);
         if (!err) {
             console.log('mongodb connected');
-        }	
+        }
     });
 };
-
-
-// MongoClient.connect(db.url,(err,database) =>{ 
-//   const myAwesomeDB = database.db('myDatabaseNameAsAString')
-//   myAwesomeDB.collection('theCollectionIwantToAccess')
-// }
