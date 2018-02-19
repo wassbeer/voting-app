@@ -4,6 +4,21 @@ import HelloWorld from '@/components/HelloWorld'
 
 Vue.use(Router)
 
+/*
+
+| Route           | Access       |
+| --------------  | :----------: |
+| /ping           | public       |
+| /home           | Public       |
+| /register       | Public       | 
+| / login         | Public       |
+| /poll           | Public       |
+| /user/:id       | Authenticated|
+| /create/poll    | Authenticated|
+| /account        | Authenticated|
+
+*/
+
 export default new Router({
     routes: [
         // test route /helloworld
@@ -28,6 +43,11 @@ export default new Router({
             component: Login
         },
         {
+            path: '/poll',
+            name: 'Poll',
+            component: Poll
+        },
+        {
             path: '/user/:id',
             name: 'User',
             component: User
@@ -38,28 +58,10 @@ export default new Router({
             component: CreatePoll
         },
         {
-        	path: '/poll',
-        	name: 'Poll',
-        	component: Poll
-        },
-        {
-        	path: 'Account',
-        	name: 'Account',
-        	component: Account
+            path: 'Account',
+            name: 'Account',
+            component: Account
         }
 
     ]
 })
-
-
-
-// Header:
-// nav bar 1
-// nav bar 2
-// Home: http://votingapp.herokuapp.com 
-// Signup
-// Login
-// User / My polls
-// New Poll
-// Publicly accesible poll
-// Settings / Change password / User settings / delete

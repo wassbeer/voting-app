@@ -14,15 +14,23 @@ The web service is responsible for providing the UI of the voting-app.
 │   └── router
 ├── static
 └── test
-    └── unit
-        └── specs
 ```
 
-## Front-end routes
+## UI routes
 
 
+// | Route           | Access       |
+// | --------------  | :----------: |
+// | /ping           | public       |
+// | /home           | Public       |
+// |  /register      | Public       | 
+// | / login         | Public       |
+// | /poll           | Public       |
+// | /user/:id       | Authenticated|
+// | /create/poll    | Authenticated|
+// | /account        | Authenticated|
 
-## HTTP back-end requests
+## HTTP request routes
 
 | Endpoint       | HTTP Method | CRUD      |           Result |
 | -------------- | :---------: | ----------: | ---------------: |
@@ -31,8 +39,8 @@ The web service is responsible for providing the UI of the voting-app.
 | /user/:id      |     GET     |        READ |  retrieve a user |
 | /user/update   |     PUT     |      UPDATE | update user info |
 | /user/delete   |   DELETE    |      DELETE |    delete a user |
-| /poll/:id     | GET | READ  | retrieve a poll |
-| /poll/share | POST | CREATE | share a poll with social media api  |
+| /poll/:id      |   GET       | READ        |  retrieve a poll |
+| /poll/share    |   POST      | CREATE      | share a poll with social media api  |
 | /poll/result/:id | GET | READ | retrieve the aggregate result of a poll  |
 | /poll/delete/:id | DELETE | DELETE | Delete a specific poll |
 | /poll/create | POST | CREATE | create a poll |
@@ -42,6 +50,7 @@ The web service is responsible for providing the UI of the voting-app.
 ## API's && Dependencies
 
 * Vue.js
+* Vuex
 * npm jest
 
 ## Build Setup
