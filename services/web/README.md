@@ -19,16 +19,16 @@ The web service is responsible for providing the UI of the voting-app.
 ## UI routes
 
 
-// | Route           | Access       |
-// | --------------  | :----------: |
-// | /ping           | public       |
-// | /home           | Public       |
-// |  /register      | Public       | 
-// | / login         | Public       |
-// | /poll           | Public       |
-// | /user/:id       | Authenticated|
-// | /create/poll    | Authenticated|
-// | /account        | Authenticated|
+| Route           | Access       |
+| --------------  | :----------: |
+| /ping           | public       |
+| /home           | Public       |
+| /register       | Public       | 
+| / login         | Public       |
+| /poll           | Public       |
+| /user/:id       | Authenticated|
+| /create/poll    | Authenticated|
+| /account        | Authenticated|
 
 ## HTTP request routes
 
@@ -39,12 +39,12 @@ The web service is responsible for providing the UI of the voting-app.
 | /user/:id      |     GET     |        READ |  retrieve a user |
 | /user/update   |     PUT     |      UPDATE | update user info |
 | /user/delete   |   DELETE    |      DELETE |    delete a user |
+| /poll/share    |   POST      | CREATE      | share a poll     |
+| /poll/create   |   POST      | CREATE | create a poll |
 | /poll/:id      |   GET       | READ        |  retrieve a poll |
-| /poll/share    |   POST      | CREATE      | share a poll with social media api  |
-| /poll/result/:id | GET | READ | retrieve the aggregate result of a poll  |
-| /poll/delete/:id | DELETE | DELETE | Delete a specific poll |
-| /poll/create | POST | CREATE | create a poll |
+| /poll/result/:id | GET | READ | retrieve poll result  |
 | /poll/update | PUT    | UPDATE  | update a poll |
+| /poll/delete/:id | DELETE | DELETE | Delete a specific poll |
 
 
 ## API's && Dependencies
