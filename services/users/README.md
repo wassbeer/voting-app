@@ -43,3 +43,11 @@ The Users API is responsible for the routes, database configuration and integrat
 * npm mongodb
 * npm mocha, chai
 * npm express
+
+
+<!-- ## Reference
+
+Token based authentication in Node.js with Passprt, JWT and bcrypt -> bCrypt
+https://jonathas.com/token-based-authentication-in-nodejs-with-passport-jwt-and-bcrypt/?utm_source=hashnode.com 
+
+-->

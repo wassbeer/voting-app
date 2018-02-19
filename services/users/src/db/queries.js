@@ -19,9 +19,13 @@ module.exports = {
         return getDb().collection('users').insertOne(obj);
     },
 
-    readUser: async function(userId) {
-        let o_id = new ObjectId(userId),
-            cursor = getDb().collection('users').find({ _id: o_id });
+    readUser: async function(email) {
+        let 
+        // o_id = new ObjectId(userId),
+            cursor = getDb().collection('users').find({ 
+                email: email
+                // _id: o_id 
+            });
         return await cursor.next() // returns document result of collection.find() method
     },
 

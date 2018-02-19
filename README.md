@@ -1,6 +1,6 @@
 ## Architecture
 
-The application is built in a microservice architecture. The application contains 7 microservices residing in 9 Docker containers. 
+The application is built in a microservice architecture. The application contains 6 microservices residing in 8 Docker containers. 
 
 |		Name      | Service   |Container   |  Tech     |
 |   -------------   |  -----------  |  -------|-----------------|
@@ -10,8 +10,7 @@ The application is built in a microservice architecture. The application contain
 |Polls DB       | polls |polls-db| Node, MongoDB |
 |  Users API       |users|  users| node.js, express, chai, supertest |
 |Users DB      |users|users-db| Node, Mongodb |
-|Authentication       |authentication|authentication| Node,  Express, passport, JWT, Mocha, Chai |
-|Authorization       |authorization| authorization | Node, Express, ACL |
+|Auth      |auth |auth | Node,  Express, passport, JWT, Mocha, Chai |
 |Social Media       |social-media| social-media | Node, Express |
 
 ## Repository Structure 

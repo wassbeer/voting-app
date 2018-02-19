@@ -40,8 +40,8 @@ router.get('/ping', (req, res) => {
 	res.send('pong');
 });
 
-router.get('/read/:id', (req, res) => {
-	queries.readUser(req.params.id)
+router.get('/read/:email', (req, res) => {
+	queries.readUser(req.params.email)
 		.then((user) => {
 			res.status(200).json({
 				status: 'success',
