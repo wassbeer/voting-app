@@ -19,13 +19,11 @@ const express = require('express'),
 
 router.post('/create', (req, res) => {
     bcrypt.hash(req.body.password, 10, function(err, hash) {
-        let user = ({
+       let user = ({
             name: req.body.name,
             email: req.body.email,
             password: hash
         });
-        return user
-    }).then((user) => {
         queries.createUser(user)
             .then((user) => {
                 res.status(201).json({

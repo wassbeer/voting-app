@@ -15,13 +15,12 @@ const getDb = require('./connection').getDb,
 
 
 module.exports = {
-    createUser: async function(obj) {
+    createUser: function(obj) {
         return getDb().collection('users').insertOne(obj);
     },
 
-    readUser: async function(id) {
-        let 
-        o_id = new ObjectId(userId),
+    readUser: async function(userId) {
+        let o_id = new ObjectId(userId),
             cursor = getDb().collection('users').find({ 
                 _id: o_id 
             });
