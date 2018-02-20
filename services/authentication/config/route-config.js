@@ -4,9 +4,9 @@
 
     routeConfig.init = function(app) {
         // routes
-        const authRoutes = require('../routes/auth');
+        const authRoutes = require('../routes/authentication');
 
         // register routes
-        app.use('/auth/', authRoutes);
+        app.use('/authentication/', authRoutes);
     };
 })(module.exports);

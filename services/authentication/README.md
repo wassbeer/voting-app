@@ -11,7 +11,7 @@ The Authentication Service is responsible for the authentication of users upon l
 │   └── route-config.js
 ├── node_modules
 ├── routes
-│   └── auth.js
+│   └── authentication.js
 ├── app.js
 ├── package.json
 ├── package-lock.json

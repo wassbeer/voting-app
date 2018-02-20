@@ -58,7 +58,7 @@ export default new Router({
             component: CreatePoll
         },
         {
-            path: 'Account',
+            path: '/account',
             name: 'Account',
             component: Account
         }

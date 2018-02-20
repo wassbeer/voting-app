@@ -34,7 +34,7 @@ The web service is responsible for providing the UI of the voting-app.
 
 | Endpoint       | HTTP Method | CRUD      |           Result |
 | -------------- | :---------: | ----------: | ---------------: |
-| /user/login    |    POST     |      CREATE |     login a user |
+| /authentication/login    |    POST     |      CREATE |     login a user |
 | /user/register |    POST     |      CREATE |  register a user |
 | /user/:id      |     GET     |        READ |  retrieve a user |
 | /user/update   |     PUT     |      UPDATE | update user info |

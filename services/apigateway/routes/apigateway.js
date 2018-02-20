@@ -1,52 +1,125 @@
 const request = require('request'),
-serviceAddress = require('../config/services-config.js')
+router = express.Router(),
+serviceAddress = require('../config/services-config.js'),
+urlConfig = require('../config/url-config')
 
 /* All the auth validation should be handled at the API gateway level, and 
 once forwarded to a (micro)service , that service can trust the request.
 */
 
-router.post('/login', (req, res) => {
+router.post('/authentication/login', (req, res) => {
     request.post({
-        url: serviceAddres.authUrl + '/auth/',
+        url: serviceAddres.authUrl + '/authentication/login',
         form: { email: req.body.email, password: req.body.password },
         json: true
     }, (err, res, body) => {
         if (err) {
-            return res.render('login', { error: 'An error occurred' });
+            // respond with error and redirect to login page
         }
         if (!body.token) {
-            return res.render('login', { error: 'Username or password is incorrect', username: req.body.username });
+            // username or password is incorrect
         }
-        // save JWT token in the session to make it available to the angular app
-        req.session.token = body.token;
-        res.redirect( /* vue user route */ );
+        // grab token and sent it to the client
+        // redirect the user to the profile page
     });
 });
 
-/* 
+router.post('/user/register', (req, res) =>{
+    // make use of urlConfig
 
-router.post('/', function (req, res) {
-    // authenticate using api to maintain clean separation between layers
-    request.post({
-        url: config.apiUrl + '/users/authenticate',
-        form: req.body,
-        json: true
-    }, function (error, response, body) {
-        if (error) {
-            return res.render('login', { error: 'An error occurred' });
-        }
- 
-        if (!body.token) {
-            return res.render('login', { error: 'Username or password is incorrect', username: req.body.username });
-        }
- 
-        // save JWT token in the session to make it available to the angular app
-        req.session.token = body.token;
- 
-        // redirect to returnUrl
-        var returnUrl = req.query.returnUrl && decodeURIComponent(req.query.returnUrl) || '/';
-        res.redirect(returnUrl);
-    });
+    // 1. send request to authentication service
+    // 2. send request to authorization service
+    // 3. send request to the requested resource
+    request. // HTTP method
+}
+}
 
+router.get('/user/:id', (req, res) =>{
+    // make use of urlConfig
 
-*/
+    // 1. send request to authentication service
+    // 2. send request to authorization service
+    // 3. send request to the requested resource
+    request. // HTTP method
+}
+}
+
+router.put('/user/update', (req, res) =>{
+    // make use of urlConfig
+
+    // 1. send request to authentication service
+    // 2. send request to authorization service
+    // 3. send request to the requested resource
+    request. // HTTP method
+}
+}
+
+router.delete('/user/delete', (req, res) =>{
+    // make use of urlConfig
+
+    // 1. send request to authentication service
+    // 2. send request to authorization service
+    // 3. send request to the requested resource
+    request. // HTTP method
+}
+}
+
+router.post('/poll/share', (req, res) =>{
+    // make use of urlConfig
+
+    // 1. send request to authentication service
+    // 2. send request to authorization service
+    // 3. send request to the requested resource
+    request. // HTTP method
+}
+}
+
+router.post('/poll/create ', (req, res) =>{
+    // make use of urlConfig
+
+    // 1. send request to authentication service
+    // 2. send request to authorization service
+    // 3. send request to the requested resource
+    request. // HTTP method
+}
+}
+
+router.get('/poll/:id', (req, res) =>{
+    // make use of urlConfig
+
+    // 1. send request to authentication service
+    // 2. send request to authorization service
+    // 3. send request to the requested resource
+    request. // HTTP method
+}
+}
+
+router.get('/poll/result/:id', (req, res) =>{
+    // make use of urlConfig
+
+    // 1. send request to authentication service
+    // 2. send request to authorization service
+    // 3. send request to the requested resource
+    request. // HTTP method
+}
+}
+
+router.put('/poll/update', (req, res) =>{
+    // make use of urlConfig
+
+    // 1. send request to authentication service
+    // 2. send request to authorization service
+    // 3. send request to the requested resource
+    request. // HTTP method
+}
+}
+
+router.delete('/delete/:id', (req, res) =>{
+    // make use of urlConfig
+
+    // 1. send request to authentication service
+    // 2. send request to authorization service
+    // 3. send request to the requested resource
+    request. // HTTP method
+}
+}
