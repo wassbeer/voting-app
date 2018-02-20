@@ -1,6 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
+import Home from '@/components/Home'
+import Register from '@/components/Register'
+import Login from '@/components/Login'
+import Poll from '@/components/Poll'
+import User from '@/components/User'
+import CreatePoll from '@/components/CreatePoll'
+import Account from '@/components/Account'
 
 Vue.use(Router)
 
@@ -20,48 +27,46 @@ Vue.use(Router)
 */
 
 export default new Router({
-    routes: [
-        // test route /helloworld
-        {
-            path: '/ping',
-            name: 'Pong',
-            component: Pong
-        },
-        {
-            path: '/',
-            name: 'Home',
-            component: Home
-        },
-        {
-            path: '/register',
-            name: 'Register',
-            component: Register
-        },
-        {
-            path: '/login',
-            name: 'Login',
-            component: Login
-        },
-        {
-            path: '/poll',
-            name: 'Poll',
-            component: Poll
-        },
-        {
-            path: '/user/:id',
-            name: 'User',
-            component: User
-        },
-        {
-            path: '/create/poll',
-            name: 'CreatePoll',
-            component: CreatePoll
-        },
-        {
-            path: '/account',
-            name: 'Account',
-            component: Account
-        }
+  routes: [{
+      path: '/',
+      name: 'HelloWorld',
+      component: HelloWorld
+    },
+    {
+      path: '/',
+      name: 'Home',
+      component: Home
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
+    },
+    {
+      path: '/poll',
+      name: 'Poll',
+      component: Poll
+    },
+    {
+      path: '/user/:id',
+      name: 'User',
+      component: User
+    },
+    {
+      path: '/create/poll',
+      name: 'CreatePoll',
+      component: CreatePoll
+    },
+    {
+      path: '/account',
+      name: 'Account',
+      component: Account
+    }
 
-    ]
+  ]
 })
