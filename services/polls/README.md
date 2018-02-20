@@ -40,10 +40,6 @@ The "polls" container is responsible for the controllers, database configuration
 | /polls/update/:id | PUT | UPDATE | edit a poll |
 | /polls/delete/:id | DELETE | DELETE | delete a poll |
 
-## Database configuration
-
-
-
 ## API's && Dependencies
 
 * npm mongoose

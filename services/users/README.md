@@ -8,11 +8,12 @@ The Users API is responsible for the routes, database configuration and integrat
 .
 ├── node_modules
 ├── src
+│   ├── config
+│   │   ├── main-config.js
+│   │   └── route-config.js
 │   ├── db
-│   │   ├── seeds
-│   │   │   └── users.js
+│   │   ├── collections.js
 │   │   ├── connection.js
-│   │   ├── Dockerfile
 │   │   └── queries.js
 │   ├── routes
 │   │   └── users.js
@@ -22,7 +23,7 @@ The Users API is responsible for the routes, database configuration and integrat
 │   └── routes.users.test.js
 ├── Dockerfile
 ├── gulpfile.js
-├── mongoosefile.js
+├── mongodbfile.js
 ├── package.json
 ├── package-lock.json
 └── README.md
@@ -43,11 +44,3 @@ The Users API is responsible for the routes, database configuration and integrat
 * npm mongodb
 * npm mocha, chai
 * npm express
-
-
-<!-- ## Reference
-
-Token based authentication in Node.js with Passprt, JWT and bcrypt -> bCrypt
-https://jonathas.com/token-based-authentication-in-nodejs-with-passport-jwt-and-bcrypt/?utm_source=hashnode.com 
-
--->
