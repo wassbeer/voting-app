@@ -1,8 +1,16 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import Vue from 'vue';
+import Router from 'vue-router';
+import HelloWorld from '@/components/HelloWorld';
+import Home from '@/components/Home';
+import Register from '@/components/Register';
+import Login from '@/components/Login';
+import Poll from '@/components/Poll';
+import CreatePoll from '@/components/CreatePoll';
+import PollResult from '@/components/PollResult';
+import MyPolls from '@/components/MyPolls';
+import Account from '@/components/Account';
 
-Vue.use(Router)
+Vue.use(Router);
 
 /*
 
@@ -10,9 +18,10 @@ Vue.use(Router)
 | --------------  | :----------: |
 | /ping           | public       |
 | /home           | Public       |
-| /register       | Public       | 
+| /register       | Public       |
 | / login         | Public       |
 | /poll           | Public       |
+| /poll/result    | Public       |
 | /user/:id       | Authenticated|
 | /create/poll    | Authenticated|
 | /account        | Authenticated|
@@ -25,43 +34,48 @@ export default new Router({
         {
             path: '/ping',
             name: 'Pong',
-            component: Pong
+            component: HelloWorld,
         },
         {
             path: '/',
             name: 'Home',
-            component: Home
+            component: Home,
         },
         {
             path: '/register',
             name: 'Register',
-            component: Register
+            component: Register,
         },
         {
             path: '/login',
             name: 'Login',
-            component: Login
+            component: Login,
         },
         {
             path: '/poll',
             name: 'Poll',
-            component: Poll
+            component: Poll,
         },
         {
-            path: '/user/:id',
-            name: 'User',
-            component: User
+            path: '/pollresult',
+            name: 'PollResult',
+            component: PollResult,
         },
         {
             path: '/create/poll',
             name: 'CreatePoll',
-            component: CreatePoll
+            component: CreatePoll,
         },
         {
-            path: 'Account',
+            path: '/user/:id',
+            name: 'MyPolls',
+            component: MyPolls,
+        },
+        {
+            path: '/Account',
             name: 'Account',
-            component: Account
-        }
+            component: Account,
+        },
 
-    ]
-})
+    ],
+});
