@@ -30,18 +30,18 @@ The "polls" container is responsible for the controllers, database configuration
 
 ## URI endpoints
 
-| Endpoint        | HTTP Method           | CRUD Method  |  Result   |
-| ------------- |:-------------:| -----:| ---: |
-| /polls/create | POST      |    CREATE | create a poll |
-| /polls/ping      | GET | READ | pong|
-| /polls/user/:id      | GET  | READ |     get polls of a user |
-| /polls/poll/:id      | GET  | READ |     get a poll  |
-| /polls/result/:id      | GET  | READ | get a poll result |
-| /polls/update/:id | PUT | UPDATE | edit a poll |
-| /polls/delete/:id | DELETE | DELETE | delete a poll |
+| Endpoint          | HTTP Method | CRUD Method |              Result |
+| ----------------- | :---------: | ----------: | ------------------: |
+| /api/polls/create     |    POST     |      CREATE |       create a poll |
+| /api/polls/ping       |     GET     |        READ |                pong |
+| /api/polls/user/:id   |     GET     |        READ | get polls of a user |
+| /api/polls/poll/:id   |     GET     |        READ |          get a poll |
+| /api/polls/result/:id |     GET     |        READ |   get a poll result |
+| /api/polls/update/:id |     PUT     |      UPDATE |         edit a poll |
+| /api/polls/delete/:id |   DELETE    |      DELETE |       delete a poll |
 
 ## API's && Dependencies
 
-* npm mongoose
-* npm jest
+* npm mongodb
+* npm mocha, chai
 * npm express
