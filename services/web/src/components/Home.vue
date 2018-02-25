@@ -1,113 +1,39 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-          href="https://vuejs.org"
-          target="_blank"
-        >
-          Core Docs
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://forum.vuejs.org"
-          target="_blank"
-        >
-          Forum
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://chat.vuejs.org"
-          target="_blank"
-        >
-          Community Chat
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://twitter.com/vuejs"
-          target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a
-          href="http://router.vuejs.org/"
-          target="_blank"
-        >
-          vue-router
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vuex.vuejs.org/"
-          target="_blank"
-        >
-          vuex
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vue-loader.vuejs.org/"
-          target="_blank"
-        >
-          vue-loader
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
-    </ul>
-  </div>
+  <v-container fluid>
+    <v-layout row>
+      <v-flex xs4 >
+         <v-card color="red lighten-2" height="15em">
+          <h2>Live Results</h2>
+          <p>Live graphs show your results immediately</p>
+        </v-card>
+      </v-flex>
+      <v-flex xs4 color="red lighten-2" height="15em">
+        <v-card color="red lighten-2" height="15em">
+          <h2>Works Everywhere</h2>
+          <p>A responsive desing that works on tablets, smartphones and web</p>
+        </v-card>
+      </v-flex>
+      <v-flex xs4 >
+         <v-card color="red lighten-2" height="15em">
+            <h2>Social Integration</h2>
+            <p>Free included Facebook comments allow your public to immediately comment</p>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
+>>>>>>> web
 </template>
 
 <script>
 export default {
-  name: 'Home',
   data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
+  },
+  methods: {
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+
 </style>

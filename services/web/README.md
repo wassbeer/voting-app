@@ -24,8 +24,9 @@ The web service is responsible for providing the UI of the voting-app.
 | /ping           | public       |
 | /home           | Public       |
 | /register       | Public       | 
-| / login         | Public       |
+| /login          | Public       |
 | /poll           | Public       |
+| /poll/result    | Public       | 
 | /user/:id       | Authenticated|
 | /create/poll    | Authenticated|
 | /account        | Authenticated|

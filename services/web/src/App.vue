@@ -1,26 +1,34 @@
 <template>
   <div id="app">
-        <v-container fluid>
-          <PageHeader></PageHeader>
+    <v-app>
+       <main>
+        <v-content>
+          <v-container fluid>
+               <nav-bar></nav-bar>
+     <page-header></page-header>
           <router-view></router-view>
-              <img src="./assets/logo.png"> 
-
         </v-container>
+        </v-content>
+      </main>
+    </v-app>
+>>>>>>> web
   </div>
 </template>
 
 <script>
-import PageHeader from '@/components/Header.vue'
+import NavBar from '@/components/NavBar'
+import PageHeader from '@/components/Header'
 export default {
   name: 'app',
   components: {
-    'PageHeader': PageHeader
+    NavBar,
+    PageHeader
   }
 }
 </script>
 
-<style>
-#app {
+<style src='vuetify/dist/vuetify.min.css'>
+  #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -28,4 +36,16 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-</style>
+.danger-alert {
+  color: red;
+}
+
+main{
+  margin-top: 50em;
+}
+
+</style> 
+
+<style scoped>
+    /* local styles */
+</style> 
