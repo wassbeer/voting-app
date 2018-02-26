@@ -21,28 +21,40 @@ module.exports = {
         return getDb().collection('polls').insertOne(obj);
     },
 
-   readPolls: async function(userId) {
-    let o_id = new ObjectId(userId),
-        cursor = getDb().collection('polls').find({ 
-            user: o_id 
+    readPolls: async function(userName) {
+        cursor = getDb().collection('polls').find({
+            userName: userName
         });
-    return await cursor.next() // returns document result of collection.find() method
-    }
+        return await cursor.toArray() // returns document results of collection.find() method
+    },
 
     // both for poll and result query
     readPoll: async function(pollId) {
         let o_id = new ObjectId(pollId),
-            cursor = getDb().collection('polls').find({ 
-                _id: o_id 
+            cursor = getDb().collection('polls').find({
+                _id: o_id
             });
-        return await cursor.next() 
+        return await cursor.next()
     },
 
-    updatePoll: async function(pollId, updateObj) {
-        let o_id = new ObjectId(pollId),
-            conditions = { _id: o_id },
-            update = { $set: updateObj };
-        return await getDb().collection('polls').updateOne(conditions, update);
+    //     db.products.update(
+    //    { _id: 100 },
+    //    { $set:
+    //       {
+    //         "tags.1": "rain gear",
+    //         "ratings.0.rating": 2
+    //       }
+    //    }
+    // )
+
+    // db.products.update(
+    //    { userName: 100 },
+    //    { $set: { "details.make": "zzz" } }
+    // )
+
+    updatePoll: async function(pollId, updateOption) {
+        let o_id = new ObjectId(pollId)
+        return await getDb().collection('polls').updateOne({ _id: o_id }, { $inc: { "pollOptions.whale": 1 } });
     },
 
     deletePoll: async function(pollId) {

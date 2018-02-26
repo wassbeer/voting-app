@@ -4,9 +4,9 @@
 
 	routeConfig.init = function(app) {
 		// routes
-		const userRoutes = require('../routes/users');
+		const pollRoutes = require('../routes/polls');
 
 		// register routes
-		app.use('/api/users', userRoutes);
+		app.use('/api/polls', pollRoutes);
 	};
 })(module.exports);
