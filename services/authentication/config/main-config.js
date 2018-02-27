@@ -1,8 +1,17 @@
-(function(appConfig){
+(function (appConfig) {
 
-var jwt = require('express-jwt');
- 
-// use JWT auth to secure the api
-app.use('/api', expressJwt({ secret: config.secret }).unless({ path: ['/api/users/authenticate', '/api/users/register'] }));
+    const bodyParser = require('body-parser'),
+        morgan = require('morgan');
+
+    appConfig.init = (app) =>  {
+        app.use(bodyParser.urlencoded({
+            extended: false
+        }));
+        app.use(bodyParser.json());
+        app.use(morgan('dev'));
+
+        app.set('superSecret', 'psyche&brein'); // secret variable
+    };
+
 
 })(module.exports);

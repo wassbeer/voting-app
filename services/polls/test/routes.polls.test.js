@@ -33,7 +33,7 @@ describe("routes : polls", () => {
             userName: "Bas",
             pollName: "Your favourite soft drink",
             pollOptions: "Coca-Cola,Fanta",
-            _id: "1"
+            _id: "5a89948a490ecd3123f47150"
         }).then(() => {
             done(); 
         });
@@ -93,7 +93,7 @@ describe("routes : polls", () => {
     describe("GET /api/polls/poll/1", () => {
         it("it should READ a poll about soft drinks", (done) => {
             request(server)
-                .get("/api/polls/poll/1")
+                .get("/api/polls/poll/5a89948a490ecd3123f47150")
                 .expect(200)
                 .end((err, res) => {
                     if (err) return done(err);
@@ -105,10 +105,10 @@ describe("routes : polls", () => {
         });
     });
 
-    describe("PUT /api/polls/update/1", () => {
+    describe("PUT /api/polls/update/5a89948a490ecd3123f47150", () => {
         it("it should UPDATE a poll result", (done) => {
             request(server)
-                .put("/api/polls/update/1")
+                .put("/api/polls/update/5a89948a490ecd3123f47150")
                 .send({ pollName: "Name your favourite soft drink in the world", pollOptions: "Fanta"})
                 .expect(200)
                 .end((err, res) => {
@@ -122,10 +122,10 @@ describe("routes : polls", () => {
         });
     });
 
-    describe("DELETE /api/polls/delete/1", () => {
+    describe("DELETE /api/polls/delete/5a89948a490ecd3123f47150", () => {
         it("it should DELETE a poll about soft drinks", (done) => {
             request(server)
-                .delete("/api/polls/delete/1")
+                .delete("/api/polls/delete/5a89948a490ecd3123f47150")
                 .expect(200)
                 .end((err, res) => {
                     if (err) return done(err);

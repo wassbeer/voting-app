@@ -43,6 +43,22 @@ router.get('/ping', (req, res) => {
     res.send('pong');
 });
 
+router.get('/read', (req, res) => {
+    queries.readUser(req.body.email)
+        .then((user) => {
+            res.status(200).json({
+                status: 'success',
+                data: user
+            });
+        })
+        .catch((err) => {
+            res.status(500).json({
+                status: 'error',
+                data: err
+            });
+        });
+});
+
 router.get('/read/:id', (req, res) => {
     queries.readUser(req.params.id)
         .then((user) => {

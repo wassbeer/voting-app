@@ -15,27 +15,42 @@ const getDb = require('./connection').getDb,
 
 
 module.exports = {
-    createUser: function(obj) {
+    createUser: function (obj) {
         return getDb().collection('users').insertOne(obj);
     },
 
-    readUser: async function(userId) {
-        let o_id = new ObjectId(userId),
-            cursor = getDb().collection('users').find({ 
-                _id: o_id 
-            });
-        return await cursor.next(); // returns document result of collection.find() method
+    readUser: async function (userId, email) {
+        switch (userId) {
+            case true: // id query
+                let o_id = new ObjectId(userId),
+                    cursor = getDb().collection('users').find({
+                        _id: o_id
+                    });
+                return await cursor.next();
+                break;
+            case false: // email query
+                cursor = getDb().collection('users').find({
+                    email: email
+                });
+                return await cursor.next();
+        }
     },
 
-    updateUser: async function(userId, updateObj) {
+    updateUser: async function (userId, updateObj) {
         let o_id = new ObjectId(userId),
-            conditions = { _id: o_id },
-            update = { $set: updateObj };
+            conditions = {
+                _id: o_id
+            },
+            update = {
+                $set: updateObj
+            };
         return await getDb().collection('users').updateOne(conditions, update);
     },
 
-    deleteUser: async function(userId) {
+    deleteUser: async function (userId) {
         let o_id = new ObjectId(userId);
-        return await getDb().collection('users').deleteOne({ _id: o_id });
+        return await getDb().collection('users').deleteOne({
+            _id: o_id
+        });
     }
 };
