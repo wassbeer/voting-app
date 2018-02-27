@@ -17,11 +17,11 @@ const getDb = require('./connection').getDb,
 
 
 module.exports = {
-    createPoll: function(obj) {
+    createPoll: function (obj) {
         return getDb().collection('polls').insertOne(obj);
     },
 
-    readPolls: async function(userName) {
+    readPolls: async function (userName) {
         cursor = getDb().collection('polls').find({
             userName: userName
         });
@@ -29,7 +29,7 @@ module.exports = {
     },
 
     // both for poll and result query
-    readPoll: async function(pollId) {
+    readPoll: async function (pollId) {
         let o_id = new ObjectId(pollId),
             cursor = getDb().collection('polls').find({
                 _id: o_id
@@ -37,27 +37,14 @@ module.exports = {
         return await cursor.next()
     },
 
-    //     db.products.update(
-    //    { _id: 100 },
-    //    { $set:
-    //       {
-    //         "tags.1": "rain gear",
-    //         "ratings.0.rating": 2
-    //       }
-    //    }
-    // )
-
-    // db.products.update(
-    //    { userName: 100 },
-    //    { $set: { "details.make": "zzz" } }
-    // )
-
-    updatePoll: async function(pollId, updateOption) {
+    updatePoll: async function (pollId, updateOption, updatePollName) {
         let o_id = new ObjectId(pollId)
-        return await getDb().collection('polls').updateOne({ _id: o_id }, { $inc: { "pollOptions.whale": 1 } });
+        return await getDb().collection('polls').update({ _id: o_id }, {
+            $inc: { [updateOption]: 1 }, $set: { pollName: updatePollName }
+        })
     },
 
-    deletePoll: async function(pollId) {
+    deletePoll: async function (pollId) {
         let o_id = new ObjectId(pollId);
         return await getDb().collection('polls').deleteOne({ _id: o_id });
     }

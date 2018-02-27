@@ -91,8 +91,9 @@ router.get('/poll/:id', (req, res) => {
 });
 
 router.put('/update/:id', (req, res) => {
-    let updateOption = req.body.option;
-    queries.updatePoll(req.params.id, updateOption)
+    let updateOption = req.body.pollOptions,
+    updatePollName = req.body.pollName;
+    queries.updatePoll(req.params.id, updateOption, updatePollName)
         .then((poll) => {
             res.status(200).json({
                 status: 'success',

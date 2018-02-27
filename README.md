@@ -31,15 +31,7 @@ The application is built in a microservice architecture. The application contain
     └── web
 ```
 
-## Tests
-
-_"..a substantial bank of test cases, exploring the input range and probing its boundaries, must be prepare, run and recorderd" - Frederick P. Brooks Jr._
-
-The application is developed in a TDD fashion. Middleware used includes Mocha, Chai on server side testing and and Jest for the client side. 
-
 ## API Specification
-
-_"..promotion of a program to a programming product requires its thorough documentation, so that anyone may use it, fix it, and extend it" - Frederick P. Brooks Jr._
 
 Please visit these endpoints for API specification:
 *  http://localhost:3000/users/api-docs/

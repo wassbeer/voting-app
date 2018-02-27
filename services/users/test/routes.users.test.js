@@ -3,11 +3,9 @@ process.env.NODE_ENV = 'test';
 const request = require('supertest'),
 	chai = require('chai'),
 	chaiHttp = require('chai-http'),
-	should = chai.should(),
 	server = require('../src/app'),
 	queries = require('../src/db/queries'),
-	mongo = require('../src/db/connection'),
-	createUsersCollection = require('../src/db/collections').users;
+	mongo = require('../src/db/connection');
 
 chai.use(chaiHttp);
 
