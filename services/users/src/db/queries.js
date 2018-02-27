@@ -24,7 +24,7 @@ module.exports = {
             cursor = getDb().collection('users').find({ 
                 _id: o_id 
             });
-        return await cursor.next() // returns document result of collection.find() method
+        return await cursor.next(); // returns document result of collection.find() method
     },
 
     updateUser: async function(userId, updateObj) {

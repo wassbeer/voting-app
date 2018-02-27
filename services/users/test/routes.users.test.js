@@ -5,7 +5,8 @@ const request = require('supertest'),
 	chaiHttp = require('chai-http'),
 	server = require('../src/app'),
 	queries = require('../src/db/queries'),
-	mongo = require('../src/db/connection');
+	mongo = require('../src/db/connection'),
+	should = chai.should();
 
 chai.use(chaiHttp);
 

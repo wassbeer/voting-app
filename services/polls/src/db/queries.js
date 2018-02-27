@@ -30,22 +30,19 @@ module.exports = {
 
     // both for poll and result query
     readPoll: async function (pollId) {
-        let o_id = new ObjectId(pollId),
             cursor = getDb().collection('polls').find({
-                _id: o_id
+                _id: pollId
             });
         return await cursor.next()
     },
 
     updatePoll: async function (pollId, updateOption, updatePollName) {
-        let o_id = new ObjectId(pollId)
-        return await getDb().collection('polls').update({ _id: o_id }, {
+        return await getDb().collection('polls').update({ _id: pollId }, {
             $inc: { [updateOption]: 1 }, $set: { pollName: updatePollName }
-        })
+        });
     },
 
     deletePoll: async function (pollId) {
-        let o_id = new ObjectId(pollId);
-        return await getDb().collection('polls').deleteOne({ _id: o_id });
+        return await getDb().collection('polls').deleteOne({ _id: pollId });
     }
 };

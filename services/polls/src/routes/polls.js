@@ -20,6 +20,7 @@ router.post('/create', (req, res) => {
     let poll = ({
         userName: req.body.userName,
         pollName: req.body.pollName,
+        _id: req.body._id
     });
     async function pollOptions() {
         return await req.body.pollOptions;
@@ -75,7 +76,7 @@ router.get('/user/:userName', (req, res) => {
 });
 
 router.get('/poll/:id', (req, res) => {
-    queries.readPolls(req.params.id)
+    queries.readPoll(req.params.id)
         .then((poll) => {
             res.status(200).json({
                 status: 'success',
@@ -109,11 +110,11 @@ router.put('/update/:id', (req, res) => {
 });
 
 router.delete('/delete/:id', (req, res) => {
-    queries.deleteUser(req.params.id)
-        .then((user) => {
+    queries.deletePoll(req.params.id)
+        .then((poll) => {
             res.status(200).json({
                 status: 'success',
-                data: user
+                data: poll
             });
         })
         .catch((err) => {
