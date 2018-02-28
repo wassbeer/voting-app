@@ -1,6 +1,4 @@
-const getDb = require('./connection').getDb,
-    ObjectId = require('mongodb').ObjectId;
-
+const getDb = require('./connection').getDb;
 /*
 
 |  URI Endpoint     | HTTP Method | CRUD Method |          Result |
@@ -15,8 +13,10 @@ const getDb = require('./connection').getDb,
 
 
 module.exports = {
-    createUser: function (obj) {
-        return getDb().collection('users').insertOne(obj);
+    createUser: async function (obj) {
+        return getDb().collection('users').insertOne(obj).then((result) => {
+            return result.ops[0]
+        });
     },
 
     readUser: async function (userId, email) {
@@ -39,9 +39,8 @@ module.exports = {
     },
 
     updateUser: async function (userId, updateObj) {
-        let o_id = new ObjectId(userId),
-            conditions = {
-                _id: o_id
+        let conditions = {
+                _id: userId
             },
             update = {
                 $set: updateObj
@@ -50,9 +49,8 @@ module.exports = {
     },
 
     deleteUser: async function (userId) {
-        let o_id = new ObjectId(userId);
         return await getDb().collection('users').deleteOne({
-            _id: o_id
+            _id: userId
         });
     }
 };

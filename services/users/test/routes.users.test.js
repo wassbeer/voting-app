@@ -54,7 +54,7 @@ describe('routes : users', () => {
 					res.should.be.json;
 					res.body.should.have.property('status');
 					res.body.status.should.equal('success');
-					res.body.data.ok.should.equal(1);
+					res.body.data.name.should.equal('Bas');
 					done();
 				});
 		});

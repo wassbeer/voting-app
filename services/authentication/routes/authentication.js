@@ -20,9 +20,8 @@ router.post('/signup', (req, res) => {
                 url: 'http://localhost:3000/api/users/create'
             };
         request(options, (require, response) => {
-            res.status(200).json(response.body)
             const payload = {
-                admin: response.body.data.name
+                admin: response.body.data._id
             },
                 token = jwt.sign(payload, 'superSecret', {
                     expiresIn: 1440 // expires in 24 hours
@@ -51,7 +50,7 @@ router.post('/login', (req, res) => {
                 switch (result === true) {
                     case true:
                         const payload = {
-                            admin: response.body.data.name
+                            admin: response.body.data._id
                         },
                             token = jwt.sign(payload, 'superSecret', {
                                 expiresIn: 1440 // expires in 24 hours
@@ -75,12 +74,14 @@ router.post('/login', (req, res) => {
     });
 });
 
-router.post('/verify', (req, res, next) => {
+// verify route for pages on client side with authenticated access
+router.use((req, res, next) => {
+    
     // check header or url parameters or post parameters for token
-    var token = req.body.token || req.param('token') || req.headers['x-access-token'];
+    var token = req.body.token || req.headers['x-access-token'];
     if (token) {
         // verifies secret and checks exp
-        jwt.verify(token, app.get('superSecret'), function (err, decoded) {
+        jwt.verify(token, 'superSecret', function (err, decoded) {
             if (err) {
                 return res.json({
                     success: false,
@@ -101,5 +102,9 @@ router.post('/verify', (req, res, next) => {
         });
     }
 });
+
+router.get('/', (req,res) => {
+    res.json({ message: 'Welcome to the coolest API on earth!' });
+})
 
 module.exports = router;
