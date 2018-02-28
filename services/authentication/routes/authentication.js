@@ -1,9 +1,9 @@
-const express = require('express'),
+const express = require("express"),
     router = express.Router(),
-    request = require('request'),
-    bcrypt = require('bcrypt'),
-    jwt = require('jsonwebtoken'),
-    secret = 'theOldManAndTheSea';
+    request = require("request"),
+    bcrypt = require("bcrypt"),
+    jwt = require("jsonwebtoken"),
+    secret = "theOldManAndTheSea";
 
 /* 
 
@@ -17,19 +17,19 @@ const express = require('express'),
 
 */
 
-router.post('/signup', (req, res) => {
+router.post("/signup", (req, res) => {
     bcrypt.hash(req.body.password, 10, function (err, hash) {
         let options;
         err ? console.error(err) :
             options = {
-                method: 'post',
+                method: "post",
                 body: {
                     name: req.body.name,
                     email: req.body.email,
                     password: hash
                 },
                 json: true,
-                url: 'http://localhost:3000/api/users/create'
+                url: "http://localhost:3000/api/users/create"
             };
         request(options, (require, response) => {
             const payload = {
@@ -40,25 +40,25 @@ router.post('/signup', (req, res) => {
                 });
             res.status(200).json({
                 success: true,
-                message: 'Enjoy your token!',
+                message: "Enjoy your token!",
                 token: token
-            })
+            });
         });
     });
 });
 
-router.post('/login', (req, res) => {
+router.post("/login", (req, res) => {
     const options = {
-        method: 'post',
+        method: "post",
         body: {
             email: req.body.email
         },
         json: true,
-        url: 'http://localhost:3000/api/users/read'
-    }
+        url: "http://localhost:3000/api/users/read"
+    };
     request(options, (require, response) => {
         bcrypt.compare(req.body.password, response.body.data.password, (err, result) => {
-            if (err) { console.error(err) } else {
+            if (err) { console.error(err); } else {
                 switch (result === true) {
                     case true:
                         const payload = {
@@ -69,33 +69,33 @@ router.post('/login', (req, res) => {
                             });
                         res.status(200).json({
                             success: true,
-                            message: 'Enjoy your token!',
+                            message: "Enjoy your token!",
                             token: token
-                        })
+                        });
                         break;
                     default:
                         res.status(200).json({
-                            status: 'failed',
-                            data: 'Authentication failed. Wrong password.'
+                            status: "failed",
+                            data: "Authentication failed. Wrong password."
                         });
                         break;
                 }
             }
-        })
+        });
     });
 });
 
-router.post('/verify', (req, res) => {
+router.post("/verify", (req, res) => {
     jwt.verify(req.body.token, secret, function (err, decoded) {
         if (err) {
             return res.status(200).json({
                 success: false,
-                message: 'Failed to authenticate token.'
+                message: "Failed to authenticate token."
             });
         } else {
             return res.status(200).json({
                 success: true,
-                message: 'Succesfuly authenticated token.'
+                message: "Succesfuly authenticated token."
             });
         }
     });

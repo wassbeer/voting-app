@@ -79,9 +79,9 @@ describe('routes : users', () => {
 					if (err) return done(err);
 					res.should.be.json;
 					res.body.should.have.property('status');
-					res.body.should.have.property('data')
+					res.body.should.have.property('data');
 					res.body.status.should.equal('success');
-					res.body.data.name.should.equal('Bas')
+					res.body.data.name.should.equal('Bas');
 					done();
 				});
 		});
@@ -97,7 +97,7 @@ describe('routes : users', () => {
 					if (err) return done(err);
 					res.should.be.json;
 					res.body.should.have.property('status');
-					res.body.should.have.property('data')
+					res.body.should.have.property('data');
 					res.body.status.should.equal('failure');
 					done();
 				});
