@@ -33,7 +33,6 @@ module.exports = {
                 cursor = getDb().collection('users').find({
                     _id: o_id
                 });
-
                 return await cursor.next();
                 break;
         }

@@ -5,45 +5,73 @@ const express = require('express'),
     bcrypt = require('bcrypt'),
     jwt = require('jsonwebtoken');
 
-module.exports = router;
+router.post('/signup', (req, res) => {
+    bcrypt.hash(req.body.password, 10, function (err, hash) {
+        let options;
+        err ? console.error(err) :
+            options = {
+                method: 'post',
+                body: {
+                    name: req.body.name,
+                    email: req.body.email,
+                    password: hash
+                },
+                json: true,
+                url: 'http://localhost:3000/api/users/create'
+            };
+        request(options, (require, response) => {
+            res.status(200).json(response.body)
+            const payload = {
+                admin: response.body.data.name
+            },
+                token = jwt.sign(payload, 'superSecret', {
+                    expiresIn: 1440 // expires in 24 hours
+                });
+            res.json({
+                success: true,
+                message: 'Enjoy your token!',
+                token: token
+            })
+        });
+    });
+});
 
 router.post('/login', (req, res) => {
-    request.post('localhost:3000/api/users/read', {
-        email: req.body.email
-    }).then((user) => {
-        bcrypt.compare(req.body.password, user.password, (err, res) => {
-            if (res) {
-                return rightPassword = true;
-            }
-        }).then((rightPassword) => {
-            switch (rightPassword) {
-                case !rightPassword:
-                    res.status(200).json({
-                        status: 'failed',
-                        data: 'Authentication failed. Wrong password.'
-                    });
-                    break;
-                default:
-                    const payload = {
-                            admin: body.name
+    let options = {
+        method: 'post',
+        body: {
+            email: req.body.email
+        },
+        json: true,
+        url: 'http://localhost:3000/api/users/read'
+    }
+    request(options, (require, response) => {
+        bcrypt.compare(req.body.password, response.body.data.password, (err, result) => {
+            if (err) { console.error(err) } else {
+                switch (result === true) {
+                    case true:
+                        const payload = {
+                            admin: response.body.data.name
                         },
-                        token = jwt.sign(payload, router.get('superSecret'), {
-                            expiresInMinutes: 1440 // expires in 24 hours
-                        });
-                    // return the information including token as JSON
-                    res.json({
+                            token = jwt.sign(payload, 'superSecret', {
+                                expiresIn: 1440 // expires in 24 hours
+                            });
+                        // return the information including token as JSON
+                        res.json({
                             success: true,
                             message: 'Enjoy your token!',
                             token: token
                         })
-                        .catch((err) => {
-                            res.status(500).json({
-                                status: 'error',
-                                data: err
-                            });
+                        break;
+                    default:
+                        res.status(200).json({
+                            status: 'failed',
+                            data: 'Authentication failed. Wrong password.'
                         });
+                        break;
+                }
             }
-        });
+        })
     });
 });
 
@@ -64,16 +92,14 @@ router.post('/verify', (req, res, next) => {
                 next();
             }
         });
-
     } else {
-
         // if there is no token
         // return an error
         return res.status(403).send({
             success: false,
             message: 'No token provided.'
         });
-
     }
-
 });
+
+module.exports = router;

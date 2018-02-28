@@ -19,11 +19,10 @@ const express = require('express'),
 */
 
 router.post('/create', (req, res) => {
-    bcrypt.hash(req.body.password, 10, function(err, hash) {
-       let user = ({
+        let user = ({
             name: req.body.name,
             email: req.body.email,
-            password: hash
+            password: req.body.password
         });
         queries.createUser(user)
             .then((user) => {
@@ -38,19 +37,25 @@ router.post('/create', (req, res) => {
                 });
             });
     })
-});
 
 router.get('/ping', (req, res) => {
     res.send('pong');
 });
 
 router.post('/read', (req, res) => {
+    console.log(req.body.email)
     queries.readUser(null, req.body.email)
         .then((user) => {
-            res.status(200).json({
-                status: 'success',
-                data: user
-            });
+            user ?
+                res.status(200).json({
+                    status: 'success',
+                    data: user
+                })
+                :
+                res.status(404).json({
+                    status: 'failure',
+                    data: 'User not found'
+                })
         })
         .catch((err) => {
             res.status(500).json({
@@ -63,10 +68,16 @@ router.post('/read', (req, res) => {
 router.get('/read/:id', (req, res) => {
     queries.readUser(req.params.id)
         .then((user) => {
-            res.status(200).json({
-                status: 'success',
-                data: user
-            });
+            user ?
+                res.status(200).json({
+                    status: 'success',
+                    data: user
+                })
+                :
+                res.status(404).json({
+                    status: 'failure',
+                    data: 'User not found'
+                })
         })
         .catch((err) => {
             res.status(500).json({

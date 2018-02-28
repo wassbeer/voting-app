@@ -70,7 +70,7 @@ describe('routes : users', () => {
 	});
 
 	describe('POST /api/users/read', () => {
-		it('it should authenitcate user Bas', (done) => {
+		it('it should authenticate user Bas', (done) => {
 			request(server)
 				.post('/api/users/read')
 				.send({email: 'bkdelaat@gmail.com'})
@@ -82,6 +82,23 @@ describe('routes : users', () => {
 					res.body.should.have.property('data')
 					res.body.status.should.equal('success');
 					res.body.data.name.should.equal('Bas')
+					done();
+				});
+		});
+	});
+
+	describe('POST /api/users/read', () => {
+		it('it should authenticate user Bas', (done) => {
+			request(server)
+				.post('/api/users/read')
+				.send({email: 'bkksddelaat@gmail.com'})
+				.expect(404)
+				.end((err, res) => {
+					if (err) return done(err);
+					res.should.be.json;
+					res.body.should.have.property('status');
+					res.body.should.have.property('data')
+					res.body.status.should.equal('failure');
 					done();
 				});
 		});
@@ -114,6 +131,7 @@ describe('routes : users', () => {
 		});
 	});
 
+	// this test fails because the 'inserted' custom id is not the same as the stored id
 	describe('PUT /api/users/update/:id', () => {
 		it('it should UPDATE user bas', (done) => {
 			request(server)
