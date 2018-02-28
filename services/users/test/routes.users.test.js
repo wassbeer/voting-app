@@ -14,15 +14,16 @@ describe('routes : users', () => {
 
 	/* 
 
-     URI endpoints
+		## URI endpoints
 
-    | Endpoint              | HTTP Method | CRUD Method |          Result |
-    | --------------------: | :---------: | ----------: | --------------: |
-    | /api/users/create     |    POST     |      CREATE | create a user |
-    | /api/users/ping       |     GET     |        READ |            pong |
-    | /api/users/user/:id   |     GET     |        READ |   get user info |
-    | /api/users/update/:id |     PUT     |      UPDATE |     edit a user |
-    | /api/users/delete/:id |   DELETE    |      DELETE |   delete a user |
+		| Endpoint              | HTTP Method | CRUD Method |          Result |
+		| --------------------- | :---------: | ----------: | --------------: |
+		| /api/users/create     |    POST     |      CREATE | register a user |
+		| /api/users/read       |    POST     |      CREATE | authenticate    |
+		| /api/users/ping       |    GET      |        READ |            pong |
+		| /api/users/read/:id   |    GET      |        READ |   get user info |
+		| /api/users/update/:id |    PUT      |      UPDATE |     edit a user |
+		| /api/users/delete/:id |    DELETE   |      DELETE |   delete a user |
 
     */
 
@@ -66,6 +67,24 @@ describe('routes : users', () => {
 		// 			should.exist(err);
 		// 		});
 		// });
+	});
+
+	describe('POST /api/users/read', () => {
+		it('it should authenitcate user Bas', (done) => {
+			request(server)
+				.post('/api/users/read')
+				.send({email: 'bkdelaat@gmail.com'})
+				.expect(200)
+				.end((err, res) => {
+					if (err) return done(err);
+					res.should.be.json;
+					res.body.should.have.property('status');
+					res.body.should.have.property('data')
+					res.body.status.should.equal('success');
+					res.body.data.name.should.equal('Bas')
+					done();
+				});
+		});
 	});
 
 	describe('GET /api/users/read/5a89948a490ecd3123f47150', () => {

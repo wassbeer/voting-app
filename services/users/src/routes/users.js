@@ -5,15 +5,16 @@ const express = require('express'),
 
 /* 
 
- URI endpoints
+    # URI endpoints
 
-| Endpoint          | HTTP Method | CRUD Method |          Result |
-| ----------------- | :---------: | ----------: | --------------: |
-| /users/create     |    POST     |      CREATE | create a user   |
-| /users/ping       |     GET     |        READ |            pong |
-| /users/read/:id   |     GET     |        READ |   get user info |
-| /users/update/:id |     PUT     |      UPDATE |     edit a user |
-| /users/delete/:id |   DELETE    |      DELETE |   delete a user |
+    | Endpoint              | HTTP Method | CRUD Method |          Result |
+    | --------------------- | :---------: | ----------: | --------------: |
+    | /api/users/create     |    POST     |      CREATE | register a user |
+    | /api/users/read       |    POST     |      CREATE | authenticate    |
+    | /api/users/ping       |    GET      |        READ |            pong |
+    | /api/users/read/:id   |    GET      |        READ |   get user info |
+    | /api/users/update/:id |    PUT      |      UPDATE |     edit a user |
+    | /api/users/delete/:id |    DELETE   |      DELETE |   delete a user |
 
 */
 
@@ -43,8 +44,8 @@ router.get('/ping', (req, res) => {
     res.send('pong');
 });
 
-router.get('/read', (req, res) => {
-    queries.readUser(req.body.email)
+router.post('/read', (req, res) => {
+    queries.readUser(null, req.body.email)
         .then((user) => {
             res.status(200).json({
                 status: 'success',

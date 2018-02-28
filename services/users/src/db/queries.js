@@ -20,19 +20,22 @@ module.exports = {
     },
 
     readUser: async function (userId, email) {
-        switch (userId) {
-            case true: // id query
-                let o_id = new ObjectId(userId),
-                    cursor = getDb().collection('users').find({
-                        _id: o_id
-                    });
-                return await cursor.next();
-                break;
-            case false: // email query
+        let cursor;
+        switch (userId === null) {
+            case true: // email query
                 cursor = getDb().collection('users').find({
                     email: email
                 });
                 return await cursor.next();
+                break;
+            default: // id query
+                let o_id = new ObjectId(userId);
+                cursor = getDb().collection('users').find({
+                    _id: o_id
+                });
+
+                return await cursor.next();
+                break;
         }
     },
 
