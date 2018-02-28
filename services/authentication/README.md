@@ -1,6 +1,6 @@
 # Authentication Service
 
-The Authentication Service is responsible for the authentication of users upon login and page visit.
+The Authentication Service is responsible for the authentication of users upon signup, login and visiting authenticated routes.
 
 ## Folder structure
 
@@ -12,6 +12,8 @@ The Authentication Service is responsible for the authentication of users upon l
 ├── node_modules
 ├── routes
 │   └── authentication.js
+├── test
+│   └── routes.authentication.test.js
 ├── app.js
 ├── package.json
 ├── package-lock.json
@@ -21,10 +23,14 @@ The Authentication Service is responsible for the authentication of users upon l
 
 ## URI endpoints
 
-| Endpoint          | HTTP Method |          Result |
-| ----------------- | :---------:  | --------------: |
-| /authenticate/login     |    POST     | authenticate a user upon login|
-| /authenticate/verify   |     POST     | authenticate a user upon visiting a page |
+URI endpoints
+
+| Endpoint                 | HTTP Method | CRUD Method |              Result                                   |
+| ------------------------ | :---------: | ----------: | ----------------------------------------------------: |
+| /authentication/signup   |    POST     |   CREATE    | hash password and provide JWT upon signup             |
+| /authentication/login    |     POST    |   CREATE    | bcrypt compare password and provide JWT upon login    |
+| /authentication/verify   |     POST    |   CREATE    | verify a JWT for authenticated routes                 |
+
 
 ## API's && Dependencies
 

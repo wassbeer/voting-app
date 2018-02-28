@@ -1,9 +1,21 @@
-// get an instance of the router for api routes
 const express = require('express'),
     router = express.Router(),
     request = require('request'),
     bcrypt = require('bcrypt'),
-    jwt = require('jsonwebtoken');
+    jwt = require('jsonwebtoken'),
+    secret = 'theOldManAndTheSea';
+
+/* 
+
+ URI endpoints
+
+| Endpoint                 | HTTP Method | CRUD Method |              Result                                   |
+| ------------------------ | :---------: | ----------: | ----------------------------------------------------: |
+| /authentication/signup   |    POST     |   CREATE    | hash password and provide JWT upon signup             |
+| /authentication/login    |     POST    |   CREATE    | bcrypt compare password and provide JWT upon login    |
+| /authentication/verify   |     POST    |   CREATE    | verify a JWT for authenticated routes                 |
+
+*/
 
 router.post('/signup', (req, res) => {
     bcrypt.hash(req.body.password, 10, function (err, hash) {
@@ -23,10 +35,10 @@ router.post('/signup', (req, res) => {
             const payload = {
                 admin: response.body.data._id
             },
-                token = jwt.sign(payload, 'superSecret', {
+                token = jwt.sign(payload, secret, {
                     expiresIn: 1440 // expires in 24 hours
                 });
-            res.json({
+            res.status(200).json({
                 success: true,
                 message: 'Enjoy your token!',
                 token: token
@@ -36,7 +48,7 @@ router.post('/signup', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-    let options = {
+    const options = {
         method: 'post',
         body: {
             email: req.body.email
@@ -52,11 +64,10 @@ router.post('/login', (req, res) => {
                         const payload = {
                             admin: response.body.data._id
                         },
-                            token = jwt.sign(payload, 'superSecret', {
+                            token = jwt.sign(payload, secret, {
                                 expiresIn: 1440 // expires in 24 hours
                             });
-                        // return the information including token as JSON
-                        res.json({
+                        res.status(200).json({
                             success: true,
                             message: 'Enjoy your token!',
                             token: token
@@ -74,37 +85,20 @@ router.post('/login', (req, res) => {
     });
 });
 
-// verify route for pages on client side with authenticated access
-router.use((req, res, next) => {
-    
-    // check header or url parameters or post parameters for token
-    var token = req.body.token || req.headers['x-access-token'];
-    if (token) {
-        // verifies secret and checks exp
-        jwt.verify(token, 'superSecret', function (err, decoded) {
-            if (err) {
-                return res.json({
-                    success: false,
-                    message: 'Failed to authenticate token.'
-                });
-            } else {
-                // if everything is good, save to request for use in other routes
-                req.decoded = decoded;
-                next();
-            }
-        });
-    } else {
-        // if there is no token
-        // return an error
-        return res.status(403).send({
-            success: false,
-            message: 'No token provided.'
-        });
-    }
+router.post('/verify', (req, res) => {
+    jwt.verify(req.body.token, secret, function (err, decoded) {
+        if (err) {
+            return res.status(200).json({
+                success: false,
+                message: 'Failed to authenticate token.'
+            });
+        } else {
+            return res.status(200).json({
+                success: true,
+                message: 'Succesfuly authenticated token.'
+            });
+        }
+    });
 });
-
-router.get('/', (req,res) => {
-    res.json({ message: 'Welcome to the coolest API on earth!' });
-})
 
 module.exports = router;

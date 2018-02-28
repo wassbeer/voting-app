@@ -1,0 +1,12 @@
+{
+  "name": "apigateway",
+  "version": "1.0.0",
+  "description": "The API Gateway is the principle access service for the client. The API gateway ensures a request is authenticated and authorized before the requested resource is accessed.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
