@@ -9,15 +9,15 @@
           name="change-password-form"
           autocomplete="off">
           <v-text-field
-            label="current password"
-            v-model="currentPassword"
-            autocomplete="provide your current password"
+            label="new password"
+            v-model="newPassword"
+            autocomplete="provide your new password"
           ></v-text-field>
           <br>
           <v-text-field
             label="new password"
-            v-model="newPassword"
-            autocomplete="provide a new password"
+            v-model="confirmPassword"
+            autocomplete="confirm a new password"
           ></v-text-field>
         </form>
         <br>
@@ -36,19 +36,28 @@
 </template>
 
 <script>
-// import AuthService from '@/services/AuthService'
-// export default {
-//   data () {
-//     return {
-//       currentPassword: '',
-//       newPassword: '',
-//       error: null
-//     }},
-//   methods: {
-//     // async renewPassword () {
-//     // }
-// }
-// }
+import AuthService from '@/services/UsersService'
+export default {
+  data () {
+    return {
+      newPassword: '',
+      confirmPassword: '',
+      error: null
+      }},
+  methods: {
+    async changePassword () {
+      try{
+        const response = UsersService.update({
+        id: req.session.id, // retrieve the id from store or session or token
+        password: this.newPassword
+      })
+     console.log('succesfully updated')
+      } catch (error) {
+        this.error = error.response.data
+      }
+    }
+}
+}
 </script>
 
 <style scoped>

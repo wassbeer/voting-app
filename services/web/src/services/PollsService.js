@@ -11,7 +11,7 @@ export default {
   getPoll(pollId) {
     return Api().get(`/polls/read/${pollId}`)
   },
-  post (poll) {
+  register (poll) {
     return Api().post('/polls/create', poll)
   },
   put (poll) {

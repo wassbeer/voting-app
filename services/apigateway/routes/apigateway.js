@@ -1,4 +1,5 @@
-const request = require('request'),
+const request = require('request-promise'),
+    express = require('express'),
     router = express.Router(),
     serviceAddress = require('../config/services-config.js'),
     urlConfig = require('../config/url-config')
@@ -8,144 +9,160 @@ once forwarded to a (micro)service , that service can trust the request.
 */
 
 // verify route for pages on client side with authenticated access
-router.use((req, res, next) => {
-    const token = req.body.token || req.headers['x-access-token'];
-    if (token) {
-        const options = {
-            method: 'post',
-            body: {
-                token: token
-            },
-            url: 'localhost:5000/authentication/verify',
-            json: true;
-        }
 
-        request(options, (request, response) => {
-            !response.body.success ? res.json({ success: false, message: 'Failed to authenticate token.' }) :
-                req.decoded = decoded;
-            next();
-        })
+/*
+
+AVOID:
+Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+
+*/
+
+router.all('/*', function (req, res, next) {
+    // CORS headers
+    res.header("Access-Control-Allow-Origin", "*"); // restrict it to the required domain
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    // Set custom headers for CORS
+    res.header('Access-Control-Allow-Headers', 'Content-type,Accept,X-Access-Token,X-Key');
+    if (req.method == 'OPTIONS') {
+        res.status(200).end();
     } else {
-        return res.status(403).send({
-            success: false,
-            message: 'No token provided.'
-        });
+        next();
     }
 });
 
-router.post('/authentication/login', (req, res) => {
-    request.post({
-        url: serviceAddres.authUrl + '/authentication/login',
-        form: { email: req.body.email, password: req.body.password },
-        json: true
-    }, (err, res, body) => {
-        if (err) {
-            // respond with error and redirect to login page
-        }
-        if (!body.token) {
-            // username or password is incorrect
-        }
-        // grab token and sent it to the client
-        // redirect the user to the profile page
+// routes
+
+router.post("/authentication/signup", (req, res) => {
+    let options = {
+        method: 'post',
+        body: {
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password
+        },
+        json: true,
+        url: "http://localhost:5000/authentication/signup"
+    }
+    request(options).then((signup) => {
+        res.json(signup)
+    }).catch((err) => {
+        res.json(err);
     });
 });
 
-router.post('/user/register', (req, res) => {
-    // make use of urlConfig
+router.post('/authentication/login', (req, res) => {
+    let options = {
+        method: 'post',
+        body: {
+            email: req.body.email,
+            password: req.body.password
+        },
+        json: true,
+        url: 'http://localhost:5000/authentication/login'
+    }
 
-    // 1. send request to authentication service
-    // 2. send request to authorization service
-    // 3. send request to the requested resource
-    request. // HTTP method
-}
-}
+    request(options).then((loginResult) => {
+        res.json(loginResult)
+    }).catch((err) => {
+        res.json(err);
+    });
+});
 
-    router.get('/user/:id', (req, res) => {
-        // make use of urlConfig
+router.post("/authentication/verify", (req, res) => {
+    let options = {
+        method: 'post',
+        body: {
+            token: req.body.token
+        },
+        json: true,
+        url: 'http://localhost:5000/authentication/verify'
+    }
+    request(options).then((verifyResult) => {
+        res.json(verifyResult)
+    }).catch((err) => {
+        res.json(err);
+    });
+});
 
-        // 1. send request to authentication service
-        // 2. send request to authorization service
-        // 3. send request to the requested resource
-        request. // HTTP method
-}
-}
+router.put('/api/users/update/:id', (req, res) => {
+    let options = {
+        method: 'post',
+        body: {
+            password: req.body.password
+        },
+        json: true,
+        url: 'http://localhost:3000/api/users/update/' + req.params.id
+    }
+    request(options).then((updateResult) => {
+        res.json(updateResult)
+    }).catch((err) => {
+        res.json(err);
+    });
+});
 
-        router.put('/user/update', (req, res) => {
-            // make use of urlConfig
+// router.delete('/api/users/delete/:id', (req, res) => {
+//     // make use of urlConfig
 
-            // 1. send request to authentication service
-            // 2. send request to authorization service
-            // 3. send request to the requested resource
-            request. // HTTP method
-}
-}
+//     // 2. send request to authorization service
+//     // 3. send request to the requested resource
+//     request. // HTTP method
+// })
 
-            router.delete('/user/delete', (req, res) => {
-                // make use of urlConfig
+// router.post('/api/polls/create ', (req, res) => {
+//     // make use of urlConfig
 
-                // 1. send request to authentication service
-                // 2. send request to authorization service
-                // 3. send request to the requested resource
-                request. // HTTP method
-}
-}
+//     // 2. send request to authorization service
+//     // 3. send request to the requested resource
+//     request. // HTTP method
+// })
 
-                router.post('/poll/share', (req, res) => {
-                    // make use of urlConfig
+// router.get('/api/polls/user/:id', (req, res) => {
+//     // make use of urlConfig
 
-                    // 1. send request to authentication service
-                    // 2. send request to authorization service
-                    // 3. send request to the requested resource
-                    request. // HTTP method
-}
-}
+//     // 2. send request to authorization service
+//     // 3. send request to the requested resource
+//     request. // HTTP method
+// })
 
-                    router.post('/poll/create ', (req, res) => {
-                        // make use of urlConfig
+// router.get('/api/polls/poll/:id', (req, res) => {
+//     // make use of urlConfig
 
-                        // 1. send request to authentication service
-                        // 2. send request to authorization service
-                        // 3. send request to the requested resource
-                        request. // HTTP method
-}
-}
+//     // 2. send request to authorization service
+//     // 3. send request to the requested resource
+//     request. // HTTP method
+// });
 
-                        router.get('/poll/:id', (req, res) => {
-                            // make use of urlConfig
 
-                            // 1. send request to authentication service
-                            // 2. send request to authorization service
-                            // 3. send request to the requested resource
-                            request. // HTTP method
-}
-}
+// router.get('/api/polls/result/:id', (req, res) => {
+//     // make use of urlConfig
 
-                            router.get('/poll/result/:id', (req, res) => {
-                                // make use of urlConfig
+//     // 2. send request to authorization service
+//     // 3. send request to the requested resource
+//     request. // HTTP method
+// });
 
-                                // 1. send request to authentication service
-                                // 2. send request to authorization service
-                                // 3. send request to the requested resource
-                                request. // HTTP method
-}
-}
+// router.put('/api/polls/update/:id', (req, res) => {
+//     // make use of urlConfig
 
-                                router.put('/poll/update', (req, res) => {
-                                    // make use of urlConfig
+//     // 2. send request to authorization service
+//     // 3. send request to the requested resource
+//     request. // HTTP method
+// });
 
-                                    // 1. send request to authentication service
-                                    // 2. send request to authorization service
-                                    // 3. send request to the requested resource
-                                    request. // HTTP method
-}
-}
+// router.delete('/api/polls/delete/:id', (req, res) => {
+//     // make use of urlConfig
 
-                                    router.delete('/delete/:id', (req, res) => {
-                                        // make use of urlConfig
+//     // 2. send request to authorization service
+//     // 3. send request to the requested resource
+//     request. // HTTP method
+// });
 
-                                        // 1. send request to authentication service
-                                        // 2. send request to authorization service
-                                        // 3. send request to the requested resource
-                                        request. // HTTP method
-}
-}
+// router.get('/api/users/read/:id', (req, res) => {
+//     // make use of urlConfig
+
+//     // 2. send request to authorization service
+//     // 3. send request to the requested resource
+//     request. // HTTP method
+// })
+
+module.exports = router;

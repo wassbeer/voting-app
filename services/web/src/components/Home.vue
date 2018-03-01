@@ -21,7 +21,6 @@
       </v-flex>
     </v-layout>
   </v-container>
->>>>>>> web
 </template>
 
 <script>

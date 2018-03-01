@@ -7,7 +7,7 @@ export default {
   get(userId) {
     return Api().get(`/user/read/${userId}`)
   },
-  put (user) {
+  update (user) {
     return Api().put(`/user/update/${user.id}`, user)
   },
   delete(user){

@@ -8,6 +8,11 @@
         <form 
           name="sign-up-form"
           autocomplete="off">
+           <v-text-field
+            label="Name"
+            v-model="name"
+          ></v-text-field>
+          <br>
           <v-text-field
             label="Email"
             v-model="email"
@@ -24,7 +29,7 @@
         <v-btn
           dark
           class="cyan"
-          @click="register">
+          @click="signup">
           Register
         </v-btn>
       </panel>
@@ -36,35 +41,40 @@
 </template>
 
 <script>
-// import AuthenticationService from '@/services/AuthService'
-// export default {
-//   data () {
-//     return {
-//       email: '',
-//       password: '',
-//       error: null
-//     }},
-//   methods: {
-//     // async register () {
-//       //       try {
-//         // const response = await 
-//         AuthService.register()
-//       //     email: this.email,
-//       //     password: this.password
-//       //   })
-//       //   this.$store.dispatch('setToken', response.data.token)
-//       //   this.$store.dispatch('setUser', response.data.user)
-//       //   this.$router.push({
-//       //     name: 'mypolls'
-//       //   })
-//       // } catch (error) {
-//       //   this.error = error.response.data.error
-//       // }
-//     // }
-// }
-// }
-
+import AuthService from "@/services/AuthService";
+export default {
+  data() {
+    return {
+      email: "",
+      password: "",
+      name: "",
+      error: null
+    };
+  },
+  methods: {
+    async signup() {
+      try {
+        const response = await AuthService.signup({
+          email: this.email,
+          name: this.name,
+          password: this.password
+        }).then(response => {
+          console.log(response);
+          this.$store.dispatch('setToken', response.data.token)
+          this.$store.dispatch('setUser', response.data.user._id)
+          this.$router.push({
+            name: "MyPolls",
+            params: { id: response.data.user._id }
+          });
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+};
 </script>
 
 <style scoped>
+
 </style>

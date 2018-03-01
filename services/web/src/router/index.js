@@ -9,6 +9,8 @@ import CreatePoll from '@/components/CreatePoll';
 import PollResult from '@/components/PollResult';
 import MyPolls from '@/components/MyPolls';
 import Account from '@/components/Account';
+import AuthService from '@/services/AuthService';
+import Store from '@/store/store';
 
 Vue.use(Router);
 
@@ -60,19 +62,58 @@ export default new Router({
             name: 'PollResult',
             component: PollResult,
         },
+
+    // *** authenticated routes *** //
+
         {
             path: '/create/poll',
             name: 'CreatePoll',
+            beforeEnter: (to, from, next) => {
+                switch(Store.state.isUserLoggedIn){
+                    case true:
+                    AuthService.verify(Store.state.token).then((result) => {
+                        result.data.success ? next() :
+                        console.log('token verification failed')
+                    }); 
+                    break;
+                    default:
+                    console.log('you are not logged in')
+                }
+              },
             component: CreatePoll,
         },
         {
             path: '/user/:id',
             name: 'MyPolls',
+            beforeEnter: (to, from, next) => {
+                switch(Store.state.isUserLoggedIn){
+                    case true:
+                    AuthService.verify(Store.state.token).then((result) => {
+                        result.data.success ? next() :
+                        console.log('token verification failed')
+                    }); 
+                    break;
+                    default:
+                    console.log('you are not logged in')
+                }
+              },
             component: MyPolls,
         },
         {
             path: '/Account',
             name: 'Account',
+            beforeEnter: (to, from, next) => {
+                switch(Store.state.isUserLoggedIn){
+                    case true:
+                    AuthService.verify(Store.state.token).then((result) => {
+                        result.data.success ? next() :
+                        console.log('token verification failed')
+                    }); 
+                    break;
+                    default:
+                    console.log('you are not logged in')
+                }
+              },
             component: Account,
         },
 

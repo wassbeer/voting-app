@@ -1,12 +1,16 @@
-(function(appConfig){
+(function (appConfig) {
 
-var session = require('express-session');
-var bodyParser = require('body-parser');
- 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(session({ secret: config.secret, resave: false, saveUninitialized: true }));
+    'use strict';
 
-app.use('/', require('../routes/apigateway.js'));
+	// main dependencies
+
+    const session = require('express-session'),
+        bodyParser = require('body-parser');
+
+    appConfig.init = function (app) {
+        app.use(bodyParser.urlencoded({ extended: false }));
+        app.use(bodyParser.json());
+        app.use('/', require('../routes/apigateway.js'));
+    }
 
 })(module.exports);

@@ -1,6 +1,6 @@
 const express = require("express"),
     router = express.Router(),
-    request = require("request"),
+    request = require("request-promise"),
     bcrypt = require("bcrypt"),
     jwt = require("jsonwebtoken"),
     secret = "theOldManAndTheSea";
@@ -31,21 +31,48 @@ router.post("/signup", (req, res) => {
                 json: true,
                 url: "http://localhost:3000/api/users/create"
             };
-        request(options, (require, response) => {
-            const payload = {
-                admin: response.body.data._id
-            },
-                token = jwt.sign(payload, secret, {
-                    expiresIn: 1440 // expires in 24 hours
-                });
+        request(options).then((user) => {
+
+            // router.post('/create', (req, res) => {
+            //     let user = ({
+            //         name: req.body.name,
+            //         email: req.body.email,
+            //         password: req.body.password
+            //     });
+            //     queries.createUser(user)
+            //         .then((user) => {
+            //             res.status(201).json({
+            //                 status: 'success',
+            //                 data: user
+            //             });
+            //         }).catch((err) => {
+            //             res.status(500).json({
+            //                 status: 'error',
+            //                 data: err
+            //             });
+            //         });
+            // });
+
+
+            // 1. If the user is succesfully registered 
+
+            const token = jwt.sign({ admin: user.data._id }, secret, { // payload, secret
+                expiresIn: 1440 // expires in 24 hours
+            });
             res.status(200).json({
                 success: true,
                 message: "Enjoy your token!",
-                token: token
+                token: token,
+                user: user.data
             });
+
+            // 2. If the user is not succesfully registered due to e-mail already taken
+
+
         });
     });
-});
+})
+
 
 router.post("/login", (req, res) => {
     const options = {
@@ -56,21 +83,21 @@ router.post("/login", (req, res) => {
         json: true,
         url: "http://localhost:3000/api/users/read"
     };
-    request(options, (require, response) => {
-        bcrypt.compare(req.body.password, response.body.data.password, (err, result) => {
+    request(options).then((user) => {
+        bcrypt.compare(req.body.password, user.password, (err, result) => {
             if (err) { console.error(err); } else {
                 switch (result === true) {
                     case true:
-                        const payload = {
-                            admin: response.body.data._id
-                        },
-                            token = jwt.sign(payload, secret, {
+                        token = jwt.sign({
+                            admin: user._id
+                        }, secret, {
                                 expiresIn: 1440 // expires in 24 hours
                             });
                         res.status(200).json({
                             success: true,
                             message: "Enjoy your token!",
-                            token: token
+                            token: token,
+                            user: user.data
                         });
                         break;
                     default:
@@ -82,7 +109,7 @@ router.post("/login", (req, res) => {
                 }
             }
         });
-    });
+    })
 });
 
 router.post("/verify", (req, res) => {
