@@ -24,9 +24,10 @@ The API Gateway is the principle access service for the client. The API gateway 
 | Endpoint        | HTTP Method           | CRUD Method  |  Result   |
 | ------------- |:-------------:| -----:| ---: |
 | /authentication/login    |    POST     |      CREATE |     login a user |
-| /user/register |    POST     |      CREATE |  register a user |
+| /authentication/signup | POST | CREATE | signup a user | 
+| /authentication/verify | POST | CREATE | verify the authentication of a user |
+| /authentication/update/:id | PUT  | UPDATE  | update a user password
 | /user/:id      |     GET     |        READ |  retrieve a user |
-| /user/update   |     PUT     |      UPDATE | update user info |
 | /user/delete   |   DELETE    |      DELETE |    delete a user |
 | /poll/share    |   POST      | CREATE      | share a poll     |
 | /poll/create   |   POST      | CREATE | create a poll |

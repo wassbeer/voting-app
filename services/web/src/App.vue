@@ -11,7 +11,6 @@
         </v-content>
       </main>
     </v-app>
->>>>>>> web
   </div>
 </template>
 

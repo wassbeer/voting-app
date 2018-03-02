@@ -59,6 +59,9 @@ export default {
           name: this.name,
           password: this.password
         }).then(response => {
+
+          // 1. the signup worked out
+          
           console.log(response);
           this.$store.dispatch('setToken', response.data.token)
           this.$store.dispatch('setUser', response.data.user._id)
@@ -66,6 +69,10 @@ export default {
             name: "MyPolls",
             params: { id: response.data.user._id }
           });
+
+          // 2. the e-mail address is already taken
+
+
         });
       } catch (error) {
         console.log(error);

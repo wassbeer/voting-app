@@ -31,34 +31,53 @@
 </template>
 
 <script>
-// import AuthenticationService from '@/services/AuthService'
-// export default {
-//   data () {
-//     return {
-//       email: '',
-//       password: '',
-//       error: null
-//     }
-//   },
-//   methods: {
-//   //   async login () {
-//   // //     try {
-//   // //       const response = await AuthenticationService.login({
-//   // //         email: this.email,
-//   // //         password: this.password
-//   // //       })
-//   // //       this.$store.dispatch('setToken', response.data.token)
-//   // //       this.$store.dispatch('setUser', response.data.user)
-//   // //       this.$router.push({
-//   // //         name: 'mypolls'
-//   // //       })
-//   // //     } catch (error) {
-//   // //       this.error = error.response.data.error
-//   // //     }
-//   //   }
-//   }
-// }
+import AuthService from "@/services/AuthService";
+export default {
+  data() {
+    return {
+      email: "",
+      password: "",
+      error: null
+    };
+  },
+  methods: {
+    async login() {
+      try {
+        const response = await AuthService.login({
+          email: this.email,
+          password: this.password
+        }).then(response => {
+          console.log(response);
+          // 1. the login worked out
+          switch (response.data.success) {
+            case true:
+              this.$store.dispatch("setToken", response.data.token);
+              this.$store.dispatch("setUser", response.data.user._id);
+              this.$router.push({
+                name: "MyPolls",
+                params: { id: response.data.user._id }
+              });
+              break;
+
+            // 2. the login did not work because of a false password
+            // 2.1 error message, staying on the same page
+            
+            // 3. the login did not work because the email is not registered
+            // 3. error message, stay on the same page
+            default:
+            console.log('login failed')
+
+              break;
+          }
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+};
 </script>
 
 <style scoped>
+
 </style>

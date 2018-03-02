@@ -1,16 +1,10 @@
 import Api from '@/services/Api'
 
 export default {
-  register (credentials) {
-    return Api().post('/user/register', credentials)
-  },
   get(userId) {
-    return Api().get(`/user/read/${userId}`)
-  },
-  update (user) {
-    return Api().put(`/user/update/${user.id}`, user)
+    return Api().get(`/api/users/read/${userId}`)
   },
   delete(user){
-    return Api().delete(`/user/delete/${user.id}`, user)
+    return Api().delete(`/api/users/delete/${user.id}`, user)
   }
 }

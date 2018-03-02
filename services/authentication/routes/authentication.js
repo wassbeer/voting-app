@@ -14,6 +14,7 @@ const express = require("express"),
 | /authentication/signup   |    POST     |   CREATE    | hash password and provide JWT upon signup             |
 | /authentication/login    |     POST    |   CREATE    | bcrypt compare password and provide JWT upon login    |
 | /authentication/verify   |     POST    |   CREATE    | verify a JWT for authenticated routes                 |
+| /authentication/update   |     PUT     |   UPDATE    | hash a newly created password                         |
 
 */
 
@@ -64,11 +65,11 @@ router.post("/signup", (req, res) => {
                 message: "Enjoy your token!",
                 token: token,
                 user: user.data
-            });
-
+            }).catch((err) => {
+                res.json(err);
+            })
             // 2. If the user is not succesfully registered due to e-mail already taken
-
-
+            //--> catch the error and send to apigateway
         });
     });
 })
@@ -84,9 +85,9 @@ router.post("/login", (req, res) => {
         url: "http://localhost:3000/api/users/read"
     };
     request(options).then((user) => {
-        bcrypt.compare(req.body.password, user.password, (err, result) => {
+        bcrypt.compare(req.body.password, user.data.password, (err, result) => {
             if (err) { console.error(err); } else {
-                switch (result === true) {
+                switch (result) {
                     case true:
                         token = jwt.sign({
                             admin: user._id
@@ -113,7 +114,7 @@ router.post("/login", (req, res) => {
 });
 
 router.post("/verify", (req, res) => {
-    jwt.verify(req.body.token, secret, function (err, decoded) {
+    jwt.verify(req.body.token, secret, (err, decoded) => {
         if (err) {
             return res.status(200).json({
                 success: false,
@@ -127,5 +128,24 @@ router.post("/verify", (req, res) => {
         }
     });
 });
+
+router.put("/update/:id", (req, res) => {
+    bcrypt.hash(req.body.password, 10, function (err, hash) {
+        let options = {
+            method: 'put',
+            body: {
+                password: hash
+            },
+            url: "http://localhost:3000/api/users/read/update/" + req.params.id,
+            json: true
+        }
+        request(options).then((update) => {
+            res.json(update)
+        })
+            .catch((err) => {
+                res.json(err);
+            });
+    })
+})
 
 module.exports = router;

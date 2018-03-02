@@ -28,18 +28,28 @@
         Sign Up
       </v-btn>
 
-      <v-btn 
-        v-if="$store.state.isUserLoggedIn"
+<!-- <v-layout justify-space-around> -->
+  <!-- <v-btn v-if="$store.state.isUserLoggedIn"
         flat 
-        dark
+        dark>
+      Account
+      </v-btn> -->
+<v-btn    flat 
+        dark  v-if="$store.state.isUserLoggedIn">
+  Hello {{ user }}
+        </v-btn>
+
+<v-btn         flat 
+        dark 
         to="account">
-        Account <!-- settings icon -->
-      </v-btn>
-      
+<v-icon v-if="$store.state.isUserLoggedIn"
+        class="material-icons"
+        >settings</v-icon>
+        </v-btn>
       <v-btn 
-        v-if="$store.state.isUserLoggedIn"
+       v-if="$store.state.isUserLoggedIn"
         flat 
-        dark
+        dark 
         @click="logout">
         Log Out
       </v-btn>
@@ -48,17 +58,33 @@
 </template>
 
 <script>
+import UsersService from "@/services/UsersService";
+import Store from "@/store/store";
 export default {
+  data() {
+    return {
+      user: 'user'
+    };
+  },
+  created() {
+   UsersService.get(Store.state.user)
+    .then((response) => {
+      this.user = response.data.data.name
+    })
+    .catch(e => {
+      this.errors.push(e)
+    })
+  },
   methods: {
-    logout () {
-      this.$store.dispatch('setToken', null)
-      this.$store.dispatch('setUser', null)
+    logout() {
+      this.$store.dispatch("setToken", null);
+      this.$store.dispatch("setUser", null);
       this.$router.push({
-        name: 'home'
-      })
+        name: "Home"
+      });
     }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -66,6 +92,6 @@ export default {
   cursor: pointer;
 }
 .home:hover {
-  color: #E9E;
+  color: #e9e;
 }
 </style>

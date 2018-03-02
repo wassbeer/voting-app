@@ -60,7 +60,6 @@ router.post('/authentication/login', (req, res) => {
         json: true,
         url: 'http://localhost:5000/authentication/login'
     }
-
     request(options).then((loginResult) => {
         res.json(loginResult)
     }).catch((err) => {
@@ -84,14 +83,14 @@ router.post("/authentication/verify", (req, res) => {
     });
 });
 
-router.put('/api/users/update/:id', (req, res) => {
+router.put('/authentication/update', (req, res) => {
     let options = {
-        method: 'post',
+        method: 'put',
         body: {
             password: req.body.password
         },
         json: true,
-        url: 'http://localhost:3000/api/users/update/' + req.params.id
+        url: 'http://localhost:5000/authentication/update/' + req.body.id
     }
     request(options).then((updateResult) => {
         res.json(updateResult)
@@ -100,69 +99,87 @@ router.put('/api/users/update/:id', (req, res) => {
     });
 });
 
-// router.delete('/api/users/delete/:id', (req, res) => {
-//     // make use of urlConfig
+router.get('/api/users/read/:id', (req, res) => {
+let options = {
+    method: 'get',
+    url: 'http://localhost:3000/api/users/read/' + req.params.id,
+    json: true
+}
+request(options).then((user) => {
+    res.json(user)
+}).catch((err) => {
+    res.json(err);
+});
+});
 
-//     // 2. send request to authorization service
-//     // 3. send request to the requested resource
-//     request. // HTTP method
-// })
+router.delete('/api/users/delete/:id', (req, res) => {
+    let options = {
+        method: 'get',
+        url: 'http://localhost:3000/api/users/delete/' + req.params.id,
+        json: true
+    }
+    request(options).then((deleteStatus) => {
+        res.json(deleteStatus)
+    }).catch((err) => {
+        res.json(err);
+    });
+})
 
-// router.post('/api/polls/create ', (req, res) => {
-//     // make use of urlConfig
+router.post('/api/polls/create ', (req, res) => {
+    // make use of urlConfig
 
-//     // 2. send request to authorization service
-//     // 3. send request to the requested resource
-//     request. // HTTP method
-// })
+    // 2. send request to authorization service
+    // 3. send request to the requested resource
+    // request HTTP method
+})
 
-// router.get('/api/polls/user/:id', (req, res) => {
-//     // make use of urlConfig
+router.get('/api/polls/user/:id', (req, res) => {
+    // make use of urlConfig
 
-//     // 2. send request to authorization service
-//     // 3. send request to the requested resource
-//     request. // HTTP method
-// })
+    // 2. send request to authorization service
+    // 3. send request to the requested resource
+    // request HTTP method
+})
 
-// router.get('/api/polls/poll/:id', (req, res) => {
-//     // make use of urlConfig
+router.get('/api/polls/poll/:id', (req, res) => {
+    // make use of urlConfig
 
-//     // 2. send request to authorization service
-//     // 3. send request to the requested resource
-//     request. // HTTP method
-// });
+    // 2. send request to authorization service
+    // 3. send request to the requested resource
+    // request HTTP method
+});
 
 
-// router.get('/api/polls/result/:id', (req, res) => {
-//     // make use of urlConfig
+router.get('/api/polls/result/:id', (req, res) => {
+    // make use of urlConfig
 
-//     // 2. send request to authorization service
-//     // 3. send request to the requested resource
-//     request. // HTTP method
-// });
+    // 2. send request to authorization service
+    // 3. send request to the requested resource
+    // request HTTP method
+});
 
-// router.put('/api/polls/update/:id', (req, res) => {
-//     // make use of urlConfig
+router.put('/api/polls/update/:id', (req, res) => {
+    // make use of urlConfig
 
-//     // 2. send request to authorization service
-//     // 3. send request to the requested resource
-//     request. // HTTP method
-// });
+    // 2. send request to authorization service
+    // 3. send request to the requested resource
+    // request HTTP method
+});
 
-// router.delete('/api/polls/delete/:id', (req, res) => {
-//     // make use of urlConfig
+router.delete('/api/polls/delete/:id', (req, res) => {
+    // make use of urlConfig
 
-//     // 2. send request to authorization service
-//     // 3. send request to the requested resource
-//     request. // HTTP method
-// });
+    // 2. send request to authorization service
+    // 3. send request to the requested resource
+    // request HTTP method
+});
 
-// router.get('/api/users/read/:id', (req, res) => {
-//     // make use of urlConfig
+router.get('/api/users/read/:id', (req, res) => {
+    // make use of urlConfig
 
-//     // 2. send request to authorization service
-//     // 3. send request to the requested resource
-//     request. // HTTP method
-// })
+    // 2. send request to authorization service
+    // 3. send request to the requested resource
+    // request HTTP method
+})
 
 module.exports = router;

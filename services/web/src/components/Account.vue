@@ -36,7 +36,8 @@
 </template>
 
 <script>
-import AuthService from '@/services/UsersService'
+import UsersService from '@/services/UsersService'
+import Store from '@/store/store'
 export default {
   data () {
     return {
@@ -47,13 +48,14 @@ export default {
   methods: {
     async changePassword () {
       try{
-        const response = UsersService.update({
-        id: req.session.id, // retrieve the id from store or session or token
+        const response = AuthService.update({
+        id: Store.state.user, // retrieve the id from store or session or token
         password: this.newPassword
+      }).then((update)=> {
+        console.log(update)
       })
-     console.log('succesfully updated')
-      } catch (error) {
-        this.error = error.response.data
+            } catch (error) {
+        console.log(error)
       }
     }
 }

@@ -94,13 +94,14 @@ export default new Router({
                     }); 
                     break;
                     default:
+                    // redirect with
                     console.log('you are not logged in')
                 }
               },
             component: MyPolls,
         },
         {
-            path: '/Account',
+            path: '/user/account',
             name: 'Account',
             beforeEnter: (to, from, next) => {
                 switch(Store.state.isUserLoggedIn){

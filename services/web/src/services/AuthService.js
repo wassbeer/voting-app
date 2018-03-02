@@ -9,6 +9,9 @@ export default {
   },
   verify(jsonwebtoken){
     return Api().post('/authentication/verify', {token: jsonwebtoken})
+  },
+  update(){
+    return Api().put('/authentication/:id', credentials)
   }
 }
 
