@@ -20,7 +20,7 @@ router.post('/create', (req, res) => {
     let poll = ({
         userName: req.body.userName,
         pollName: req.body.pollName,
-        _id: req.body._id
+        userId: req.body.id
     });
     async function pollOptions() {
         return await req.body.pollOptions;
@@ -43,12 +43,12 @@ router.post('/create', (req, res) => {
             .then((poll) => {
                 console.log(poll)
                 res.status(201).json({
-                    status: 'success',
+                    success: true,
                     data: poll
                 });
             }).catch((err) => {
                 res.status(500).json({
-                    status: 'error',
+                    success: false,
                     data: err
                 });
             });
@@ -59,17 +59,17 @@ router.get('/ping', (req, res) => {
     res.send('pong');
 });
 
-router.get('/user/:userName', (req, res) => {
-    queries.readPolls(req.params.userName)
+router.get('/user/:id', (req, res) => {
+    queries.readPolls(req.params.id)
         .then((poll) => {
             res.status(200).json({
-                status: 'success',
+                success: true,
                 data: poll
             });
         })
         .catch((err) => {
             res.status(500).json({
-                status: 'error',
+                success: false,
                 data: err
             });
         });
@@ -79,13 +79,13 @@ router.get('/poll/:id', (req, res) => {
     queries.readPoll(req.params.id)
         .then((poll) => {
             res.status(200).json({
-                status: 'success',
+                success: true,
                 data: poll
             });
         })
         .catch((err) => {
             res.status(500).json({
-                status: 'error',
+                success: false,
                 data: err
             });
         });
@@ -97,13 +97,13 @@ router.put('/update/:id', (req, res) => {
     queries.updatePoll(req.params.id, updateOption, updatePollName)
         .then((poll) => {
             res.status(200).json({
-                status: 'success',
+                success: true,
                 data: poll
             });
         })
         .catch((err) => {
             res.status(500).json({
-                status: 'error',
+                success: false,
                 data: err
             });
         });
@@ -113,13 +113,13 @@ router.delete('/delete/:id', (req, res) => {
     queries.deletePoll(req.params.id)
         .then((poll) => {
             res.status(200).json({
-                status: 'success',
+                success: true,
                 data: poll
             });
         })
         .catch((err) => {
             res.status(500).json({
-                status: 'error',
+                success: false,
                 data: err
             });
         });

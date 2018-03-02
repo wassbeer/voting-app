@@ -4,7 +4,7 @@
       <v-flex xs4 >
       </v-flex>
       <v-flex xs4 color="red lighten-2">
-        <panel title="Login">
+        <!-- <panel title="Login"> -->
         <v-text-field
           label="Email"
           v-model="email"
@@ -22,7 +22,7 @@
           @click="login">
           Login
         </v-btn>
-      </panel>
+      <!-- </panel> -->
       </v-flex>
       <v-flex xs4 >
       </v-flex>

@@ -21,9 +21,10 @@ module.exports = {
         return getDb().collection('polls').insertOne(obj);
     },
 
-    readPolls: async function (userName) {
+    readPolls: async function (userId) {
+        let o_id = new ObjectId(userId)
         cursor = getDb().collection('polls').find({
-            userName: userName
+            userId: o_id
         });
         return await cursor.toArray() // returns document results of collection.find() method
     },

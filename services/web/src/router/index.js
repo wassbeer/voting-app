@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import HelloWorld from '@/components/HelloWorld';
+import Pong from '@/components/Pong';
 import Home from '@/components/Home';
 import Register from '@/components/Register';
 import Login from '@/components/Login';
@@ -35,7 +35,7 @@ export default new Router({
         {
             path: '/ping',
             name: 'Pong',
-            component: HelloWorld,
+            component: Pong,
         },
         {
             path: '/',
@@ -101,7 +101,7 @@ export default new Router({
             component: MyPolls,
         },
         {
-            path: '/user/account',
+            path: '/account',
             name: 'Account',
             beforeEnter: (to, from, next) => {
                 switch(Store.state.isUserLoggedIn){

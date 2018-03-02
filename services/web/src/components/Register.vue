@@ -4,7 +4,7 @@
       <v-flex xs4 >
       </v-flex>
       <v-flex xs4 color="red lighten-2">
-        <panel title="Sign Up">
+        <!-- <panel title="Sign Up"> -->
         <form 
           name="sign-up-form"
           autocomplete="off">
@@ -32,7 +32,7 @@
           @click="signup">
           Register
         </v-btn>
-      </panel>
+      <!-- </panel> -->
       </v-flex>
       <v-flex xs4 >
       </v-flex>

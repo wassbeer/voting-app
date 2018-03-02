@@ -1,27 +1,15 @@
 const request = require('request-promise'),
     express = require('express'),
-    router = express.Router(),
-    serviceAddress = require('../config/services-config.js'),
-    urlConfig = require('../config/url-config')
+    router = express.Router();
 
 /* All the auth validation should be handled at the API gateway level, and 
 once forwarded to a (micro)service , that service can trust the request.
 */
 
-// verify route for pages on client side with authenticated access
-
-/*
-
-AVOID:
-Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
-
-*/
-
 router.all('/*', function (req, res, next) {
     // CORS headers
-    res.header("Access-Control-Allow-Origin", "*"); // restrict it to the required domain
+    res.header("Access-Control-Allow-Origin", "*"); 
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    // Set custom headers for CORS
     res.header('Access-Control-Allow-Headers', 'Content-type,Accept,X-Access-Token,X-Key');
     if (req.method == 'OPTIONS') {
         res.status(200).end();
@@ -100,21 +88,21 @@ router.put('/authentication/update', (req, res) => {
 });
 
 router.get('/api/users/read/:id', (req, res) => {
-let options = {
-    method: 'get',
-    url: 'http://localhost:3000/api/users/read/' + req.params.id,
-    json: true
-}
-request(options).then((user) => {
-    res.json(user)
-}).catch((err) => {
-    res.json(err);
-});
+    let options = {
+        method: 'get',
+        url: 'http://localhost:3000/api/users/read/' + req.params.id,
+        json: true
+    }
+    request(options).then((user) => {
+        res.json(user)
+    }).catch((err) => {
+        res.json(err);
+    });
 });
 
 router.delete('/api/users/delete/:id', (req, res) => {
     let options = {
-        method: 'get',
+        method: 'delete',
         url: 'http://localhost:3000/api/users/delete/' + req.params.id,
         json: true
     }
@@ -126,60 +114,92 @@ router.delete('/api/users/delete/:id', (req, res) => {
 })
 
 router.post('/api/polls/create ', (req, res) => {
-    // make use of urlConfig
-
-    // 2. send request to authorization service
-    // 3. send request to the requested resource
-    // request HTTP method
+    let options = {
+        method: 'post',
+        body: {
+            userName: req.body.userName,
+            pollName: req.body.pollName,
+            pollOptions: req.body.pollOptions,
+            userId: req.body.id
+        },
+        json: true,
+        url: "http://localhost:4000/api/polls/create"
+    }
+    request(options).then((createStatus) => {
+        res.json(createStatus)
+    }).catch((err) => {
+        res.json(err);
+    });
 })
 
 router.get('/api/polls/user/:id', (req, res) => {
-    // make use of urlConfig
+    let options = {
+        method: 'get',
+        json: true,
+        url: "http://localhost:4000/api/polls/user/" + req.params.id
+    }
+    request(options).then((polls) => {
+        res.json(polls.data)
+    }).catch((err) => {
+        res.json(err);
+    });
 
-    // 2. send request to authorization service
-    // 3. send request to the requested resource
-    // request HTTP method
 })
 
 router.get('/api/polls/poll/:id', (req, res) => {
-    // make use of urlConfig
-
-    // 2. send request to authorization service
-    // 3. send request to the requested resource
-    // request HTTP method
+    let options = {
+        method: 'get',
+        json: true,
+        url: "http://localhost:4000/api/polls/poll/" + req.params.id
+    }
+    request(options).then((poll) => {
+        res.json(poll.data)
+    }).catch((err) => {
+        res.json(err);
+    });
 });
 
-
 router.get('/api/polls/result/:id', (req, res) => {
-    // make use of urlConfig
-
-    // 2. send request to authorization service
-    // 3. send request to the requested resource
-    // request HTTP method
+    let options = {
+        method: 'get',
+        json: true,
+        url: "http://localhost:4000/api/polls/result/" + req.params.id
+    }
+    request(options).then((result) => {
+        res.json(result.data)
+    }).catch((err) => {
+        res.json(err);
+    });
 });
 
 router.put('/api/polls/update/:id', (req, res) => {
-    // make use of urlConfig
-
-    // 2. send request to authorization service
-    // 3. send request to the requested resource
-    // request HTTP method
+    let options = {
+        method: 'put',
+        body: {
+            pollOptions: req.body.pollOptions,
+            pollName: req.body.pollName
+        },
+        json: true,
+        url: "http://localhost:4000/api/polls/update/" + req.params.id
+    }
+    request(options).then((update) => {
+        res.json(update.data)
+    }).catch((err) => {
+        res.json(err);
+    });
 });
 
 router.delete('/api/polls/delete/:id', (req, res) => {
-    // make use of urlConfig
-
-    // 2. send request to authorization service
-    // 3. send request to the requested resource
-    // request HTTP method
+    let options = {
+        method: 'delete',
+        json: true,
+        url: "http://localhost:4000/api/polls/delete/" + req.params.id
+    }
+    request(options).then((result) => {
+        res.json(result.data)
+    }).catch((err) => {
+        res.json(err);
+    });
 });
-
-router.get('/api/users/read/:id', (req, res) => {
-    // make use of urlConfig
-
-    // 2. send request to authorization service
-    // 3. send request to the requested resource
-    // request HTTP method
-})
 
 module.exports = router;

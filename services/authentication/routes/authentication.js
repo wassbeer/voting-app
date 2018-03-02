@@ -85,31 +85,38 @@ router.post("/login", (req, res) => {
         url: "http://localhost:3000/api/users/read"
     };
     request(options).then((user) => {
-        bcrypt.compare(req.body.password, user.data.password, (err, result) => {
-            if (err) { console.error(err); } else {
-                switch (result) {
-                    case true:
-                        token = jwt.sign({
-                            admin: user._id
-                        }, secret, {
-                                expiresIn: 1440 // expires in 24 hours
+        console.log('user.success')
+        console.log(user.success)
+        switch (user.success === true) {
+            case true:
+                bcrypt.compare(req.body.password, user.data.password, (err, result) => {
+                    switch (result) {
+                        case true:
+                            token = jwt.sign({
+                                admin: user._id
+                            }, secret, {
+                                    expiresIn: 1440 // expires in 24 hours
+                                });
+                            res.status(200).json({
+                                success: true,
+                                message: "Enjoy your token!",
+                                token: token,
+                                user: user.data
                             });
-                        res.status(200).json({
-                            success: true,
-                            message: "Enjoy your token!",
-                            token: token,
-                            user: user.data
-                        });
-                        break;
-                    default:
-                        res.status(200).json({
-                            status: "failed",
-                            data: "Authentication failed. Wrong password."
-                        });
-                        break;
-                }
-            }
-        });
+                            break;
+                        default:
+                            res.status(200).json({
+                                status: "failed",
+                                data: "Authentication failed. Wrong password."
+                            });
+                    }
+                })
+                    .catch((err) => {
+                        res.json(err)
+                    });
+                default: // error
+                res.json(user.status)
+        }
     })
 });
 
@@ -136,7 +143,7 @@ router.put("/update/:id", (req, res) => {
             body: {
                 password: hash
             },
-            url: "http://localhost:3000/api/users/read/update/" + req.params.id,
+            url: "http://localhost:3000/api/users/update/" + req.params.id,
             json: true
         }
         request(options).then((update) => {

@@ -2,6 +2,21 @@
   <v-container fluid>
     <v-layout row>
       <v-flex xs4 >
+      </v-flex>
+      <v-flex xs4 color="red lighten-2" height="15em">
+         <v-card color="red lighten-2">
+        <v-btn v-if="!$store.state.isUserLoggedIn"
+        flat 
+        dark
+        to="register">Signup</v-btn>
+      </v-card>
+      </v-flex>
+      <v-flex xs4 >
+      </v-flex>
+    </v-layout>
+    <br>
+    <v-layout row>
+      <v-flex xs4 >
          <v-card color="red lighten-2" height="15em">
           <h2>Live Results</h2>
           <p>Live graphs show your results immediately</p>
@@ -25,10 +40,10 @@
 
 <script>
 export default {
-  data () {
-  },
-  methods: {
-  }
+  // data () {
+  // return },
+  // methods: {
+  // }
 }
 </script>
 

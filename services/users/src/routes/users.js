@@ -27,12 +27,12 @@ router.post('/create', (req, res) => {
 	queries.createUser(user)
 		.then((user) => {
 			res.status(201).json({
-				status: 'success',
+				success: true,
 				data: user
 			});
 		}).catch((err) => {
 			res.status(500).json({
-				status: 'error',
+				success: false,
 				data: err
 			});
 		});
@@ -45,22 +45,15 @@ router.get('/ping', (req, res) => {
 router.post('/read', (req, res) => {
 	console.log(req.body.email);
 	queries.readUser(null, req.body.email)
-		.then((user) => {
-			user ?
+		.then((user, err) => {
 				res.status(200).json({
-					status: 'success',
+					success: true,
 					data: user
 				})
-				:
-				res.status(404).json({
-					status: 'failure',
-					data: 'User not found'
-				});
-		})
 		.catch((err) => {
-			res.status(500).json({
-				status: 'error',
-				data: err
+			res.status(404).json({
+				success: false,
+				data: 'User not found'
 			});
 		});
 });
@@ -70,18 +63,18 @@ router.get('/read/:id', (req, res) => {
 		.then((user) => {
 			user ?
 				res.status(200).json({
-					status: 'success',
+					success: true,
 					data: user
 				})
 				:
 				res.status(404).json({
-					status: 'failure',
+					success: false,
 					data: 'User not found'
 				});
 		})
 		.catch((err) => {
 			res.status(500).json({
-				status: 'error',
+				success: false,
 				data: err
 			});
 		});
@@ -98,13 +91,13 @@ router.put('/update/:id', (req, res) => {
 	queries.updateUser(req.params.id, updatedUser)
 		.then((user) => {
 			res.status(201).json({
-				status: 'success',
+				success: true,
 				data: user
 			});
 		})
 		.catch((err) => {
 			res.status(500).json({
-				status: 'error',
+				success: false,
 				data: err
 			});
 		});
@@ -114,13 +107,13 @@ router.delete('/delete/:id', (req, res) => {
 	queries.deleteUser(req.params.id)
 		.then((user) => {
 			res.status(200).json({
-				status: 'success',
+				success: true,
 				data: user
 			});
 		})
 		.catch((err) => {
 			res.status(500).json({
-				status: 'error',
+				success: false,
 				data: err
 			});
 		});

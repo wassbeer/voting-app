@@ -4,7 +4,7 @@
       <router-link 
         class="home"
         tag="span"
-        to="home">
+        to="/">
         Voting App
       </router-link>
     </v-toolbar-title>
@@ -27,14 +27,7 @@
         to="register">
         Sign Up
       </v-btn>
-
-<!-- <v-layout justify-space-around> -->
-  <!-- <v-btn v-if="$store.state.isUserLoggedIn"
-        flat 
-        dark>
-      Account
-      </v-btn> -->
-<v-btn    flat 
+<v-btn class="mr-4"  flat 
         dark  v-if="$store.state.isUserLoggedIn">
   Hello {{ user }}
         </v-btn>
@@ -63,17 +56,37 @@ import Store from "@/store/store";
 export default {
   data() {
     return {
-      user: 'user'
+      user: "user"
     };
   },
-  created() {
-   UsersService.get(Store.state.user)
-    .then((response) => {
-      this.user = response.data.data.name
-    })
-    .catch(e => {
-      this.errors.push(e)
-    })
+  created: function() {
+    if (Store.state.isUserLoggedIn) {
+      UsersService.get(Store.state.user)
+        .then(response => {
+          this.user = response.data.data.name;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  },
+  computed: {
+    loggedIn() {
+      return this.$store.state.isUserLoggedIn;
+    }
+  },
+  watch: {
+    loggedIn(value) {
+      if (value) {
+        UsersService.get(Store.state.user)
+          .then(response => {
+            this.user = response.data.data.name;
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }
+    }
   },
   methods: {
     logout() {
