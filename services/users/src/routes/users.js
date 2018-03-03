@@ -50,12 +50,13 @@ router.post('/read', (req, res) => {
 					success: true,
 					data: user
 				})
+		})	
 		.catch((err) => {
 			res.status(404).json({
 				success: false,
 				data: 'User not found'
-			});
-		});
+			});;
+});
 });
 
 router.get('/read/:id', (req, res) => {

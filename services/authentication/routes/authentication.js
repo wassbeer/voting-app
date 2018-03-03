@@ -85,11 +85,16 @@ router.post("/login", (req, res) => {
         url: "http://localhost:3000/api/users/read"
     };
     request(options).then((user) => {
-        console.log('user.success')
-        console.log(user.success)
-        switch (user.success === true) {
+        console.log('user')
+        console.log(user)
+        // console.log('user.success')
+        // console.log(user.success)
+        // console.log(user.data)
+        switch (user.data !== null) {
             case true:
                 bcrypt.compare(req.body.password, user.data.password, (err, result) => {
+                    console.log('result')
+                    console.log(result)
                     switch (result) {
                         case true:
                             token = jwt.sign({
@@ -111,11 +116,12 @@ router.post("/login", (req, res) => {
                             });
                     }
                 })
-                    .catch((err) => {
-                        res.json(err)
-                    });
+                    // .catch((err) => {
+                    //     res.json(err)
+                //     // });
+                break;
                 default: // error
-                res.json(user.status)
+                res.json({data: 'The e-mail is not registered'})
         }
     })
 });

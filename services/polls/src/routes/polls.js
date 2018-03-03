@@ -18,22 +18,20 @@ const express = require('express'),
 
 router.post('/create', (req, res) => {
     let poll = ({
-        userName: req.body.userName,
         pollName: req.body.pollName,
-        userId: req.body.id
+        userId: req.body.userId
     });
     async function pollOptions() {
         return await req.body.pollOptions;
     }
     // pollOptions: whale,wolf
     pollOptions().then((options) => {
-        options = options.split(",")
         options.forEach((option) => {
             poll[option] = 0;
         })
 
         // { userName: 'Thomas',
-        //   pollName: '"What is your favourite mammal in the world?',
+        //   pollName: '"What is your favourite mammal?',
         //   _id: 5a93ecf4242fb97b96821f4e,
         //   whale: 0,
         //   wholf: 0 }
@@ -41,10 +39,10 @@ router.post('/create', (req, res) => {
 
         queries.createPoll(poll)
             .then((poll) => {
-                console.log(poll)
+                console.log(poll.ops[0])
                 res.status(201).json({
                     success: true,
-                    data: poll
+                    data: poll.ops[0]
                 });
             }).catch((err) => {
                 res.status(500).json({

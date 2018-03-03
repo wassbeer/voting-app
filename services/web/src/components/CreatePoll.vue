@@ -3,22 +3,23 @@
     <v-layout row>
       <v-flex xs4 >
       </v-flex>
-      <v-flex xs4 color="red lighten-2">
-          <panel title="Create Poll">
+      <v-flex xs4 color="red lighten-2" v-if="!created">
         <form 
           name="create-poll-form"
           autocomplete="off">
           <v-text-field
             label="Poll"
-            v-model="Poll"
-            autocomplete="provide a poll"
-          ></v-text-field>
+            v-model="poll"
+                    ></v-text-field>
           <br>
-          <v-text-field
-            label="Answer"
-            v-model="Answer"
-            autocomplete="provide an answer"
+                <div v-for="option in options" :key="option">
+                   <v-text-field
+            label="Option"
+            v-model="option.value"
           ></v-text-field>
+          </div>
+    <v-btn @click="addRow">More Options</v-btn>
+
         </form>
         <br>
         <v-btn
@@ -27,41 +28,62 @@
           @click="createPoll">
           Submit
         </v-btn>
-      </panel>
       </v-flex>
+            <v-flex xs4 color="red lighten-2" v-if="created">
+              <h1>Congratulations!</h1>
+              <p>Your poll has been posted to {{ pollLink }}</p>
+              </v-flex>
       <v-flex xs4 >
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
-
 <script>
-// import PollsService from '@/services/PollsService'
-// export default {
-//   data () {
-//     return {
-//       poll: '',
-//       answer: '',
-//       error: null
-//     }
-//   }
-//     ,
-//   methods: {
-//     // async createPoll () {
-//     //   //       try {
-//     //   //   const response = await PollsService.register({
-//     //   //     poll: this.poll,
-//     //   //     answer: this.password // forEach((answer))
-//     //   //   })
-//     //   // } catch (error) {
-//     //   //   this.error = error.response.data.error
-//     //   // }
-//     // }
-// }
-// }
+import PollsService from "@/services/PollsService";
+import Store from "@/store/store";
 
+export default {
+  data() {
+    return {
+      poll: "",
+      options: [{ value: " " }, { value: "" }],
+      error: null,
+      created: false,
+      pollLink: ""
+    };
+  },
+  methods: {
+    async createPoll() {
+      try {
+        let pollOptions = [];
+        this.options.forEach(option => {
+          pollOptions.push(option.value);
+        });
+        const response = await PollsService.register({
+          pollName: this.poll,
+          pollOptions: pollOptions,
+          userId: Store.state.user
+        }).then(response => {
+          this.created = true;
+          this.pollLink =
+            "http//:localhost:8080/#/poll/" + response.data.data._id;
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    addRow() {
+      this.options.push({
+        value: ""
+      });
+    }
+  }
+};
 </script>
 
 <style scoped>
+ul {
+  list-style-type: none;
+}
 </style>

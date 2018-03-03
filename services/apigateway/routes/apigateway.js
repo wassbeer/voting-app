@@ -113,14 +113,13 @@ router.delete('/api/users/delete/:id', (req, res) => {
     });
 })
 
-router.post('/api/polls/create ', (req, res) => {
+router.post('/api/polls/create', (req, res) => {
     let options = {
         method: 'post',
         body: {
-            userName: req.body.userName,
             pollName: req.body.pollName,
             pollOptions: req.body.pollOptions,
-            userId: req.body.id
+            userId: req.body.userId
         },
         json: true,
         url: "http://localhost:4000/api/polls/create"

@@ -53,7 +53,7 @@ export default new Router({
             component: Login,
         },
         {
-            path: '/poll',
+            path: '/poll/:id',
             name: 'Poll',
             component: Poll,
         },

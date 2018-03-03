@@ -4,7 +4,6 @@
       <v-flex xs4 >
       </v-flex>
       <v-flex xs4 color="red lighten-2">
-        <!-- <panel title="Login"> -->
         <v-text-field
           label="Email"
           v-model="email"
@@ -22,7 +21,11 @@
           @click="login">
           Login
         </v-btn>
-      <!-- </panel> -->
+            <br/>
+            <br/>
+      <h2>
+      {{ message }}
+      </h2>
       </v-flex>
       <v-flex xs4 >
       </v-flex>
@@ -37,6 +40,7 @@ export default {
     return {
       email: "",
       password: "",
+      message: "",
       error: null
     };
   },
@@ -58,15 +62,9 @@ export default {
                 params: { id: response.data.user._id }
               });
               break;
-
-            // 2. the login did not work because of a false password
-            // 2.1 error message, staying on the same page
-            
-            // 3. the login did not work because the email is not registered
-            // 3. error message, stay on the same page
             default:
             console.log('login failed')
-
+            this.message = response.data.data
               break;
           }
         });

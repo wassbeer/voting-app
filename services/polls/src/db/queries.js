@@ -22,17 +22,16 @@ module.exports = {
     },
 
     readPolls: async function (userId) {
-        let o_id = new ObjectId(userId)
         cursor = getDb().collection('polls').find({
-            userId: o_id
+            userId: userId
         });
-        return await cursor.toArray() // returns document results of collection.find() method
+        return await cursor.toArray() 
     },
 
-    // both for poll and result query
     readPoll: async function (pollId) {
+        let o_id = new ObjectId(pollId)
             cursor = getDb().collection('polls').find({
-                _id: pollId
+                _id: o_id
             });
         return await cursor.next()
     },
