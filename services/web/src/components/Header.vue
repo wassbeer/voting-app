@@ -24,7 +24,7 @@
               <v-btn 
             dark
           class="cyan"
-          @click="myPolls">My Polls</v-btn>
+          to="/mypolls">My Polls</v-btn>
 
           </div>
         </div>
@@ -36,16 +36,5 @@
 </template>
 
 <script>
-import Store from '@/store/store'
-export default {
-  methods: {
-    myPolls: function(){
-       this.$router.push({
-                name: "MyPolls",
-                params: { id: Store.state.user }
-              });
-    }
-  }
-}
 </script>
 

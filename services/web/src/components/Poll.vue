@@ -35,6 +35,7 @@ export default {
     PollsService.getPoll(this.$route.params.id).then(poll => {
       Object.entries(poll.data).forEach(([key, value]) => {
         if (typeof value === "number") {
+          console.log(key)
           this.options.push(key);
         }
       });
@@ -44,11 +45,14 @@ export default {
   methods: {
     vote(){
        // 1. vote poll
-       console.log(this.selected[0])
       PollsService.put(this.$route.params.id, {
         pollOptions: this.selected[0],
         pollName: this.pollTitle
-      }).then(() => {
+      })
+      .then((result) => {
+        // console.log(result)
+        // console.log('this.$route.params')
+        // console.log(this.$route.params)
       // 2. return to results page
       this.$router.push({
         name: 'PollResult',

@@ -38,9 +38,6 @@ module.exports = {
 
     updatePoll: async function (pollId, updateOption, updatePollName) {
         let o_id = new ObjectId(pollId)
-        console.log(o_id)
-        console.log(updateOption)
-        console.log(updatePollName)
         return await getDb().collection('polls').update({ _id: o_id }, {
             $inc: { [updateOption]: 1 }, $set: { pollName: updatePollName }
         });

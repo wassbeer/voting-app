@@ -72,7 +72,7 @@ export default new Router({
             meta: { requiresAuth: true }
         },
         {
-            path: '/user/:id',
+            path: '/mypolls',
             name: 'MyPolls',
             component: MyPolls,
             meta: { requiresAuth: true }

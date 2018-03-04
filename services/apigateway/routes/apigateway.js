@@ -162,7 +162,7 @@ router.get('/api/polls/result/:id', (req, res) => {
     let options = {
         method: 'get',
         json: true,
-        url: "http://localhost:4000/api/polls/result/" + req.params.id
+        url: "http://localhost:4000/api/polls/poll/" + req.params.id
     }
     request(options).then((result) => {
         res.json(result.data)

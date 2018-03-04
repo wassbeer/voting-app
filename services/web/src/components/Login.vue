@@ -52,18 +52,14 @@ export default {
           password: this.password
         }).then(response => {
           console.log(response);
-          // 1. the login worked out
           switch (response.data.success) {
             case true:
               this.$store.dispatch("setToken", response.data.token);
               this.$store.dispatch("setUser", response.data.user._id);
               this.$router.push({
-                name: "MyPolls",
-                params: { id: response.data.user._id }
-              });
+                name: "MyPolls"              });
               break;
             default:
-            console.log('login failed')
             this.message = response.data.data
               break;
           }

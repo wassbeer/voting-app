@@ -59,7 +59,51 @@
 import AuthService from "@/services/AuthService";
 import UsersService from "@/services/UsersService";
 import Store from "@/store/store";
+import swal from 'sweetalert';
+
+let SweetAlert = {
+  methods: {
+    alert(options) {
+        swal(options)
+      },
+      alertSuccess({
+        title = "Success!", text = "That's all done!", timer = 1000, showConfirmationButton = false
+      } = {}) {
+        this.alert({
+          title: title,
+          text: text,
+          timer: timer,
+          buttons: true,
+          icon: 'success'
+        });
+      },
+      alertError({
+        title = "Error!", text = "Oops...Something went wrong"
+      } = {}) {
+        this.alert({
+          title: title,
+          text: text,
+          type: 'error'
+        });
+      },
+      confirm(callback, options) {
+        options = Object.assign({
+          title: "Are you sure?",
+          text: "Are you sure you want to do that?",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Yes",
+          closeOnConfirm: false
+        }, options);
+
+        swal(options, callback);
+      }
+  },
+}
+
 export default {
+  mixins: [SweetAlert],
   data() {
     return {
       newPassword: "",
@@ -75,7 +119,6 @@ export default {
           id: Store.state.user, // retrieve the id from store or session or token
           password: this.newPassword
         }).then(update => {
-          console.log(update);
           this.result = "Password Updated";
         });
       } catch (error) {
@@ -84,12 +127,18 @@ export default {
     },
     async terminateAccount() {
       try {
-        const response = UsersService.delete(this.$store.state.user).then(
-          status => {
-            console.log(status);
-            this.result = "Account Terminated";
-          }
-        );
+        this.confirm(() => {
+          this.alertSuccess({
+            title: "Confirm Succcessful!"
+          });
+        });
+        // const response = UsersService.delete(this.$store.state.user).then(
+        //   status => {
+        //     this.$router.push({
+        //       name: "Home"
+        //     });
+        //   }
+        // );
       } catch (error) {
         console.log(error);
       }

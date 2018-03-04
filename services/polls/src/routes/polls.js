@@ -36,7 +36,6 @@ router.post('/create', (req, res) => {
         //   whale: 0,
         //   wholf: 0 }
 
-
         queries.createPoll(poll)
             .then((poll) => {
                 console.log(poll.ops[0])
