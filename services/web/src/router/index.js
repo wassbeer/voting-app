@@ -68,54 +68,21 @@ export default new Router({
         {
             path: '/create/poll',
             name: 'CreatePoll',
-            beforeEnter: (to, from, next) => {
-                switch(Store.state.isUserLoggedIn){
-                    case true:
-                    AuthService.verify(Store.state.token).then((result) => {
-                        result.data.success ? next() :
-                        console.log('token verification failed')
-                    }); 
-                    break;
-                    default:
-                    console.log('you are not logged in')
-                }
-              },
             component: CreatePoll,
+            meta: { requiresAuth: true }
         },
         {
             path: '/user/:id',
             name: 'MyPolls',
-            beforeEnter: (to, from, next) => {
-                switch(Store.state.isUserLoggedIn){
-                    case true:
-                    AuthService.verify(Store.state.token).then((result) => {
-                        result.data.success ? next() :
-                        console.log('token verification failed')
-                    }); 
-                    break;
-                    default:
-                    // redirect with
-                    console.log('you are not logged in')
-                }
-              },
             component: MyPolls,
+            meta: { requiresAuth: true }
+
         },
         {
             path: '/account',
             name: 'Account',
-            beforeEnter: (to, from, next) => {
-                switch(Store.state.isUserLoggedIn){
-                    case true:
-                    AuthService.verify(Store.state.token).then((result) => {
-                        result.data.success ? next() :
-                        console.log('token verification failed')
-                    }); 
-                    break;
-                    default:
-                    console.log('you are not logged in')
-                }
-              },
             component: Account,
+            meta: { requiresAuth: true }
         },
 
     ],

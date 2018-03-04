@@ -50,7 +50,8 @@ export default {
       options: [{ value: " " }, { value: "" }],
       error: null,
       created: false,
-      pollLink: ""
+      pollLink: "",
+      message: ""
     };
   },
   methods: {

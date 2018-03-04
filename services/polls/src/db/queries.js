@@ -37,12 +37,17 @@ module.exports = {
     },
 
     updatePoll: async function (pollId, updateOption, updatePollName) {
-        return await getDb().collection('polls').update({ _id: pollId }, {
+        let o_id = new ObjectId(pollId)
+        console.log(o_id)
+        console.log(updateOption)
+        console.log(updatePollName)
+        return await getDb().collection('polls').update({ _id: o_id }, {
             $inc: { [updateOption]: 1 }, $set: { pollName: updatePollName }
         });
     },
 
     deletePoll: async function (pollId) {
-        return await getDb().collection('polls').deleteOne({ _id: pollId });
+        let o_id = new ObjectId(pollId)
+        return await getDb().collection('polls').deleteOne({ _id: o_id });
     }
 };

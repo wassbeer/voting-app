@@ -14,6 +14,18 @@ Vue.use(Vuetify)
 
 sync(store, router)
 
+// making sure authed routes are entered only authenticated
+// otherwise: redirect to login
+router.beforeEach((to, from, next) => {
+  const authRequired = to.matched.some((route) => route.meta.requiresAuth),
+  authed = store.state.isUserLoggedIn
+  if (authRequired && !authed) {
+    next('/login')
+  } else {
+    next()
+  }
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

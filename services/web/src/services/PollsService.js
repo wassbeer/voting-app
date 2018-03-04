@@ -17,10 +17,10 @@ export default {
   register (poll) {
     return Api().post('/api/polls/create', poll)
   },
-  put (poll) {
-    return Api().put(`/api/polls/update/${poll.id}`, poll)
+  put (pollId, updates) {
+    return Api().put(`/api/polls/update/${pollId}`, updates)
   },
   delete(poll){
-    return Api().delete(`/api/polls/delete/${poll.id}`, poll)
+    return Api().delete(`/api/polls/delete/${poll}`)
   }
 }
