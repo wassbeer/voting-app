@@ -1,9 +1,9 @@
 <template>
   <v-container fluid>
     <v-layout row>
-      <v-flex xs4 >
+      <v-flex >
       </v-flex>
-      <v-flex xs4 color="red lighten-2">
+         <v-flex xs8 sm6 md4>  
         <form 
           name="change-password-form"
           autocomplete="off">
@@ -24,12 +24,12 @@
         <br>
         <v-btn
           dark
-          class="cyan"
+          color="warning"
           @click="changePassword">
           Change Password
         </v-btn>
       </v-flex>
-      <v-flex xs4 >
+      <v-flex >
       </v-flex>
     </v-layout>
         <v-layout row>
@@ -41,7 +41,7 @@
           autocomplete="off">
         <v-btn
           dark
-          class="cyan"
+          color="warning"
           @click="terminateAccount">
           Terminate Account
         </v-btn>
@@ -111,8 +111,8 @@ export default {
     async terminateAccount() {
       try {
         swal({
-          title: "You are about to terminate your account",
-          text: "Once deleted, you will not be able to recover this account!",
+          title: "Once terminated, you will not be able to recover this account!",
+          text: "Are you sure you want to suspend your account?",
           icon: "warning",
           buttons: true,
           dangerMode: true

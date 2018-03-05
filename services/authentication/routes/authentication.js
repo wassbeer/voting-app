@@ -18,7 +18,7 @@ const express = require("express"),
 
 */
 
-router.post("/signup", (req, res) => {
+router.post("/signup", (req, res, next) => {
     bcrypt.hash(req.body.password, 10, function (err, hash) {
         let options;
         err ? console.error(err) :
@@ -32,47 +32,28 @@ router.post("/signup", (req, res) => {
                 json: true,
                 url: "http://localhost:3000/api/users/create"
             };
-        request(options).then((user) => {
 
-            // router.post('/create', (req, res) => {
-            //     let user = ({
-            //         name: req.body.name,
-            //         email: req.body.email,
-            //         password: req.body.password
-            //     });
-            //     queries.createUser(user)
-            //         .then((user) => {
-            //             res.status(201).json({
-            //                 status: 'success',
-            //                 data: user
-            //             });
-            //         }).catch((err) => {
-            //             res.status(500).json({
-            //                 status: 'error',
-            //                 data: err
-            //             });
-            //         });
-            // });
+            request(options).then((user) => {
+                // 1. If the user is succesfully registered 
+                const token = jwt.sign({ admin: user.data._id }, secret, { // payload, secret
+                    expiresIn: 1440 // expires in 24 hours
+                });
+                res.status(200).json({
+                    success: true,
+                    message: "Enjoy your token!",
+                    token: token,
+                    user: user.data
+                }).catch((err) => {
+                    res.json(err);
+                })
 
-
-            // 1. If the user is succesfully registered 
-
-            const token = jwt.sign({ admin: user.data._id }, secret, { // payload, secret
-                expiresIn: 1440 // expires in 24 hours
-            });
-            res.status(200).json({
-                success: true,
-                message: "Enjoy your token!",
-                token: token,
-                user: user.data
             }).catch((err) => {
-                res.json(err);
+                res.status(500).json({
+                    success: false
+                })
             })
-            // 2. If the user is not succesfully registered due to e-mail already taken
-            //--> catch the error and send to apigateway
-        });
     });
-})
+});
 
 
 router.post("/login", (req, res) => {
@@ -116,12 +97,9 @@ router.post("/login", (req, res) => {
                             });
                     }
                 })
-                    // .catch((err) => {
-                    //     res.json(err)
-                //     // });
                 break;
-                default: // error
-                res.json({data: 'The e-mail is not registered'})
+            default: // error
+                res.json({ data: 'The e-mail is not registered' })
         }
     })
 });

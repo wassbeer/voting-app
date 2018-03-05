@@ -18,9 +18,8 @@ module.exports = {
     createUser: async function (obj) {
         return getDb().collection('users').insertOne(obj).then((result) => {
             return result.ops[0]
-        });
+        })
     },
-
     readUser: async function (userId, email) {
         let cursor;
         switch (userId === null) {

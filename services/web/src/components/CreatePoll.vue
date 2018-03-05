@@ -24,7 +24,7 @@
         <br>
         <v-btn
           dark
-          class="cyan"
+          color="warning"
           @click="createPoll">
           Submit
         </v-btn>

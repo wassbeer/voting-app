@@ -19,7 +19,7 @@
             <a :href="'/#/poll/' + poll._id" >{{poll.pollName}}</a>
             </v-flex>
             <v-flex xs2>
-            <v-btn @click="deletePoll(poll._id)">Delete</v-btn>
+            <v-btn @click="deletePoll(poll._id)" color="warning">Delete</v-btn>
             </v-flex>
           </li>
         </ul>

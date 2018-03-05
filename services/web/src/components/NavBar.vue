@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar fixed class="cyan" dark>
+  <v-toolbar fixed class="blue-grey lighten-4" dark>
     <v-toolbar-title class="mr-4">
       <router-link 
         class="home"
@@ -105,6 +105,6 @@ export default {
   cursor: pointer;
 }
 .home:hover {
-  color: #e9e;
+  color: grey
 }
 </style>

@@ -1,9 +1,9 @@
 <template>
   <v-container fluid>
-    <v-layout row>
-      <v-flex xs4 >
+    <v-layout row class="login">
+      <v-flex >
       </v-flex>
-      <v-flex xs4 color="red lighten-2">
+         <v-flex xs8 sm6 md4>  
         <v-text-field
           label="Email"
           v-model="email"
@@ -17,14 +17,14 @@
         <br>
         <v-btn
           dark
-          class="cyan"
+          color="warning"
           @click="login">
           Login
         </v-btn>
             <br/>
             <br/>
       </v-flex>
-      <v-flex xs4 >
+      <v-flex >
       </v-flex>
     </v-layout>
   </v-container>
@@ -46,11 +46,11 @@ export default {
   methods: {
     async login() {
       try {
-        switch(this.email.length > 0){ // data validation
-          case false:
+        switch(this.email.length){ // data validation
+          case false: // no email provided
           swal("Please provide an e-mail address");
           break;
-          case true && !this.password:
+          case true && !this.password: // no password provided
           swal("Please provide a password");
           break;
           default: // credentials validation
@@ -67,7 +67,7 @@ export default {
                   });
               break;
               default:
-                swal(response.data.data);
+                swal("Warning!", response.data.data);
           }});
         }
       } catch (error) {

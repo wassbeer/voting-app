@@ -15,36 +15,15 @@
 </template>
 
 <script>
-import NavBar from '@/components/NavBar'
-import PageHeader from '@/components/Header'
+import NavBar from "@/components/NavBar";
+import PageHeader from "@/components/Header";
 export default {
-  name: 'app',
+  name: "app",
   components: {
     NavBar,
     PageHeader
   }
-}
+};
 </script>
 
-<style src='vuetify/dist/vuetify.min.css'>
-  #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-.danger-alert {
-  color: red;
-}
-
-main{
-  margin-top: 50em;
-}
-
-</style> 
-
-<style scoped>
-    /* local styles */
-</style> 
+<style src='./assets/css/mycss.css'/> 

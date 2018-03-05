@@ -46,17 +46,17 @@ router.post('/read', (req, res) => {
 	console.log(req.body.email);
 	queries.readUser(null, req.body.email)
 		.then((user, err) => {
-				res.status(200).json({
-					success: true,
-					data: user
-				})
-		})	
+			res.status(200).json({
+				success: true,
+				data: user
+			})
+		})
 		.catch((err) => {
 			res.status(404).json({
 				success: false,
 				data: 'User not found'
 			});;
-});
+		});
 });
 
 router.get('/read/:id', (req, res) => {
