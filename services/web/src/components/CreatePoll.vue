@@ -31,7 +31,7 @@
       </v-flex>
             <v-flex xs4 color="red lighten-2" v-if="created">
               <h1>Congratulations!</h1>
-              <p>Your poll has been posted to {{ pollLink }}</p>
+              <p>Your poll has been <a :href="pollLink">posted</a></p>
               </v-flex>
       <v-flex xs4 >
       </v-flex>
@@ -68,7 +68,7 @@ export default {
         }).then(response => {
           this.created = true;
           this.pollLink =
-            "http//:localhost:8080/#/poll/" + response.data.data._id;
+            "/#/poll/" + response.data.data._id;
         });
       } catch (error) {
         console.log(error);

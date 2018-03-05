@@ -23,9 +23,6 @@
         </v-btn>
             <br/>
             <br/>
-      <h2>
-      {{ message }}
-      </h2>
       </v-flex>
       <v-flex xs4 >
       </v-flex>
@@ -35,6 +32,8 @@
 
 <script>
 import AuthService from "@/services/AuthService";
+import swal from "sweetalert";
+
 export default {
   data() {
     return {
@@ -47,23 +46,30 @@ export default {
   methods: {
     async login() {
       try {
-        const response = await AuthService.login({
-          email: this.email,
-          password: this.password
-        }).then(response => {
-          console.log(response);
-          switch (response.data.success) {
-            case true:
-              this.$store.dispatch("setToken", response.data.token);
-              this.$store.dispatch("setUser", response.data.user._id);
-              this.$router.push({
-                name: "MyPolls"              });
+        switch(this.email.length > 0){ // data validation
+          case false:
+          swal("Please provide an e-mail address");
+          break;
+          case true && !this.password:
+          swal("Please provide a password");
+          break;
+          default: // credentials validation
+            const response = await AuthService.login({
+            email: this.email,
+            password: this.password
+            }).then(response => {
+              switch (response.data.success) {
+                case true:
+                  this.$store.dispatch("setToken", response.data.token);
+                  this.$store.dispatch("setUser", response.data.user._id);
+                  this.$router.push({
+                    name: "MyPolls"
+                  });
               break;
-            default:
-            this.message = response.data.data
-              break;
-          }
-        });
+              default:
+                swal(response.data.data);
+          }});
+        }
       } catch (error) {
         console.log(error);
       }
