@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container fluid class="account">
     <v-layout row>
       <v-flex >
       </v-flex>

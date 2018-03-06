@@ -1,30 +1,29 @@
 <template>
-  <v-container fluid>
+  <v-container fluid class="myPolls">
     <v-layout row>
-      <v-flex xs4 >
+      <v-flex xs2 sm3 md4>
       </v-flex>
-      <v-flex xs4>
-       <!-- <v-card> -->
+        <v-flex xs8 sm6 md4>
         <h2>Your Polls</h2>
       </v-flex>
-      <v-flex xs4 >
+      <v-flex xs2 sm3 md4>
       </v-flex>
     </v-layout>
      <v-layout row>
-      <v-flex xs4 >
+        <v-flex xs4 sm4 md4 >
       </v-flex>
         <ul>
           <li v-for="poll in polls" v-bind:key="poll">
-            <v-flex xs2>
+            <v-flex xs2 sm2 md2>
             <a :href="'/#/poll/' + poll._id" >{{poll.pollName}}</a>
             </v-flex>
-            <v-flex xs2>
+            <v-flex xs2 sm2 md2 >
             <v-btn @click="deletePoll(poll._id)" color="warning">Delete</v-btn>
             </v-flex>
           </li>
         </ul>
        <!-- </v-card> -->
-      <v-flex xs4 >
+      <v-flex xs4 sm4 md4>
       </v-flex>
     </v-layout>
   </v-container>

@@ -5,7 +5,7 @@
         class="home"
         tag="span"
         to="/">
-        Voting App
+        Voveō
       </router-link>
     </v-toolbar-title>
 

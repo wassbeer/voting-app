@@ -6,27 +6,68 @@
 
 /* CUSTOM CSS */
 
-  .titleDiv {
-    color: white;
-    font-size: 2em;
-    left: 0;
-    width: 5em;
-    padding: 3em 0em 1em 0em;
-    margin: 0 20% 0 20%;
-    text-align: center;
-  }
-
   .header{
-      background-color: #bcaaa4 !important
+      background-color: #bcaaa4 !important;
+      color: white;
+      font-size: 2rem;
+      left: 0;
+      padding: 3em 0em 1em 0em;
+      text-align: center;
   }
 
   .login{
       padding: 5% 0;
+      text-align: center;
   }
 
   .register{
       padding: 5% 0;
+      text-align: center;
   }
+
+  .home {
+    padding: 4% 4%;
+    text-align: center;
+  }
+
+  .myPolls {
+    text-align: center;
+    padding: 5% 0;
+  }
+
+  .createPoll{
+    text-align: center;
+    padding: 5% 0;
+  }
+
+  .poll{
+    text-align: center;
+    padding: 4% 2%;
+  }
+
+  .pollResult{
+    text-align: center;
+    padding: 5% 0;
+  }
+
+  .account{
+    text-align: center;
+    padding: 5% 0;
+  }
+
+/* ICONS */
+
+.fa-line-chart {
+  color: #cfd8dc;
+}
+
+.fa-globe {
+  color: #ffc107;
+}
+
+.fa-facebook-square {
+  color: #bcaaa4
+}
 
 /* Vuetify */
 
@@ -11260,7 +11301,7 @@ table.table tfoot tr td {
   }
   .flex.sm4 {
     -ms-flex-preferred-size: 33.33333333333333%;
-    flex-basis: 33.33333333333333%;
+    /* flex-basis: 33.33333333333333%; */
     max-width: 33.33333333333333%
   }
   .flex.order-sm4 {

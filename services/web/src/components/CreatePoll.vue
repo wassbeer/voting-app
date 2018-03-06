@@ -1,9 +1,9 @@
 <template>
-  <v-container fluid>
+  <v-container fluid class="createPoll">
     <v-layout row>
-      <v-flex xs4 >
+      <v-flex xs2 sm4 md4>
       </v-flex>
-      <v-flex xs4 color="red lighten-2" v-if="!created">
+              <v-flex xs8 sm6 md4 v-if="!created">
         <form 
           name="create-poll-form"
           autocomplete="off">
@@ -29,11 +29,17 @@
           Submit
         </v-btn>
       </v-flex>
-            <v-flex xs4 color="red lighten-2" v-if="created">
+       <v-flex xs2 sm3 md4>
+      </v-flex>
+      </v-layout>
+      <v-layout row>
+       <v-flex xs2 sm3 md4>
+      </v-flex>
+              <v-flex xs8 sm6 md4 v-if="created">
               <h1>Congratulations!</h1>
               <p>Your poll has been <a :href="pollLink">posted</a></p>
               </v-flex>
-      <v-flex xs4 >
+    <v-flex xs2 sm3 md4>
       </v-flex>
     </v-layout>
   </v-container>

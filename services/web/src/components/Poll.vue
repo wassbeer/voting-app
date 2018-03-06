@@ -1,12 +1,12 @@
 <template>
-  <v-container fluid>
-    <v-layout row id="root">
-      <v-flex xs6 sm4 md4> 
+  <v-container fluid class="poll">
+    <v-layout row v-bind="binding">
+      <v-flex xs12 sm12 md4> 
           <h2>
             {{ pollTitle }}
           </h2>
       </v-flex>
-       <v-flex xs6 sm4 md4 color="red lighten-2">
+       <v-flex xs12 sm12 md4>
 <form>
               <v-checkbox
       v-bind:key="option" v-for="option in options" :label="option" v-model="selected" :value="option"
@@ -14,7 +14,7 @@
     <v-btn @click="vote" color="warning">Vote</v-btn>
     </form>
       </v-flex>
-      <v-flex sm4 md4 hidden-xs-only >
+      <v-flex xs12 sm12 md4 >
           <p>Sorry, comments is no MVP feature yet</p>
       </v-flex>
     </v-layout>
@@ -23,7 +23,7 @@
 
 <script>
 import PollsService from "@/services/PollsService";
-import swal from "sweetalert"
+import swal from "sweetalert";
 
 export default {
   data() {
@@ -33,11 +33,17 @@ export default {
       selected: []
     };
   },
+  computed: {
+    binding() {
+      const binding = {};
+      if (this.$vuetify.breakpoint.smAndDown) binding.column = true;
+      return binding;
+    }
+  },
   created() {
     PollsService.getPoll(this.$route.params.id).then(poll => {
       Object.entries(poll.data).forEach(([key, value]) => {
         if (typeof value === "number") {
-          console.log(key);
           this.options.push(key);
         }
       });
@@ -46,9 +52,15 @@ export default {
   },
   methods: {
     vote() {
-      !this.selected.length
-        ? swal("Please tick a box!")
-        : PollsService.put(this.$route.params.id, {
+      switch(!this.selected.length){
+        case true:
+        swal("Please tick a box!")
+        break;
+        case false:
+        this.selected.length > 1 ?
+        (this.selected = [],
+        swal("Please tick one box!")) :
+        PollsService.put(this.$route.params.id, {
             pollOptions: this.selected[0],
             pollName: this.pollTitle
           }).then(result => {
@@ -60,8 +72,7 @@ export default {
             });
           });
     }
-  }
-};
+  }}}
 </script>
 
 <style scoped>
