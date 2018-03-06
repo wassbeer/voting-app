@@ -48,7 +48,7 @@ export default {
           labels: pollOptions,
           datasets: [
             {
-              label: "Poll Result",
+              label: "",
               data: pollData,
               backgroundColor: [
                 "rgba(255, 99, 132, 0.2)",

@@ -19,7 +19,6 @@
           ></v-text-field>
           </div>
     <v-btn @click="addRow">More Options</v-btn>
-
         </form>
         <br>
         <v-btn
@@ -48,12 +47,13 @@
 <script>
 import PollsService from "@/services/PollsService";
 import Store from "@/store/store";
+import swal from "sweetalert"
 
 export default {
   data() {
     return {
       poll: "",
-      options: [{ value: " " }, { value: "" }],
+      options: [{ value: "" }, { value: "" }],
       error: null,
       created: false,
       pollLink: "",
@@ -62,7 +62,13 @@ export default {
   },
   methods: {
     async createPoll() {
-      try {
+      // data validation
+      if(!this.poll.length){
+        return swal("Please provide a poll name")
+      } else if(!this.options[0].value.length || !this.options[1].value.length){
+        return swal("Please submit at least two options")
+      } else {
+            try {
         let pollOptions = [];
         this.options.forEach(option => {
           pollOptions.push(option.value);
@@ -73,11 +79,11 @@ export default {
           userId: Store.state.user
         }).then(response => {
           this.created = true;
-          this.pollLink =
-            "/#/poll/" + response.data.data._id;
+          this.pollLink = "/#/poll/" + response.data.data._id;
         });
       } catch (error) {
         console.log(error);
+      }
       }
     },
     addRow() {

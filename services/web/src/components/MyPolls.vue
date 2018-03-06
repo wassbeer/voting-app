@@ -1,29 +1,19 @@
 <template>
   <v-container fluid class="myPolls">
-    <v-layout row>
+     <v-layout row> 
+        <v-flex xs2 sm3 md4>
+      </v-flex>
+      <v-flex xs8 sm6 md4>
+        <v-list>
+          <v-list-tile v-for="poll in polls" v-bind:key="poll" class="listItem">
+             <v-list-tile-content><a :href="'/#/poll/' + poll._id">{{poll.pollName}}</a></v-list-tile-content>
+             <v-list-tile-content>
+              <v-btn @click="deletePoll(poll._id)" color="warning">Delete</v-btn>
+              </v-list-tile-content>
+          </v-list-tile >
+        </v-list>
+        </v-flex>
       <v-flex xs2 sm3 md4>
-      </v-flex>
-        <v-flex xs8 sm6 md4>
-        <h2>Your Polls</h2>
-      </v-flex>
-      <v-flex xs2 sm3 md4>
-      </v-flex>
-    </v-layout>
-     <v-layout row>
-        <v-flex xs4 sm4 md4 >
-      </v-flex>
-        <ul>
-          <li v-for="poll in polls" v-bind:key="poll">
-            <v-flex xs2 sm2 md2>
-            <a :href="'/#/poll/' + poll._id" >{{poll.pollName}}</a>
-            </v-flex>
-            <v-flex xs2 sm2 md2 >
-            <v-btn @click="deletePoll(poll._id)" color="warning">Delete</v-btn>
-            </v-flex>
-          </li>
-        </ul>
-       <!-- </v-card> -->
-      <v-flex xs4 sm4 md4>
       </v-flex>
     </v-layout>
   </v-container>
@@ -63,7 +53,12 @@ export default {
 </script>
 
 <style scoped>
-ul {
-  list-style-type: none;
+
+.listItem button {
+  float: right;
 }
+
+
+
+
 </style>

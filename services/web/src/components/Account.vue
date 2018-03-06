@@ -33,9 +33,9 @@
       </v-flex>
     </v-layout>
         <v-layout row>
-      <v-flex xs4 >
+      <v-flex >
       </v-flex>
-      <v-flex xs4 color="red lighten-2">
+       <v-flex xs8 sm6 md4>
         <form 
           name="delete-account-form"
           autocomplete="off">
@@ -47,7 +47,7 @@
         </v-btn>
       </form>
       </v-flex>
-      <v-flex xs4 >
+      <v-flex  >
       </v-flex>
     </v-layout>
   </v-container>

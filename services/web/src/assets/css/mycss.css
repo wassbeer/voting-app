@@ -6,6 +6,8 @@
 
 /* CUSTOM CSS */
 
+/* COMPONENTS */
+
   .header{
       background-color: #bcaaa4 !important;
       color: white;
@@ -67,6 +69,23 @@
 
 .fa-facebook-square {
   color: #bcaaa4
+}
+
+/* SWAL */
+
+.swal-button {
+  padding: 7px 19px;
+  border-radius: 2px;
+  background-color: #ffc107;
+  font-size: 12px;
+  border: 1px solid #3e549a;
+}
+
+.swal-footer {
+  background-color: rgb(245, 248, 250);
+  margin-top: 32px;
+  border-top: 1px solid #E9EEF1;
+  overflow: hidden;
 }
 
 /* Vuetify */
