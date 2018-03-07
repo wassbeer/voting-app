@@ -1,12 +1,12 @@
 (function(routeConfig) {
 
-	"use strict";	
+	'use strict';	
 
 	routeConfig.init = function(app) {
 		// routes
-		const pollRoutes = require("../routes/polls");
+		const pollRoutes = require('../routes/polls');
 
 		// register routes
-		app.use("/api/polls", pollRoutes);
+		app.use('/api/polls', pollRoutes);
 	};
 })(module.exports);

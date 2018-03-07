@@ -1,8 +1,6 @@
 const express = require('express'),
 	router = express.Router(),
-	queries = require('../db/queries'),
-	bcrypt = require('bcrypt');
-
+	queries = require('../db/queries');
 /* 
 
     # URI endpoints
@@ -46,21 +44,21 @@ router.post('/read', (req, res) => {
 	queries.readUser(null, req.body.email)
 		.then((user) => {
 			user ?
-			res.status(200).json({
-				success: true,
-				data: user
-			})
-			:
-			res.status(404).json({
-				success: false,
-				data: "User not found"
-			})
+				res.status(200).json({
+					success: true,
+					data: user
+				})
+				:
+				res.status(404).json({
+					success: false,
+					data: 'User not found'
+				});
 		})
 		.catch((err) => {
 			res.status(500).json({
 				success: false,
 				data: err
-			});;
+			});
 		});
 });
 

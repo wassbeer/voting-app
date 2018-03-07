@@ -11,7 +11,7 @@ const request = require('supertest'),
 chai.use(chaiHttp);
 
 describe('routes : users', () => {
-let userId;
+	let userId;
 	/* 
 
 		## URI endpoints
@@ -96,7 +96,7 @@ let userId;
 		});
 	});
 
-	describe(`GET /api/users/read/:id`, () => {
+	describe('GET /api/users/read/:id', () => {
 		it('it should READ user Bas', (done) => {
 			request(server)
 				.get(`/api/users/read/${userId}`)
@@ -116,7 +116,7 @@ let userId;
 			request(server)
 				.get('/api/users/ping')
 				.expect(200)
-				.end(function(err, res) {
+				.end((err) => {
 					if (err) return done(err);
 					done();
 				});
@@ -135,7 +135,7 @@ let userId;
 					res.should.be.json;
 					res.body.should.have.property('success');
 					res.body.success.should.equal(true);
-					res.body.data.n.should.equal(1)
+					res.body.data.n.should.equal(1);
 					done();
 				});
 		});
@@ -151,7 +151,7 @@ let userId;
 					res.should.be.json;
 					res.body.should.have.property('success');
 					res.body.success.should.equal(true);
-					res.body.data.n.should.equal(1)
+					res.body.data.n.should.equal(1);
 					done();
 				});
 		});

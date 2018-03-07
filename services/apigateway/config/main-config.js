@@ -1,16 +1,15 @@
 (function (appConfig) {
 
-    'use strict';
+	'use strict';
 
 	// main dependencies
 
-    const session = require('express-session'),
-        bodyParser = require('body-parser');
+	const bodyParser = require('body-parser');
 
-    appConfig.init = function (app) {
-        app.use(bodyParser.urlencoded({ extended: false }));
-        app.use(bodyParser.json());
-        app.use('/', require('../routes/apigateway.js'));
-    }
+	appConfig.init = function (app) {
+		app.use(bodyParser.urlencoded({ extended: false }));
+		app.use(bodyParser.json());
+		app.use('/', require('../routes/apigateway.js'));
+	};
 
 })(module.exports);

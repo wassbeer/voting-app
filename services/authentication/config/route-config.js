@@ -1,12 +1,12 @@
 (function (routeConfig) {
 
-    "use strict";
+	'use strict';
 
-    routeConfig.init = (app) => {
-        // routes
-        const authRoutes = require("./../routes/authentication");
+	routeConfig.init = (app) => {
+		// routes
+		const authRoutes = require('./../routes/authentication');
 
-        // register routes
-        app.use("/authentication/", authRoutes);
-    };
+		// register routes
+		app.use('/authentication/', authRoutes);
+	};
 })(module.exports);

@@ -29,10 +29,9 @@ The API Gateway is the principle access service for the client. The API gateway 
 | /authentication/update/:id | PUT  | UPDATE  | update a user password
 | /user/:id      |     GET     |        READ |  retrieve a user |
 | /user/delete   |   DELETE    |      DELETE |    delete a user |
-| /poll/share    |   POST      | CREATE      | share a poll     |
 | /poll/create   |   POST      | CREATE | create a poll |
 | /poll/:id      |   GET       | READ        |  retrieve a poll |
-| /poll/result/:id | GET | READ | retrieve poll result  |
+| /poll/read/:id | GET | READ | retrieve poll result  |
 | /poll/update | PUT    | UPDATE  | update a poll |
 | /poll/delete/:id | DELETE | DELETE | Delete a specific poll |
 
