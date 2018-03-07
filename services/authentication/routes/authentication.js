@@ -14,6 +14,7 @@ const express = require("express"),
 | /authentication/signup   |    POST     |   CREATE    | hash password and provide JWT upon signup             |
 | /authentication/login    |     POST    |   CREATE    | bcrypt compare password and provide JWT upon login    |
 | /authentication/verify   |     POST    |   CREATE    | verify a JWT for authenticated routes                 |
+| /authentication/ping     |     GET     |   READ      | api test route                                        |
 | /authentication/update   |     PUT     |   UPDATE    | hash a newly created password                         |
 
 */
@@ -63,11 +64,7 @@ router.post("/login", (req, res) => {
         url: "http://localhost:3000/api/users/read"
     };
     request(options).then((user) => {
-        switch (user.data !== null) {
-            case true:
                 bcrypt.compare(req.body.password, user.data.password, (err, result) => {
-                    console.log('result')
-                    console.log(result)
                     switch (result) {
                         case true:
                             token = jwt.sign({
@@ -89,12 +86,12 @@ router.post("/login", (req, res) => {
                             });
                     }
                 })
-                break;
-            default: // error
-                res.json({ data: 'The e-mail is not registered' })
-        }
-    })
+    }).catch((err) => {
+        console.log("caught")
+        res.status(404).json({ data: 'The e-mail is not registered' })
+})
 });
+
 
 router.post("/verify", (req, res) => {
     jwt.verify(req.body.token, secret, (err, decoded) => {
@@ -110,6 +107,10 @@ router.post("/verify", (req, res) => {
             });
         }
     });
+});
+
+router.get('/ping', (req, res) => {
+    res.send('pong');
 });
 
 router.put("/update/:id", (req, res) => {

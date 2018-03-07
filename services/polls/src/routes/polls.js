@@ -27,8 +27,6 @@ router.post('/create', (req, res) => {
     }
     // pollOptions: whale,wolf
     pollOptions().then((options) => {
-        console.log("options")
-        console.log(options)
         options.forEach((option) => {
             poll[option] = 0;
         })
@@ -41,7 +39,6 @@ router.post('/create', (req, res) => {
 
         queries.createPoll(poll)
             .then((poll) => {
-                console.log(poll.ops[0])
                 res.status(201).json({
                     success: true,
                     data: poll.ops[0]

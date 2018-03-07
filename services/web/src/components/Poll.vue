@@ -15,7 +15,7 @@
     </form>
       </v-flex>
       <v-flex xs12 sm12 md4 >
-          <p>Sorry, comments is no MVP feature yet</p>
+          <p id="comments">Sorry, comments is no MVP feature yet</p>
       </v-flex>
     </v-layout>
   </v-container>

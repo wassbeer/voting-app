@@ -67,7 +67,7 @@ export default {
                   });
               break;
               default:
-                swal("Warning!", response.data.data);
+                swal("Warning!", response.data.error.data);
           }});
         }
       } catch (error) {

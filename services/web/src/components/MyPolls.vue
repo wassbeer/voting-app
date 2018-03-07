@@ -7,9 +7,9 @@
         <v-list>
           <v-list-tile v-for="poll in polls" v-bind:key="poll" class="listItem">
              <v-list-tile-content><a :href="'/#/poll/' + poll._id">{{poll.pollName}}</a></v-list-tile-content>
-             <v-list-tile-content>
+             <v-list-tile-action>
               <v-btn @click="deletePoll(poll._id)" color="warning">Delete</v-btn>
-              </v-list-tile-content>
+              </v-list-tile-action>
           </v-list-tile >
         </v-list>
         </v-flex>
@@ -54,8 +54,8 @@ export default {
 
 <style scoped>
 
-.listItem button {
-  float: right;
+a {
+  text-decoration: none;
 }
 
 

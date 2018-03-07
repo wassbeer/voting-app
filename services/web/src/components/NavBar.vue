@@ -28,7 +28,7 @@
         Sign Up
       </v-btn>
 <v-btn class="mr-4"  flat 
-        dark  v-if="$store.state.isUserLoggedIn" to="mypolls">
+        dark  v-if="$store.state.isUserLoggedIn" to="mypolls" id="helloUser">
   Hello {{ user }}
         </v-btn>
 

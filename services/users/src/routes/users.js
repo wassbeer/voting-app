@@ -45,7 +45,7 @@ router.get('/ping', (req, res) => {
 router.post('/read', (req, res) => {
 	queries.readUser(null, req.body.email)
 		.then((user) => {
-			user !== null ?
+			user ?
 			res.status(200).json({
 				success: true,
 				data: user
@@ -67,7 +67,7 @@ router.post('/read', (req, res) => {
 router.get('/read/:id', (req, res) => {
 	queries.readUser(req.params.id)
 		.then((user) => {
-			user !== null ?
+			user ?
 				res.status(200).json({
 					success: true,
 					data: user

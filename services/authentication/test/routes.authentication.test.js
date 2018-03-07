@@ -22,6 +22,7 @@ describe("routes : authentication!", () => {
     | /authentication/signup   |    POST     |   CREATE    | hash password and provide JWT upon signup             |
     | /authentication/login    |     POST    |   CREATE    | bcrypt compare password and provide JWT upon login    |
     | /authentication/verify   |     POST    |   CREATE    | verify a JWT for authenticated routes                 |
+    | /authentication/ping     |     GET     |   READ      | api test route                                        |
     | /authentication/update   |     PUT     |   UPDATE    | hash a newly created password                         |
 
 */
@@ -43,7 +44,6 @@ describe("routes : authentication!", () => {
                     res.body.should.have.property("token");
                     reusableToken = res.body.token;
                     reusableID = res.body.user._id;
-                    console.log(res.body.user._id)
                     done();
                 });
         });
@@ -78,6 +78,19 @@ describe("routes : authentication!", () => {
                     res.body.should.have.property("success");
                     res.body.success.should.equal(true);
                     res.body.should.have.property("message");
+                    done();
+                });
+        });
+    });
+
+
+    describe("/GET /authentication/ping", () => {
+        it("it should GET \"pong\"", (done) => {
+            request(server)
+                .get("/authentication/ping")
+                .expect(200)
+                .end(function(err, res) {
+                    if (err) return done(err);
                     done();
                 });
         });

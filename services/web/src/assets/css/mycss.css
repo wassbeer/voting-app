@@ -28,7 +28,7 @@
   }
 
   .home {
-    padding: 4% 4%;
+    padding: 4% 0%;
     text-align: center;
   }
 
@@ -55,6 +55,19 @@
   .account{
     text-align: center;
     padding: 5% 0;
+  }
+
+  @media only screen and (max-width: 600px) {
+    #helloUser{
+          display: none;
+      }
+    .poll{
+      padding: 4% 20%;
+    }
+
+    #comments{
+      display: none
+    }
   }
 
 /* ICONS */
@@ -9150,6 +9163,7 @@ p {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  flex: 1;
   font-size: 16px;
   font-weight: 400;
   height: 48px;
@@ -9201,7 +9215,7 @@ p {
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   justify-content: flex-start;
-  min-width: 56px
+  /* min-width: 56px */
 }
 
 .list__tile__action,
