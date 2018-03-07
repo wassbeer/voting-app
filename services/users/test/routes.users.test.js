@@ -5,13 +5,13 @@ const request = require('supertest'),
 	chaiHttp = require('chai-http'),
 	server = require('../src/app'),
 	queries = require('../src/db/queries'),
-	mongo = require('../src/db/connection'),
+	getDb = require('../src/db/connection').getDb,
 	should = chai.should();
 
 chai.use(chaiHttp);
 
 describe('routes : users', () => {
-
+let userId;
 	/* 
 
 		## URI endpoints
@@ -31,15 +31,16 @@ describe('routes : users', () => {
 		queries.createUser({
 			name: 'Bas',
 			email: 'bkdelaat@gmail.com',
-			password: '3982jnf',
-			_id: '5a89948a490ecd3123f47150'
-		}).then(() => {
+			password: '3982jnf'
+		}).then((user) => {
+			// store userId
+			userId = user._id;
 			done();
 		});
 	});
 
 	afterEach((done) => {
-		mongo.getDb().collection('users').drop();
+		getDb().collection('users').drop();
 		done();
 	});
 
@@ -52,35 +53,26 @@ describe('routes : users', () => {
 					if (err) return done(err);
 					res.should.have.status(201);
 					res.should.be.json;
-					res.body.should.have.property('status');
-					res.body.status.should.equal('success');
+					res.body.should.have.property('success');
+					res.body.success.should.equal(true);
 					res.body.data.name.should.equal('Bas');
 					done();
 				});
 		});
-
-		// it('it should not create a user with an already created e-mail', (done) => {
-		// 	chai.request(server)
-		// 		.post('/api/users/create')
-		// 		.send({ name: 'bas', email: 'bkdelaat@gmail.com', password: '12345' })
-		// 		.end((err, res) => {
-		// 			should.exist(err);
-		// 		});
-		// });
 	});
 
 	describe('POST /api/users/read', () => {
 		it('it should authenticate user Bas', (done) => {
 			request(server)
 				.post('/api/users/read')
-				.send({email: 'bkdelaat@gmail.com'})
+				.send({email:'bkdelaat@gmail.com'})
 				.expect(200)
 				.end((err, res) => {
 					if (err) return done(err);
 					res.should.be.json;
-					res.body.should.have.property('status');
+					res.body.should.have.property('success');
 					res.body.should.have.property('data');
-					res.body.status.should.equal('success');
+					res.body.success.should.equal(true);
 					res.body.data.name.should.equal('Bas');
 					done();
 				});
@@ -91,29 +83,29 @@ describe('routes : users', () => {
 		it('it should authenticate user Bas', (done) => {
 			request(server)
 				.post('/api/users/read')
-				.send({email: 'bkksddelaat@gmail.com'})
+				.send({email: 'bksdsdfksddelaat@gmail.com'})
 				.expect(404)
 				.end((err, res) => {
 					if (err) return done(err);
 					res.should.be.json;
-					res.body.should.have.property('status');
+					res.body.should.have.property('success');
 					res.body.should.have.property('data');
-					res.body.status.should.equal('failure');
+					res.body.success.should.equal(false);
 					done();
 				});
 		});
 	});
 
-	describe('GET /api/users/read/5a89948a490ecd3123f47150', () => {
+	describe(`GET /api/users/read/:id`, () => {
 		it('it should READ user Bas', (done) => {
 			request(server)
-				.get('/api/users/read/5a89948a490ecd3123f47150')
+				.get(`/api/users/read/${userId}`)
 				.expect(200)
 				.end((err, res) => {
 					if (err) return done(err);
 					res.should.be.json;
-					res.body.should.have.property('status');
-					res.body.status.should.equal('success');
+					res.body.should.have.property('success');
+					res.body.success.should.equal(true);
 					done();
 				});
 		});
@@ -135,14 +127,15 @@ describe('routes : users', () => {
 	describe('PUT /api/users/update/:id', () => {
 		it('it should UPDATE user bas', (done) => {
 			request(server)
-				.put('/api/users/update/5a89948a490ecd3123f47150')
+				.put(`/api/users/update/${userId}`)
 				.send({ name: 'bas', email: 'bassiedelaat@hotmail.com', password: '12345' })
-				.expect(200)
+				.expect(201)
 				.end((err, res) => {
 					if (err) return done(err);
 					res.should.be.json;
-					res.body.should.have.property('status');
-					res.body.status.should.equal('success');
+					res.body.should.have.property('success');
+					res.body.success.should.equal(true);
+					res.body.data.n.should.equal(1)
 					done();
 				});
 		});
@@ -151,13 +144,14 @@ describe('routes : users', () => {
 	describe('DELETE /api/users/delete/:id', () => {
 		it('it should DELETE user bas', (done) => {
 			request(server)
-				.delete('/api/users/delete/5a89948a490ecd3123f47150')
+				.delete(`/api/users/delete/${userId}`)
 				.expect(200)
 				.end((err, res) => {
 					if (err) return done(err);
 					res.should.be.json;
-					res.body.should.have.property('status');
-					res.body.status.should.equal('success');
+					res.body.should.have.property('success');
+					res.body.success.should.equal(true);
+					res.body.data.n.should.equal(1)
 					done();
 				});
 		});

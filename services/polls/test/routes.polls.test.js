@@ -102,7 +102,6 @@ describe("routes : polls", () => {
                     res.body.should.have.property("success");
                     res.body.success.should.equal(true);
                     res.body.data.pollName.should.equal("Your favourite soft drink");
-                   
                     done();
                 });
         });

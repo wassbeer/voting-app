@@ -43,18 +43,23 @@ router.get('/ping', (req, res) => {
 });
 
 router.post('/read', (req, res) => {
-	console.log(req.body.email);
 	queries.readUser(null, req.body.email)
-		.then((user, err) => {
+		.then((user) => {
+			user !== null ?
 			res.status(200).json({
 				success: true,
 				data: user
 			})
-		})
-		.catch((err) => {
+			:
 			res.status(404).json({
 				success: false,
-				data: 'User not found'
+				data: "User not found"
+			})
+		})
+		.catch((err) => {
+			res.status(500).json({
+				success: false,
+				data: err
 			});;
 		});
 });
@@ -62,7 +67,7 @@ router.post('/read', (req, res) => {
 router.get('/read/:id', (req, res) => {
 	queries.readUser(req.params.id)
 		.then((user) => {
-			user ?
+			user !== null ?
 				res.status(200).json({
 					success: true,
 					data: user

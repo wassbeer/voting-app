@@ -1,5 +1,5 @@
 const getDb = require('./connection').getDb,
-ObjectId = require('mongodb').ObjectId;
+    ObjectId = require('mongodb').ObjectId;
 
 /*
 
@@ -41,7 +41,7 @@ module.exports = {
 
     updateUser: async function (userId, updateObj) {
         let o_id = new ObjectId(userId),
-        conditions = {
+            conditions = {
                 _id: o_id
             },
             update = {
