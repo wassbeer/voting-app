@@ -1,8 +1,7 @@
 const environment = process.env.NODE_ENV || 'test',
-    createUsersCollection = require('./collections').users,
     envDatabase = require('../../mongodbfile')[environment];
-
 let _db = null;
+
 module.exports.getDb = function() { return _db; }
 module.exports.init = async function() {
         return await require('mongodb').connect(process.env.DATABASE_URL, (err, database) => {

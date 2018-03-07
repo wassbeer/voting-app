@@ -32,9 +32,8 @@ export default {
         pollOptions = [],
         pollData = [],
         myChart;
-
       this.pollQuestion = data.data.pollName;
-
+      
       Object.entries(data.data).forEach(([key, value]) => {
         if (typeof value === "number") {
           pollOptions.push(key);

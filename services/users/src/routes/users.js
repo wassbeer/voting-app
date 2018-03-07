@@ -84,11 +84,7 @@ router.get('/read/:id', (req, res) => {
 router.put('/update/:id', (req, res) => {
 	let updatedUser = {
 		password: req.body.password
-	};
-	console.log('updatedUser')
-	console.log(updatedUser)
-	console.log('req.params.id')
-	console.log(req.params.id)
+	};	
 	queries.updateUser(req.params.id, updatedUser)
 		.then((user) => {
 			res.status(201).json({

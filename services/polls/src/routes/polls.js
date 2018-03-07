@@ -2,19 +2,20 @@ const express = require('express'),
     router = express.Router(),
     queries = require('../db/queries');
 
-/*
+    /* 
 
-    | Endpoint              | HTTP Method | CRUD Method |              Result |
-    | --------------------- | :---------: | ----------: | ------------------: |
-    | /api/polls/create     |    POST     |      CREATE |       create a poll |
-    | /api/polls/ping       |     GET     |        READ |                pong |
-    | /api/polls/user/:id   |     GET     |        READ | get polls of a user |
-    | /api/polls/poll/:id   |     GET     |        READ |          get a poll |
-    | /api/polls/result/:id |     GET     |        READ |   get a poll result |
-    | /api/polls/update/:id |     PUT     |      UPDATE |         edit a poll |
-    | /api/polls/delete/:id |   DELETE    |      DELETE |       delete a poll |
+        URI endpoints
 
-*/
+        | Endpoint              | HTTP Method | CRUD Method |              Result |
+        | --------------------- | :---------: | ----------: | ------------------: |
+        | /api/polls/create     |    POST     |      CREATE |       create a poll |
+        | /api/polls/ping       |     GET     |        READ |                pong |
+        | /api/polls/user/:id   |     GET     |        READ | get polls of a user |
+        | /api/polls/poll/:id   |     GET     |        READ |          get a poll |
+        | /api/polls/update/:id |     PUT     |      UPDATE |         edit a poll |
+        | /api/polls/delete/:id |   DELETE    |      DELETE |       delete a poll |
+
+    */
 
 router.post('/create', (req, res) => {
     let poll = ({
@@ -26,6 +27,8 @@ router.post('/create', (req, res) => {
     }
     // pollOptions: whale,wolf
     pollOptions().then((options) => {
+        console.log("options")
+        console.log(options)
         options.forEach((option) => {
             poll[option] = 0;
         })

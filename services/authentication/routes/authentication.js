@@ -32,26 +32,23 @@ router.post("/signup", (req, res, next) => {
                 json: true,
                 url: "http://localhost:3000/api/users/create"
             };
-
-            request(options).then((user) => {
-                // 1. If the user is succesfully registered 
-                const token = jwt.sign({ admin: user.data._id }, secret, { // payload, secret
-                    expiresIn: 1440 // expires in 24 hours
-                });
-                res.status(200).json({
-                    success: true,
-                    message: "Enjoy your token!",
-                    token: token,
-                    user: user.data
-                }).catch((err) => {
-                    res.json(err);
-                })
-
-            }).catch((err) => {
-                res.status(500).json({
-                    success: false
-                })
+        request(options).then((user) => {
+            // 1. If the user is succesfully registered 
+            const token = jwt.sign({ admin: user.data._id }, secret, { // payload, secret
+                expiresIn: 1440 // expires in 24 hours
+            });
+            res.status(200).json({
+                success: true,
+                message: "Enjoy your token!",
+                token: token,
+                user: user.data
+            });
+        }).catch((err) => {
+            console.log(err)
+            res.status(500).json({
+                success: false
             })
+        })
     });
 });
 
@@ -66,11 +63,6 @@ router.post("/login", (req, res) => {
         url: "http://localhost:3000/api/users/read"
     };
     request(options).then((user) => {
-        console.log('user')
-        console.log(user)
-        // console.log('user.success')
-        // console.log(user.success)
-        // console.log(user.data)
         switch (user.data !== null) {
             case true:
                 bcrypt.compare(req.body.password, user.data.password, (err, result) => {
@@ -131,7 +123,7 @@ router.put("/update/:id", (req, res) => {
             json: true
         }
         request(options).then((update) => {
-            res.json(update)
+            res.status(201).json(update)
         })
             .catch((err) => {
                 res.json(err);

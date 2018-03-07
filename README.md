@@ -4,14 +4,13 @@ The application is built in a microservice architecture. The application contain
 
 |		Name      | Service   |Container   |  Tech     |
 |   -------------   |  -----------  |  -------|-----------------|
-| Web| web            |web            | Vue.js, Vuex, Jest |
+| Web| web            |web            | Vue.js, Vuex, Chart.js |
 |API Gateway       |apigateway|apigateway| Node, Express |
 |Polls API          |polls        |polls            | Node, Express, Mocha, Chai |
 |Polls DB       | polls |polls-db| Node, MongoDB |
 |  Users API       |users|  users| node.js, express, chai, supertest |
 |Users DB      |users|users-db| Node, Mongodb |
-|Authentication     |authentication|authentication| Node,  Express, JWT, Mocha, Chai |
-| Authorization   | authorization  | authorization | Node, ACL  | 
+|Authentication     |authentication|authentication| Node,  Express, JWT, bcrypt, Mocha, Chai |
 
 ## Repository Structure 
 ```
@@ -19,7 +18,6 @@ The application is built in a microservice architecture. The application contain
 └── services
     ├── apigateway
     ├── authentication
-    ├── authorization
     ├── polls
     │   └── src
     │       └── db
@@ -36,4 +34,3 @@ Please visit these endpoints for API specification:
 *  http://localhost:3333/apigateway/api-docs/
 *  http://localhost:4000/polls/api-docs/
 *  http://localhost:5000/authentication/api-docs/
-*  http://localhost:6000/authorization/api-docs/
