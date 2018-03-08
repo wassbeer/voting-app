@@ -1,13 +1,13 @@
 <template>
   <div id="app">
     <v-app>
-       <main>
+      <main>
         <v-content>
           <v-container fluid>
-               <nav-bar></nav-bar>
-     <page-header></page-header>
-          <router-view></router-view>
-        </v-container>
+            <nav-bar/>
+            <page-header/>
+            <router-view/>
+          </v-container>
         </v-content>
       </main>
     </v-app>

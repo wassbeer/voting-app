@@ -1,18 +1,38 @@
 <template>
-  <v-container fluid class="poll">
-    <v-layout row v-bind="binding">
-      <v-flex xs12 sm12 md4>
+  <v-container 
+    fluid 
+    class="poll">
+    <v-layout 
+      row 
+      v-bind="binding">
+      <v-flex 
+        xs12 
+        sm12 
+        md4>
         <h2>
           {{ pollTitle }}
         </h2>
       </v-flex>
-      <v-flex xs12 sm12 md4>
+      <v-flex 
+        xs12 
+        sm12 
+        md4>
         <form>
-          <v-checkbox v-bind:key="option" v-for="option in options" :label="option" v-model="selected" :value="option"> {{ option }}</v-checkbox>
-          <v-btn @click="vote" color="warning">Vote</v-btn>
+          <v-checkbox 
+            v-model="selected" 
+            :key="option" 
+            v-for="option in options" 
+            :label="option" 
+            :value="option"> {{ option }}</v-checkbox>
+          <v-btn 
+            @click="vote" 
+            color="warning">Vote</v-btn>
         </form>
       </v-flex>
-      <v-flex xs12 sm12 md4>
+      <v-flex 
+        xs12 
+        sm12 
+        md4>
         <p id="comments">Sorry, comments is no MVP feature yet</p>
       </v-flex>
     </v-layout>

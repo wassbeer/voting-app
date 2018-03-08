@@ -1,16 +1,22 @@
 <template>
-  <v-container fluid class="pollResult">
+  <v-container 
+    fluid 
+    class="pollResult">
     <v-layout row>
-      <v-flex>
-      </v-flex>
-      <v-flex xs8 sm6 md4>
+      <v-flex/>
+      <v-flex 
+        xs8 
+        sm6 
+        md4>
         <h1> {{ pollQuestion }} </h1>
         {{ results }}
         <!-- chart.js -->
-        <canvas id="myChart" width="400" height="400"></canvas>
+        <canvas 
+          id="myChart" 
+          width="400" 
+          height="400"/>
       </v-flex>
-      <v-flex>
-      </v-flex>
+      <v-flex/>
     </v-layout>
   </v-container>
 </template>

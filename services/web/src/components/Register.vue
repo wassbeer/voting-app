@@ -1,28 +1,32 @@
 <template>
   <v-container fluid>
-    <v-layout row class="register">
-      <v-flex >
-      </v-flex>
-    <v-flex xs8 sm6 md4>        <!-- <panel title="Sign Up"> -->
+    <v-layout 
+      row 
+      class="register">
+      <v-flex/>
+      <v-flex 
+        xs8 
+        sm6 
+        md4>        <!-- <panel title="Sign Up"> -->
         <form 
           name="sign-up-form"
           autocomplete="off">
-           <v-text-field
-            label="Name"
+          <v-text-field
             v-model="name"
-          ></v-text-field>
+            label="Name"
+          />
           <br>
           <v-text-field
-            label="E-mail"
             v-model="email"
-          ></v-text-field>
+            label="E-mail"
+          />
           <br>
           <v-text-field
+            v-model="password"
             label="Password"
             type="password"
-            v-model="password"
             autocomplete="new-password"
-          ></v-text-field>
+          />
         </form>
         <br>
         <v-btn
@@ -33,8 +37,7 @@
         </v-btn>
       <!-- </panel> -->
       </v-flex>
-      <v-flex >
-      </v-flex>
+      <v-flex/>
     </v-layout>
   </v-container>
 </template>

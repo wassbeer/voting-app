@@ -1,34 +1,62 @@
 <template>
-  <v-container fluid class="createPoll">
-    <v-layout row>
-      <v-flex xs2 sm4 md4>
-      </v-flex>
-      <v-flex xs8 sm6 md4 v-if="!created">
+  <v-container 
+  fluid 
+  class="createPoll">
+    <v-layout 
+    row>
+      <v-flex 
+      xs2 
+      sm4 
+      md4/>
+      <v-flex 
+      v-if="!created"
+      xs8 
+      sm6
+      md4 
+      />
         <form name="create-poll-form" autocomplete="off">
-          <v-text-field label="Poll" v-model="poll"></v-text-field>
+          <v-text-field 
+            v-model="poll"
+            label="Poll"/>
           <br>
           <div v-for="option in options" :key="option">
-            <v-text-field label="Option" v-model="option.value"></v-text-field>
+            <v-text-field
+              v-model="option.value" 
+              label="Option" 
+            />
           </div>
           <v-btn @click="addRow">More Options</v-btn>
         </form>
         <br>
-        <v-btn dark color="warning" @click="createPoll">
+        <v-btn 
+          dark 
+          color="warning" 
+          @click="createPoll">
           Submit
         </v-btn>
       </v-flex>
-      <v-flex xs2 sm3 md4>
-      </v-flex>
+      <v-flex 
+        xs2 
+        sm3 
+        md4/>
     </v-layout>
     <v-layout row>
-      <v-flex xs2 sm3 md4>
-      </v-flex>
-      <v-flex xs8 sm6 md4 v-if="created">
+      <v-flex 
+        xs2 
+        sm3 
+        md4/>
+      <v-flex 
+        v-if="created"
+        xs8 
+        sm6 
+        md4>
         <h1>Congratulations!</h1>
         <p>Your poll has been <a :href="pollLink">posted</a></p>
       </v-flex>
-      <v-flex xs2 sm3 md4>
-      </v-flex>
+      <v-flex 
+        xs2 
+        sm3 
+        md4/>
     </v-layout>
   </v-container>
 </template>

@@ -1,9 +1,14 @@
 <template>
-  <v-container fluid class="account">
-    <v-layout row>
-      <v-flex >
-      </v-flex>
-         <v-flex xs8 sm6 md4>  
+  <v-container 
+    fluid 
+    class="account">
+    <v-layout 
+      row>
+      <v-flex/>
+      <v-flex 
+        xs8 
+        sm6 
+        md4>  
         <form 
           name="change-password-form"
           autocomplete="off">
@@ -12,14 +17,14 @@
             type="password"
             v-model="newPassword"
             autocomplete="provide your new password"
-          ></v-text-field>
+          />
           <br>
           <v-text-field
             label="new password"
             type="password"
             v-model="confirmPassword"
             autocomplete="confirm a new password"
-          ></v-text-field>
+          />
         </form>
         <br>
         <v-btn
@@ -29,26 +34,27 @@
           Change Password
         </v-btn>
       </v-flex>
-      <v-flex >
-      </v-flex>
+      <v-flex/>
     </v-layout>
-        <v-layout row>
-      <v-flex >
-      </v-flex>
-       <v-flex xs8 sm6 md4>
+    <v-layout 
+      row>
+      <v-flex/>
+      <v-flex 
+        xs8 
+        sm6 
+        md4>
         <form 
           name="delete-account-form"
           autocomplete="off">
-        <v-btn
-          dark
-          color="warning"
-          @click="terminateAccount">
-          Terminate Account
-        </v-btn>
-      </form>
+          <v-btn
+            dark
+            color="warning"
+            @click="terminateAccount">
+            Terminate Account
+          </v-btn>
+        </form>
       </v-flex>
-      <v-flex  >
-      </v-flex>
+      <v-flex/>
     </v-layout>
   </v-container>
 </template>
@@ -111,7 +117,8 @@ export default {
     async terminateAccount() {
       try {
         swal({
-          title: "Once terminated, you will not be able to recover this account!",
+          title:
+            "Once terminated, you will not be able to recover this account!",
           text: "Are you sure you want to suspend your account?",
           icon: "warning",
           buttons: true,

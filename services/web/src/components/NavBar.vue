@@ -1,25 +1,55 @@
 <template>
-  <v-toolbar fixed class="blue-grey lighten-4" dark>
-    <v-toolbar-title class="mr-4">
-      <router-link class="home" tag="span" to="/">
+  <v-toolbar 
+    fixed 
+    class="blue-grey lighten-4" 
+    dark>
+    <v-toolbar-title 
+      class="mr-4">
+      <router-link 
+        class="home" 
+        tag="span" 
+        to="/">
         Voveō
       </router-link>
     </v-toolbar-title>
-    <v-spacer></v-spacer>
+    <v-spacer/>
     <v-toolbar-items>
-      <v-btn v-if="!$store.state.isUserLoggedIn" flat dark to="login">
+      <v-btn 
+        v-if="!$store.state.isUserLoggedIn" 
+        flat 
+        dark 
+        to="login">
         Login
       </v-btn>
-      <v-btn v-if="!$store.state.isUserLoggedIn" flat dark to="register">
+      <v-btn 
+        v-if="!$store.state.isUserLoggedIn" 
+        flat 
+        dark 
+        to="register">
         Sign Up
       </v-btn>
-      <v-btn class="mr-4" flat dark v-if="$store.state.isUserLoggedIn" to="mypolls" id="helloUser">
+      <v-btn 
+        class="mr-4" 
+        flat 
+        dark 
+        v-if="$store.state.isUserLoggedIn" 
+        to="mypolls" 
+        id="helloUser">
         Hello {{ user }}
       </v-btn>
-      <v-btn flat dark to="account">
-        <v-icon v-if="$store.state.isUserLoggedIn" class="material-icons">settings</v-icon>
+      <v-btn 
+        flat 
+        dark 
+        to="account">
+        <v-icon 
+          v-if="$store.state.isUserLoggedIn" 
+          class="material-icons">settings</v-icon>
       </v-btn>
-      <v-btn v-if="$store.state.isUserLoggedIn" flat dark @click="logout">
+      <v-btn 
+        v-if="$store.state.isUserLoggedIn" 
+        flat 
+        dark 
+        @click="logout">
         Log Out
       </v-btn>
     </v-toolbar-items>

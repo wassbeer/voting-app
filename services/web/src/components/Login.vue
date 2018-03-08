@@ -1,21 +1,33 @@
 <template>
   <v-container fluid>
-    <v-layout row class="login">
-      <v-flex>
-      </v-flex>
-      <v-flex xs8 sm6 md4>
-        <v-text-field label="Email" v-model="email"></v-text-field>
+    <v-layout 
+      row 
+      class="login">
+      <v-flex/>
+      <v-flex 
+        xs8 
+        sm6 
+        md4>
+        <v-text-field
+          v-model="email" 
+          label="Email"/>
         <br>
-        <v-text-field label="Password" type="password" v-model="password"></v-text-field>
+        <v-text-field
+          v-model="password"
+          label="Password" 
+          type="password"
+        />
         <br>
-        <v-btn dark color="warning" @click="login">
+        <v-btn 
+          dark 
+          color="warning" 
+          @click="login">
           Login
         </v-btn>
-        <br/>
-        <br/>
+        <br>
+        <br>
       </v-flex>
-      <v-flex>
-      </v-flex>
+      <v-flex/>
     </v-layout>
   </v-container>
 </template>
