@@ -1,3 +1,8 @@
+
+![banner](https://github.com/wassbeer/voting-app/blob/master/services/web/src/assets/images/screenshot.jpg?raw=true)
+
+> Home Page of the voting app
+
 ## Architecture
 
 The application is built in a microservice architecture. The application contains 5 microservices residing in 7 Docker containers. 
