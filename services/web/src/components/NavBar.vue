@@ -29,12 +29,12 @@
         Sign Up
       </v-btn>
       <v-btn 
-        class="mr-4" 
+        v-if="$store.state.isUserLoggedIn"
+        id="helloUser" 
+        class="mr-4"
         flat 
         dark 
-        v-if="$store.state.isUserLoggedIn" 
-        to="mypolls" 
-        id="helloUser">
+        to="mypolls"> 
         Hello {{ user }}
       </v-btn>
       <v-btn 
@@ -57,16 +57,22 @@
 </template>
 
 <script>
-  import UsersService from "@/services/UsersService";
-  import Store from "@/store/store";
-  export default {
-    data() {
-      return {
-        user: "user"
-      };
-    },
-    created: function() {
-      if (Store.state.isUserLoggedIn) {
+import UsersService from "@/services/UsersService";
+import Store from "@/store/store";
+export default {
+  data() {
+    return {
+      user: "user"
+    };
+  },
+  computed: {
+    loggedIn() {
+      return this.$store.state.isUserLoggedIn;
+    }
+  },
+  watch: {
+    loggedIn(value) {
+      if (value) {
         UsersService.get(Store.state.user)
           .then(response => {
             this.user = response.data.data.name;
@@ -75,43 +81,37 @@
             console.log(error);
           });
       }
-    },
-    computed: {
-      loggedIn() {
-        return this.$store.state.isUserLoggedIn;
-      }
-    },
-    watch: {
-      loggedIn(value) {
-        if (value) {
-          UsersService.get(Store.state.user)
-            .then(response => {
-              this.user = response.data.data.name;
-            })
-            .catch(error => {
-              console.log(error);
-            });
-        }
-      }
-    },
-    methods: {
-      logout() {
-        this.$store.dispatch("setToken", null);
-        this.$store.dispatch("setUser", null);
-        this.$router.push({
-          name: "Home"
-        });
-      }
     }
-  };
+  },
+  created: function() {
+    if (Store.state.isUserLoggedIn) {
+      UsersService.get(Store.state.user)
+        .then(response => {
+          this.user = response.data.data.name;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch("setToken", null);
+      this.$store.dispatch("setUser", null);
+      this.$router.push({
+        name: "Home"
+      });
+    }
+  }
+};
 </script>
 
 <style scoped>
-  .home {
-    cursor: pointer;
-  }
-  
-  .home:hover {
-    color: grey;
-  }
+.home {
+  cursor: pointer;
+}
+
+.home:hover {
+  color: grey;
+}
 </style>

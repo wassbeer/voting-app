@@ -18,7 +18,7 @@
 import NavBar from "@/components/NavBar";
 import PageHeader from "@/components/Header";
 export default {
-  name: "app",
+  name: "App",
   components: {
     NavBar,
     PageHeader

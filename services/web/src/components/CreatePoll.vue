@@ -1,40 +1,44 @@
 <template>
   <v-container 
-  fluid 
-  class="createPoll">
+    fluid 
+    class="createPoll">
     <v-layout 
-    row>
+      row>
       <v-flex 
-      xs2 
-      sm4 
-      md4/>
+        xs2 
+        sm4 
+        md4/>
       <v-flex 
-      v-if="!created"
-      xs8 
-      sm6
-      md4 
+        v-if="!created"
+        xs8 
+        sm6
+        md4 
       />
-        <form name="create-poll-form" autocomplete="off">
-          <v-text-field 
-            v-model="poll"
-            label="Poll"/>
-          <br>
-          <div v-for="option in options" :key="option">
-            <v-text-field
-              v-model="option.value" 
-              label="Option" 
-            />
-          </div>
-          <v-btn @click="addRow">More Options</v-btn>
-        </form>
+      <form 
+        name="create-poll-form" 
+        autocomplete="off">
+        <v-text-field 
+          v-model="poll"
+          label="Poll"/>
         <br>
-        <v-btn 
-          dark 
-          color="warning" 
-          @click="createPoll">
-          Submit
-        </v-btn>
-      </v-flex>
+        <div 
+          v-for="option in options" 
+          :key="option">
+          <v-text-field
+            v-model="option.value" 
+            label="Option" 
+          />
+        </div>
+        <v-btn @click="addRow">More Options</v-btn>
+      </form>
+      <br>
+      <v-btn 
+        dark 
+        color="warning" 
+        @click="createPoll">
+        Submit
+      </v-btn>
+      <v-flex/>
       <v-flex 
         xs2 
         sm3 

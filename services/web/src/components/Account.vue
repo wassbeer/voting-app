@@ -13,16 +13,16 @@
           name="change-password-form"
           autocomplete="off">
           <v-text-field
+            v-model="newPassword"
             label="new password"
             type="password"
-            v-model="newPassword"
             autocomplete="provide your new password"
           />
           <br>
           <v-text-field
+            v-model="confirmPassword"
             label="new password"
             type="password"
-            v-model="confirmPassword"
             autocomplete="confirm a new password"
           />
         </form>
