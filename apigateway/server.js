@@ -4,5 +4,5 @@ const app = require('./app'),
 	server = http.createServer(app);
 
 server.listen(port, () => {
-	console.log('server listening on port ' + port);
+	console.log('API gateway server listening on port ' + port);
 });

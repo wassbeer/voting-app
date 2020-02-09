@@ -29,7 +29,7 @@ router.post('/authentication/signup', (req, res) => {
 			password: req.body.password
 		},
 		json: true,
-		url: 'http://localhost:5000/authentication/signup'
+		url: 'http://authentication:5000/api/authentication/signup'
 	};
 	request(options).then((signup) => {
 		res.json(signup);
@@ -46,7 +46,7 @@ router.post('/authentication/login', (req, res) => {
 			password: req.body.password
 		},
 		json: true,
-		url: 'http://localhost:5000/authentication/login'
+		url: 'http://authentication:5000/api/authentication/login'
 	};
 	request(options).then((loginResult) => {
 		res.json(loginResult);
@@ -62,7 +62,7 @@ router.post('/authentication/verify', (req, res) => {
 			token: req.body.token
 		},
 		json: true,
-		url: 'http://localhost:5000/authentication/verify'
+		url: 'http://authentication:5000/api/authentication/verify'
 	};
 	request(options).then((verifyResult) => {
 		res.json(verifyResult);
@@ -78,7 +78,7 @@ router.put('/authentication/update', (req, res) => {
 			password: req.body.password
 		},
 		json: true,
-		url: 'http://localhost:5000/authentication/update/' + req.body.id
+		url: 'http://authentication:5000/api/authentication/update/' + req.body.id
 	};
 	request(options).then((updateResult) => {
 		res.json(updateResult);
@@ -90,7 +90,7 @@ router.put('/authentication/update', (req, res) => {
 router.get('/api/users/read/:id', (req, res) => {
 	let options = {
 		method: 'get',
-		url: 'http://localhost:3000/api/users/read/' + req.params.id,
+		url: 'http://users:3000/api/users/read/' + req.params.id,
 		json: true
 	};
 	request(options).then((user) => {
@@ -103,7 +103,7 @@ router.get('/api/users/read/:id', (req, res) => {
 router.delete('/api/users/delete/:id', (req, res) => {
 	let options = {
 		method: 'delete',
-		url: 'http://localhost:3000/api/users/delete/' + req.params.id,
+		url: 'http://users:3000/api/users/delete/' + req.params.id,
 		json: true
 	};
 	request(options).then((deleteStatus) => {
@@ -122,7 +122,7 @@ router.post('/api/polls/create', (req, res) => {
 			userId: req.body.userId
 		},
 		json: true,
-		url: 'http://localhost:4000/api/polls/create'
+		url: 'http://polls:4000/api/polls/create'
 	};
 	request(options).then((createStatus) => {
 		res.json(createStatus);
@@ -135,7 +135,7 @@ router.get('/api/polls/user/:id', (req, res) => {
 	let options = {
 		method: 'get',
 		json: true,
-		url: 'http://localhost:4000/api/polls/user/' + req.params.id
+		url: 'http://polls:4000/api/polls/user/' + req.params.id
 	};
 	request(options).then((polls) => {
 		res.json(polls.data);
@@ -149,7 +149,7 @@ router.get('/api/polls/poll/:id', (req, res) => {
 	let options = {
 		method: 'get',
 		json: true,
-		url: 'http://localhost:4000/api/polls/poll/' + req.params.id
+		url: 'http://polls:4000/api/polls/poll/' + req.params.id
 	};
 	request(options).then((poll) => {
 		res.json(poll.data);
@@ -162,7 +162,7 @@ router.get('/api/polls/result/:id', (req, res) => {
 	let options = {
 		method: 'get',
 		json: true,
-		url: 'http://localhost:4000/api/polls/poll/' + req.params.id
+		url: 'http://polls:4000/api/polls/poll/' + req.params.id
 	};
 	request(options).then((result) => {
 		res.json(result.data);
@@ -179,7 +179,7 @@ router.put('/api/polls/update/:id', (req, res) => {
 			pollName: req.body.pollName
 		},
 		json: true,
-		url: 'http://localhost:4000/api/polls/update/' + req.params.id
+		url: 'http://polls:4000/api/polls/update/' + req.params.id
 	};
 	request(options).then((update) => {
 		res.json(update.data);
@@ -192,7 +192,7 @@ router.delete('/api/polls/delete/:id', (req, res) => {
 	let options = {
 		method: 'delete',
 		json: true,
-		url: 'http://localhost:4000/api/polls/delete/' + req.params.id
+		url: 'http://polls:4000/api/polls/delete/' + req.params.id
 	};
 	request(options).then((result) => {
 		res.json(result.data);

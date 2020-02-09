@@ -7,6 +7,6 @@
 		const authRoutes = require('./../routes/authentication');
 
 		// register routes
-		app.use('/authentication/', authRoutes);
+		app.use('/api/authentication/', authRoutes);
 	};
 })(module.exports);

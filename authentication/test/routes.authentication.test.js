@@ -18,21 +18,20 @@ describe('routes : authentication!', () => {
 
     | Endpoint                 | HTTP Method | CRUD Method |              Result                                   |
     | ------------------------ | :---------: | ----------: | ----------------------------------------------------: |
-    | /authentication/signup   |    POST     |   CREATE    | hash password and provide JWT upon signup             |
-    | /authentication/login    |     POST    |   CREATE    | bcrypt compare password and provide JWT upon login    |
-    | /authentication/verify   |     POST    |   CREATE    | verify a JWT for authenticated routes                 |
-    | /authentication/ping     |     GET     |   READ      | api test route                                        |
-    | /authentication/update   |     PUT     |   UPDATE    | hash a newly created password                         |
+    | /api/authentication/signup   |    POST     |   CREATE    | hash password and provide JWT upon signup             |
+    | /api/authentication/login    |     POST    |   CREATE    | bcrypt compare password and provide JWT upon login    |
+    | /api/authentication/verify   |     POST    |   CREATE    | verify a JWT for authenticated routes                 |
+    | /api/authentication/update   |     PUT     |   UPDATE    | hash a newly created password                         |
 
 */
 
 
 
-	describe('POST /authentication/signup', () => {
+	describe('POST /api/authentication/signup', () => {
 		it('it should CREATE a JWT', (done) => {
 			reusableEmail =  Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15) + '@gmail.com';
 			chai.request(server)
-				.post('/authentication/signup')
+				.post('/api/authentication/signup')
 				.send({ name: 'Bas', email: reusableEmail, password: 'wolf' })
 				.end((err, res) => {
 					if (err) return done(err);
@@ -48,10 +47,10 @@ describe('routes : authentication!', () => {
 		});
 	});
 
-	describe('POST /authentication/login', () => {
+	describe('POST /api/authentication/login', () => {
 		it('it should CREATE a JWT', (done) => {
 			chai.request(server)
-				.post('/authentication/login')
+				.post('/api/authentication/login')
 				.send({ name: 'Bas', email: reusableEmail, password: 'wolf' })
 				.end((err, res) => {
 					if (err) return done(err);
@@ -65,10 +64,10 @@ describe('routes : authentication!', () => {
 		});
 	});
 
-	describe('POST /authentication/verify', () => {
+	describe('POST /api/authentication/verify', () => {
 		it('it should verify a JWT', (done) => {
 			chai.request(server)
-				.post('/authentication/verify')
+				.post('/api/authentication/verify')
 				.send({ token: reusableToken })
 				.end((err, res) => {
 					if (err) return done(err);
@@ -82,10 +81,10 @@ describe('routes : authentication!', () => {
 		});
 	});
 
-	describe('PUT /authentication/update', () => {
+	describe('PUT /api/authentication/update', () => {
 		it('it should UPDATE a password', (done) => {
 			chai.request(server)
-				.put(`/authentication/update/${reusableID}`)
+				.put(`/api/authentication/update/${reusableID}`)
 				.send({password: 'wolf' })
 				.end((err, res) => {
 					if (err) return done(err);

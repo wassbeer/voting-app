@@ -8,12 +8,12 @@
   },
   "scripts": {
     "test": "./node_modules/mocha/bin/_mocha 'test/**/*.test.js'",
-    "start": "node ./src/server"
+    "start": "node ./src/server.js",
+    "dev": "node --inspect=9003 ./src/server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "3.0.8",
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "dotenv": "^8.2.0",

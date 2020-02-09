@@ -1,6 +1,7 @@
 const express = require('express'),
 	router = express.Router(),
 	queries = require('../db/queries');
+
 /* 
 
     # URI endpoints

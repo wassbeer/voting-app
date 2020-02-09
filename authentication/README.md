@@ -27,10 +27,10 @@ The Authentication Service is responsible for the authentication of users upon s
 
 | Endpoint                 | HTTP Method | CRUD Method |              Result                                   |
 | ------------------------ | :---------: | ----------: | ----------------------------------------------------: |
-| /authentication/signup   |    POST     |   CREATE    | hash password and provide JWT upon signup             |
-| /authentication/login    |     POST    |   CREATE    | bcrypt compare password and provide JWT upon login    |
-| /authentication/verify   |     POST    |   CREATE    | verify a JWT for authenticated routes                 |
-| /authentication/update   |     PUT     |   UPDATE    | hash a newly created password                         |
+| /api/authentication/signup   |    POST     |   CREATE    | hash password and provide JWT upon signup             |
+| /api/authentication/login    |     POST    |   CREATE    | bcrypt compare password and provide JWT upon login    |
+| /api/authentication/verify   |     POST    |   CREATE    | verify a JWT for authenticated routes                 |
+| /api/authentication/update   |     PUT     |   UPDATE    | hash a newly created password                         |
 
 ## API's && Dependencies
 

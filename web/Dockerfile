@@ -1,4 +1,4 @@
-FROM node:lts-alpine
+FROM mhart/alpine-node:10
 
 RUN npm install -g http-server
 
@@ -11,6 +11,3 @@ RUN npm install
 COPY . .
 
 RUN npm run build
-
-EXPOSE 6000
-CMD [ "http-server", "dist" ]

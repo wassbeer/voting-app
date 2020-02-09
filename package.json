@@ -1,0 +1,23 @@
+{
+  "name": "voting-app",
+  "version": "1.0.0",
+  "description": "![banner](https://github.com/wassbeer/voting-app/blob/master/services/web/src/assets/images/screenshot.jpg?raw=true)",
+  "main": "none",
+  "scripts": {
+    "start": "concurrently \"cd apigateway && npm start\" \"cd users && npm start\" \"cd polls && npm start\" \"cd authentication && npm run dev\" \"cd web && npm start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wassbeer/voting-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wassbeer/voting-app/issues"
+  },
+  "homepage": "https://github.com/wassbeer/voting-app#readme",
+  "dependencies": {
+    "concurrently": "^5.1.0"
+  },
+  "devDependencies": {}
+}

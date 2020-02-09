@@ -6,5 +6,5 @@ const app = require('./app'),
 	server = http.createServer(app);
 
 server.listen(port, () => {
-	console.log('server listening on port ' + port);
+	console.log('Polls server listening on port ' + port);
 });
