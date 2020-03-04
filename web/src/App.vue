@@ -26,4 +26,4 @@ export default {
 };
 </script>
 
-<style src='./assets/css/mycss.css'/> 
+<style src='./assets/scss/mystyles.scss'/>

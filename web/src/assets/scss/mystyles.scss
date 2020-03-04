@@ -1,87 +1,81 @@
-/* /*!
-* Vuetify v1.0.3
-* Forged by John Leider
-* Released under the MIT License.
-*/
+$brown: #bcaaa4;
+$yellow: #ffc107;
+$light-grey: #cfd8dc;
 
-/* CUSTOM CSS */
-
-/* COMPONENTS */
-
-  .header{
-      background-color: #bcaaa4 !important;
-      color: white;
-      font-size: 2rem;
-      left: 0;
-      padding: 3em 0em 1em 0em;
-      text-align: center;
-  }
-
-  .login{
-      padding: 5% 0;
-      text-align: center;
-  }
-
-  .register{
-      padding: 5% 0;
-      text-align: center;
-  }
-
-  .home {
-    padding: 4% 0%;
+.header{
+    background-color: $brown !important;
+    color: white;
+    font-size: 2rem;
+    left: 0;
+    padding: 3em 0em 1em 0em;
     text-align: center;
-  }
+}
 
-  .myPolls {
-    text-align: center;
+.login{
     padding: 5% 0;
-  }
-
-  .createPoll{
     text-align: center;
-    padding: 5% 0;
-  }
+}
 
+.register{
+    padding: 5% 0;
+    text-align: center;
+}
+
+.home {
+  padding: 4% 0%;
+  text-align: center;
+}
+
+.myPolls {
+  text-align: center;
+  padding: 5% 0;
+}
+
+.createPoll{
+  text-align: center;
+  padding: 5% 0;
+}
+
+.poll{
+  text-align: center;
+  padding: 4% 2%;
+}
+
+.pollResult{
+  text-align: center;
+  padding: 5% 0;
+}
+
+.account{
+  text-align: center;
+  padding: 5% 0;
+}
+
+@media only screen and (max-width: 600px) {
+  #helloUser{
+        display: none;
+    }
   .poll{
-    text-align: center;
-    padding: 4% 2%;
+    padding: 4% 20%;
   }
 
-  .pollResult{
-    text-align: center;
-    padding: 5% 0;
+  #comments{
+    display: none
   }
-
-  .account{
-    text-align: center;
-    padding: 5% 0;
-  }
-
-  @media only screen and (max-width: 600px) {
-    #helloUser{
-          display: none;
-      }
-    .poll{
-      padding: 4% 20%;
-    }
-
-    #comments{
-      display: none
-    }
-  }
+}
 
 /* ICONS */
 
 .fa-line-chart {
-  color: #cfd8dc;
+  color: $light-grey;
 }
 
 .fa-globe {
-  color: #ffc107;
+  color: $yellow;
 }
 
 .fa-facebook-square {
-  color: #bcaaa4
+  color: $brown
 }
 
 /* SWAL */
@@ -89,7 +83,7 @@
 .swal-button {
   padding: 7px 19px;
   border-radius: 2px;
-  background-color: #ffc107;
+  background-color: $yellow;
   font-size: 12px;
   border: 1px solid #3e549a;
 }
@@ -3462,21 +3456,21 @@
 }
 
 .amber {
-  background-color: #ffc107 !important;
-  border-color: #ffc107 !important
+  background-color: $yellow !important;
+  border-color: $yellow !important
 }
 
 .amber--text {
-  color: #ffc107 !important
+  color: $yellow !important
 }
 
 .amber--text input,
 .amber--text textarea {
-  caret-color: #ffc107 !important
+  caret-color: $yellow !important
 }
 
 .amber--after:after {
-  background: #ffc107 !important
+  background: $yellow !important
 }
 
 .amber.lighten-5 {
@@ -4272,21 +4266,21 @@
 }
 
 .brown.lighten-3 {
-  border-color: #bcaaa4 !important
+  border-color: $brown !important
 }
 
 .brown.lighten-3,
 .brown.lighten-3--after:after {
-  background-color: #bcaaa4 !important
+  background-color: $brown !important
 }
 
 .brown--text.text--lighten-3 {
-  color: #bcaaa4 !important
+  color: $brown !important
 }
 
 .brown--text.text--lighten-3 input,
 .brown--text.text--lighten-3 textarea {
-  caret-color: #bcaaa4 !important
+  caret-color: $brown !important
 }
 
 .brown.lighten-2 {
@@ -4434,21 +4428,21 @@
 }
 
 .blue-grey.lighten-4 {
-  border-color: #cfd8dc !important
+  border-color: $light-grey !important
 }
 
 .blue-grey.lighten-4,
 .blue-grey.lighten-4--after:after {
-  background-color: #cfd8dc !important
+  background-color: $light-grey !important
 }
 
 .blue-grey--text.text--lighten-4 {
-  color: #cfd8dc !important
+  color: $light-grey !important
 }
 
 .blue-grey--text.text--lighten-4 input,
 .blue-grey--text.text--lighten-4 textarea {
-  caret-color: #cfd8dc !important
+  caret-color: $light-grey !important
 }
 
 .blue-grey.lighten-3 {

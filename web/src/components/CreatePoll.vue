@@ -6,14 +6,14 @@
       row>
       <v-flex 
         xs2 
-        sm4 
+        sm3
         md4/>
       <v-flex 
         v-if="!created"
         xs8 
         sm6
         md4 
-      />
+      >
       <form 
         name="create-poll-form" 
         autocomplete="off">
