@@ -1,5 +1,5 @@
 const environment = process.env.NODE_ENV || 'test',
-    envDatabase = require('../../mongodbfile')[environment];
+	envDatabase = require('../../mongodbfile')[environment]
 let _db = null;
 
 module.exports.getDb = function() { return _db; }
