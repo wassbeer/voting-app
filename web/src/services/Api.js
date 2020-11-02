@@ -1,7 +1,8 @@
 import axios from 'axios'
+import { apigateway } from '../../../config/config.dev.js'
 
 export default () => {
     return axios.create({
-        baseURL: `http://apigateway:2000`
+        baseURL: `http://localhost:${apigateway.port}/`
     })
 }
