@@ -18,12 +18,5 @@ module.exports = {
     "web": {
         "domain": "http://localhost",
         "port": 6000
-    },
-    "app-db": {
-        "name": "votingappdb",
-		"username": "votingapp",
-		"password": "votingapp123",
-		"host": "voting-app-db",
-		"port": 7000
     }
 }
