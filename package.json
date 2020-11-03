@@ -6,7 +6,7 @@
   "scripts": {
     "docker-compose": "docker-compose -f docker-compose.dev.yml up",
     "concurrently": "concurrently \"cd apigateway && npm start\" \"cd users && npm start\" \"cd polls && npm start\" \"cd authentication && npm run dev\" \"cd web && npm start\"",
-    "setup": "(cd apigateway && npm install); (cd authentication && npm install); (cd polls && npm install); (cd users && npm install); (cd web && npm install && npm run build)"
+    "setup": "(cd apigateway && npm install); (cd authentication && npm install); (cd polls && npm install); (cd users && npm install); (cd web && npm install && npm run build);"
   },
   "repository": {
     "type": "git",
