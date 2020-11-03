@@ -13,7 +13,7 @@
         xs8 
         sm6
         md4 
-      >
+      />
       <form 
         name="create-poll-form" 
         autocomplete="off">

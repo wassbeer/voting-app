@@ -5,29 +5,22 @@
 
 ## Architecture
 
-The application is built in a microservice architecture. The application contains 5 microservices residing in 7 Docker containers. 
+The application is built in a microservice architecture. The application contains five services: web, API gateway, authentication, users and polls.
 
-|		Name      | Service   |Container   |  Tech     |
-|   -------------   |  -----------  |  -------|-----------------|
-| Web| web            |web            | Vue.js, Vuex, Chart.js |
-|API Gateway       |apigateway|apigateway| Node, Express |
-|Polls API          |polls        |polls            | Node, Express, Mocha, Chai |
-|Polls DB       | polls |polls-db| Node, MongoDB |
-|  Users API       |users|  users| node.js, express, chai, supertest |
-|Users DB      |users|users-db| Node, Mongodb |
-|Authentication     |authentication|authentication| Node,  Express, JWT, bcrypt, Mocha, Chai |
-
-## Repository Structure 
+## Project Structure 
 ```
 .
-└── services
-    ├── apigateway
-    ├── authentication
-    ├── polls
-    │   └── src
-    │       └── db
-    ├── users
-    │   └── src
-    │       └── db
-    └── web
+├── apigateway
+├── authentication
+├── polls
+│     └── db
+├── users
+│     └── db
+└── web
 ```
+
+How to get started?
+
+1. npm clone https://github.com/wax-bear/voting-app.git
+1. npm run setup
+1. npm run docker-compose
