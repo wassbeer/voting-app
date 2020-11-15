@@ -27,19 +27,3 @@ The "polls" container is responsible for the controllers, database configuration
 ├── package-lock.json
 └── README.md
 ```
-
-## URI endpoints
-
-| Endpoint          | HTTP Method | CRUD Method |              Result |
-| ----------------- | :---------: | ----------: | ------------------: |
-| /api/polls/create     |    POST     |      CREATE |       create a poll |
-| /api/polls/user/:id   |     GET     |        READ | get polls of a user |
-| /api/polls/poll/:id   |     GET     |        READ |          get a poll |
-| /api/polls/update/:id |     PUT     |      UPDATE |         edit a poll |
-| /api/polls/delete/:id |   DELETE    |      DELETE |       delete a poll |
-
-## API's && Dependencies
-
-* npm mongodb
-* npm mocha, chai
-* npm express

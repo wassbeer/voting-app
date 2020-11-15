@@ -1,6 +1,6 @@
-const express = require('express'),
-	router = express.Router(),
-	queries = require('../db/queries');
+const express = require('express');
+const router = express.Router();
+const queries = require('../db/queries');
 
 /* 
 

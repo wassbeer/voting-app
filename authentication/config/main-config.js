@@ -1,7 +1,7 @@
 (function (appConfig) {
 
-	const bodyParser = require('body-parser'),
-		morgan = require('morgan');
+	const bodyParser = require('body-parser');
+	const morgan = require('morgan');
 
 	appConfig.init = (app) =>  {
 		app.use(bodyParser.urlencoded({

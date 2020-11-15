@@ -1,18 +1,18 @@
 require('dotenv').config();
 process.env.NODE_ENV = 'test';
 
-const request = require('supertest'),
-	chai = require('chai'),
-	chaiHttp = require('chai-http'),
-	server = require('../src/app'),
-	queries = require('../src/db/queries'),
-	getDb = require('../src/db/connection').getDb;
+const request = require('supertest');
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const server = require('../src/app');
+const queries = require('../src/db/queries');
+const getDb = require('../src/db/connection').getDb;
 
 chai.use(chaiHttp);
 
 describe('routes : polls', () => {
-	let  pollId,
-		userId= '12345';
+	let  pollId;
+	let userId= '12345';
 
 	/* 
 

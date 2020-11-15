@@ -1,11 +1,11 @@
 // dependencies
-const express = require('express'),
-	appConfig = require('./config/main-config.js'),
-	routeConfig = require('./config/route-config.js'),
-	mongoDb = require('./db/connection.js').init,
+const express = require('express');
+const appConfig = require('./config/main-config.js');
+const routeConfig = require('./config/route-config.js');
+const mongoDb = require('./db/connection.js').init;
 	
-	// express instance
-	app = express();
+// express instance
+const app = express();
 
 // mongodb connection && collection
 mongoDb();

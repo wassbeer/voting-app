@@ -1,6 +1,6 @@
-const gulp = require('gulp'),
-	nodemon = require('gulp-nodemon'),
-	eslint = require('gulp-eslint');
+const gulp = require('gulp');
+const nodemon = require('gulp-nodemon');
+const eslint = require('gulp-eslint');
 
 /*
 tasks

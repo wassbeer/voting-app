@@ -3,8 +3,8 @@
 	'use strict';
 
 	// main dependencies
-	const morgan = require('morgan'),
-		bodyParser = require('body-parser');
+	const morgan = require('morgan');
+	const bodyParser = require('body-parser');
 
 
 	appConfig.init = function(app) {

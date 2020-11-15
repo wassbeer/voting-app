@@ -1,9 +1,9 @@
-const express = require('express'),
-	router = express.Router(),
-	request = require('request-promise'),
-	bcrypt = require('bcryptjs'),
-	jwt = require('jsonwebtoken'),
-	secret = 'theOldManAndTheSea'; // TODO TWassenberg make the secret variable come from env
+const express = require('express');
+const router = express.Router();
+const request = require('request-promise');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const secret = 'theOldManAndTheSea'; // TODO TWassenberg make the secret variable come from env
 
 
 /* 

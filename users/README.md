@@ -28,19 +28,3 @@ The Users API is responsible for the routes, database configuration and integrat
 ├── package-lock.json
 └── README.md
 ```
-
-## URI endpoints
-
-| Endpoint              | HTTP Method | CRUD Method |          Result |
-| --------------------- | :---------: | ----------: | --------------: |
-| /api/users/create     |    POST     |      CREATE | register a user |
-| /api/users/read       |    POST     |      CREATE | authenticate    |
-| /api/users/read/:id   |    GET      |        READ |   get user info |
-| /api/users/update/:id |    PUT      |      UPDATE |     edit a user |
-| /api/users/delete/:id |    DELETE   |      DELETE |   delete a user |
-
-## API's && Dependencies
-
-* npm mongodb
-* npm mocha, chai
-* npm express

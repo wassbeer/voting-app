@@ -1,6 +1,6 @@
-const request = require('request-promise'),
-	express = require('express'),
-	router = express.Router();
+const request = require('request-promise');
+const express = require('express');
+const router = express.Router();
 
 /* All the auth validation should be handled at the API gateway level, and 
 once forwarded to a (micro)service , that service can trust the request.

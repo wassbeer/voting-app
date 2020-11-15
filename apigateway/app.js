@@ -1,9 +1,9 @@
 // dependencies
-const express = require('express'),
-	appConfig = require('./config/main-config.js'),
+const express = require('express');
+const appConfig = require('./config/main-config.js');
 
-	// express instance
-	app = express();
+// express instance
+const app = express();
 
 // config
 appConfig.init(app);
