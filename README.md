@@ -23,4 +23,5 @@ How to get started?
 
 1. npm clone https://github.com/wax-bear/voting-app.git
 1. npm run setup
+1. Configure the .env variables for users and polls
 1. npm run docker-compose
