@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+  apigateway:
+    build:
+      context: ./apigateway
+      dockerfile: ../Dockerfile.app
+    command: node --inspect=0.0.0.0:9002 ./server.js
+    volumes:
+      - ./apigateway:/app
+    ports:
+      - 2000:2000
+      - 9002:9002
+  users:
+    build:
+      context: ./users
+      dockerfile: ../Dockerfile.app
+    command: node --inspect=0.0.0.0:9003 ./src/server.js
+    volumes:
+      - ./users:/app
+    ports:
+      - 3000:3000
+      - 9003:9003
+  polls:
+    build:
+      context: ./polls
+      dockerfile: ../Dockerfile.app
+    command: node --inspect=0.0.0.0:9004 ./src/server.js
+    volumes:
+      - ./polls:/app
+    ports:
+      - 4000:4000
+      - 9004:9004
+  authentication:
+    build:
+      context: ./authentication
+      dockerfile: ../Dockerfile.app
+    command: node --inspect=0.0.0.0:9005 ./server.js
+    volumes:
+      - ./authentication:/app
+    ports:
+      - 5000:5000
+      - 9005:9005
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    command: http-server -p 7000 dist
+    volumes:
+      - ./web:/app
+    ports:
+      - 7000:7000

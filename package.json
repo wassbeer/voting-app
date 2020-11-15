@@ -1,0 +1,26 @@
+{
+  "name": "voting-app",
+  "version": "1.0.0",
+  "description": "![banner](https://github.com/wassbeer/voting-app/blob/master/services/web/src/assets/images/screenshot.jpg?raw=true)",
+  "main": "none",
+  "scripts": {
+    "docker-compose": "docker-compose -f docker-compose.dev.yml up",
+    "start": "concurrently \"cd apigateway && npm start\" \"cd users && npm start\" \"cd polls && npm start\" \"cd authentication && npm run dev\" \"cd web && npm start\"",
+    "postinstall": "(cd sapigateway && npm install); (cd authentication && npm install); (cd polls && npm install); (cd users && npm install); (cd web && npm install)",
+    "lint": "./node_modules/.bin/eslint '**/*.js' --ignore-pattern node_modules/",
+    "lint-fix": "./node_modules/.bin/eslint '**/*.js' --fix --ignore-pattern node_modules/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wassbeer/voting-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wassbeer/voting-app/issues"
+  },
+  "homepage": "https://github.com/wassbeer/voting-app#readme",
+  "dependencies": {
+    "concurrently": "^5.3.0"
+  }
+}

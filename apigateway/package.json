@@ -1,0 +1,19 @@
+{
+  "name": "apigateway",
+  "version": "1.0.0",
+  "description": "The API Gateway is the principle access service for the client. The API gateway ensures a request is authenticated and authorized before the requested resource is accessed.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "node --inspect=0.0.0.0:9002 server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2"
+  }
+}
