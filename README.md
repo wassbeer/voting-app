@@ -1,5 +1,5 @@
 
-![banner](https://github.com/wassbeer/voting-app/blob/master/services/web/src/assets/images/screenshot.jpg?raw=true)
+![banner](https://github.com/wassbeer/voting-app/blob/master/web/src/assets/images/screenshot.jpg?raw=true)
 
 > Home Page of the voting app
 
