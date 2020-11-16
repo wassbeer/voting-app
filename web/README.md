@@ -1,4 +1,4 @@
-# Web 
+# Web service
 
 The web service is responsible for providing the UI of the voting app.
 
