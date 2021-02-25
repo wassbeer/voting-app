@@ -20,7 +20,7 @@ router.all('/*', (req, res, next) => {
 
 // routes
 
-router.post('/authentication/signup', (req, res) => {
+router.post('/api/authentication/signup', (req, res) => {
 	let options = {
 		method: 'post',
 		body: {
@@ -38,7 +38,7 @@ router.post('/authentication/signup', (req, res) => {
 	});
 });
 
-router.post('/authentication/login', (req, res) => {
+router.post('/api/authentication/login', (req, res) => {
 	let options = {
 		method: 'post',
 		body: {
@@ -55,7 +55,7 @@ router.post('/authentication/login', (req, res) => {
 	});
 });
 
-router.post('/authentication/verify', (req, res) => {
+router.post('/api/authentication/verify', (req, res) => {
 	let options = {
 		method: 'post',
 		body: {
@@ -71,7 +71,7 @@ router.post('/authentication/verify', (req, res) => {
 	});
 });
 
-router.put('/authentication/update', (req, res) => {
+router.put('/api/authentication/update', (req, res) => {
 	let options = {
 		method: 'put',
 		body: {
